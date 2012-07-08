@@ -1,0 +1,15 @@
+Jul 08 19:41:29 general	info	Hello and welcome to Prosody version 0.8.2
+Jul 08 19:41:29 connlisteners	debug	Registered connection listener httpclient
+Jul 08 19:41:29 general	info	Prosody is using the select backend for connection handling
+Jul 08 19:41:29 hostmanager	debug	Activated host: localhost.localdomain
+Jul 08 19:41:29 auth_internal_plain	debug	initializing default authentication provider for host 'localhost.localdomain'
+Jul 08 19:41:29 usermanager	debug	host 'localhost.localdomain' now set to use user provider 'internal_plain'
+Jul 08 19:41:29 connlisteners	debug	Registered connection listener console
+Jul 08 19:41:29 socket	debug	server.lua: new server listener on '127.0.0.1:5582'
+Jul 08 19:41:29 localhost.localdomain:posix	info	Successfully daemonized to PID 33504
+Jul 08 19:41:29 connlisteners	debug	Registered connection listener xmppclient
+Jul 08 19:41:29 socket	debug	server.lua: new server listener on '*:5222'
+Jul 08 19:41:29 connlisteners	debug	Registered connection listener xmppserver
+Jul 08 19:41:29 socket	debug	server.lua: new server listener on '*:5269'
+Jul 08 19:41:29 connlisteners	debug	Registered connection listener xmppcomponent
+Jul 08 19:41:29 socket	debug	server.lua: new server listener on '127.0.0.1:5347'

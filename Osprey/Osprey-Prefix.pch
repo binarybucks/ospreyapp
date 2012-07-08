@@ -1,7 +1,28 @@
 //
-// Prefix header for all source files of the 'Osprey' target in the 'Osprey' project
+// Prefix header for all source files of the 'Say' target in the 'Say' project
 //
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import "DDLog.h"
+    #import "OSPAppDelegate.h"
+
+    #define LOGFUNCTIONCALL DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+
+    #define KEYCHAIN_SERVICE_NAME @"OspreyApp"
+
+    // User default keys 
+    #define STDUSRDEF_ACCOUNTJID @"Account.Jid"
+    #define STDUSRDEF_ACCOUNTRESOURCE @"Account.Resource"
+    #define STDUSRDEF_ACCOUNTSERVER @"Account.Server"
+    #define STDUSRDEF_ACCOUNTPORT @"Account.Port"
+    #define STDUSRDEF_ACCOUNTOLDSSL @"Account.UseOldSecureConnect"
+    #define STDUSRDEF_ACCOUNTSTATUSAFTERCONNECT @"Account.StatusAfterConnect"
+    #define STDUSRDEF_ACCOUNTONLINEPRIORITY @"Account.OnlinePriority"
+    #define STDUSRDEF_ACCOUNTAWAYPRIORITY @"Account.AwayPriority"
+    #define STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS @"General.DisplaysGrowlNotifications"
+
+
 #endif
+
