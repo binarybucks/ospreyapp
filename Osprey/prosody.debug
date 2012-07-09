@@ -13,3 +13,888 @@ Jul 08 19:41:29 connlisteners	debug	Registered connection listener xmppserver
 Jul 08 19:41:29 socket	debug	server.lua: new server listener on '*:5269'
 Jul 08 19:41:29 connlisteners	debug	Registered connection listener xmppcomponent
 Jul 08 19:41:29 socket	debug	server.lua: new server listener on '127.0.0.1:5347'
+Jul 08 19:42:33 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51036 to 5222
+Jul 08 19:42:33 sessionmanager	debug	open sessions now: 1
+Jul 08 19:42:33 c2s7f8bd058f440	info	Client connected
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Sent reply <stream:stream> to client
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:42:33 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImJjOGE2MTVkLTI2ZDgtNDc3NC05NzE4LTIxMTRiYWVmNjgyMiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:42:33 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:42:33 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1lZDI3NDlkNjIyNjZiMjFkZDExMmU0MTYyOWM1OGFiNg==</challenge>
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:42:33 c2s7f8bd058f440	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:42:33 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Sent reply <stream:stream> to client
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:42:33 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:42:33 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:42:33 c2s7f8bd058f440	debug	Received[c2s]: <iq to='alexander@localhost.localdomain' type='get'>
+Jul 08 19:45:03 socket	debug	server.lua: client 127.0.0.1:51036 read error: closed
+Jul 08 19:45:03 c2s7f8bd058f440	info	Client disconnected: closed
+Jul 08 19:45:03 c2s7f8bd058f440	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:45:03 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:45:03 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:45:07 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51038 to 5222
+Jul 08 19:45:07 sessionmanager	debug	open sessions now: 2
+Jul 08 19:45:07 c2s7f8bd056f200	info	Client connected
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Sent reply <stream:stream> to client
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:45:07 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImNmODgzMWM5LTMyNTItNGY1Ny1iZWQxLTI1YTI0OTNjY2NjMSIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:45:07 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:45:07 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD05NzU5MGE5YTVmMmI2ZTYwYzhkYTAyYTU3NzVhMTgzMQ==</challenge>
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:45:07 c2s7f8bd056f200	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:45:07 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Sent reply <stream:stream> to client
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:45:07 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:45:07 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:45:07 c2s7f8bd056f200	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:46:36 socket	debug	server.lua: client 127.0.0.1:51038 read error: closed
+Jul 08 19:46:36 c2s7f8bd056f200	info	Client disconnected: closed
+Jul 08 19:46:36 c2s7f8bd056f200	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:46:36 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:46:36 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:46:39 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51040 to 5222
+Jul 08 19:46:39 sessionmanager	debug	open sessions now: 3
+Jul 08 19:46:39 c2s7f8bd059c320	info	Client connected
+Jul 08 19:46:39 c2s7f8bd059c320	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:46:39 c2s7f8bd059c320	debug	Sent reply <stream:stream> to client
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:46:41 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjYzZGYyNzQ2LWIzZjYtNGQwMi04MGFjLTFiNmE0MzBlZWYwZCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:46:41 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:46:41 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD05MDQ5NzE5NWNiZWI2MzA3OGRiN2E4MDgwMGU0NTM3Ng==</challenge>
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:46:41 c2s7f8bd059c320	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:46:41 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Sent reply <stream:stream> to client
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:46:41 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:46:41 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:46:41 c2s7f8bd059c320	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:47:02 c2s7f8bd059c320	debug	Received[c2s]: <message type='chat' to='testuser1@localhost.localdomain' from='alexander@localhost.localdomain/Osprey'>
+Jul 08 19:47:04 c2s7f8bd059c320	debug	Received[c2s]: <message type='chat' to='testuser1@localhost.localdomain' from='alexander@localhost.localdomain/Osprey'>
+Jul 08 19:48:43 socket	debug	server.lua: client 127.0.0.1:51040 read error: closed
+Jul 08 19:48:43 c2s7f8bd059c320	info	Client disconnected: closed
+Jul 08 19:48:43 c2s7f8bd059c320	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:48:43 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:48:43 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:48:48 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51042 to 5222
+Jul 08 19:48:48 sessionmanager	debug	open sessions now: 4
+Jul 08 19:48:48 c2s7f8bd05bac10	info	Client connected
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Sent reply <stream:stream> to client
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:48:48 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjY1YWE4NjUxLWI5ZDYtNDM1ZC04NDY4LWNiNDM5ZWEzNjRlNCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:48:48 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:48:48 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1jMTdhNGUxNGRkOTU5NzA0NmU3YTU5ZGNkMzkxY2NlYw==</challenge>
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:48:48 c2s7f8bd05bac10	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:48:48 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:48:48 c2s7f8bd05bac10	debug	Sent reply <stream:stream> to client
+Jul 08 19:48:49 c2s7f8bd05bac10	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:48:49 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:48:49 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:48:49 c2s7f8bd05bac10	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:48:49 c2s7f8bd05bac10	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:48:49 c2s7f8bd05bac10	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:50:49 socket	debug	server.lua: client 127.0.0.1:51042 read error: closed
+Jul 08 19:50:49 c2s7f8bd05bac10	info	Client disconnected: closed
+Jul 08 19:50:49 c2s7f8bd05bac10	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:50:49 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:50:49 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:50:53 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51044 to 5222
+Jul 08 19:50:53 sessionmanager	debug	open sessions now: 5
+Jul 08 19:50:53 c2s7f8bd05d6af0	info	Client connected
+Jul 08 19:50:53 c2s7f8bd05d6af0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:50:53 c2s7f8bd05d6af0	debug	Sent reply <stream:stream> to client
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:50:54 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjM4OGE3ZWU3LTI0ZmMtNDcwMy1iZWY2LWYwZmNlOGYwODI2OCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:50:54 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:50:54 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1jMzUxYzliOGMyZGFmZTVlZWE2MTM3ZjExYzQwMmQ5Yg==</challenge>
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:50:54 c2s7f8bd05d6af0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:50:54 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Sent reply <stream:stream> to client
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:50:54 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:50:54 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:50:54 c2s7f8bd05d6af0	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:51:52 socket	debug	server.lua: client 127.0.0.1:51044 read error: closed
+Jul 08 19:51:52 c2s7f8bd05d6af0	info	Client disconnected: closed
+Jul 08 19:51:52 c2s7f8bd05d6af0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:51:52 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:51:52 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:51:56 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51046 to 5222
+Jul 08 19:51:56 sessionmanager	debug	open sessions now: 6
+Jul 08 19:51:56 c2s7f8bd05ecab0	info	Client connected
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Sent reply <stream:stream> to client
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:51:56 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjliZDMwZWUxLWU4NmYtNGE1ZS05MWYzLTYwYTA0MjAwZTVmMSIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:51:56 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:51:56 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1mYTI0ZjBlY2RkMGIzNWE2YzAwMTExNGE0MDQ1NmI5YQ==</challenge>
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:51:56 c2s7f8bd05ecab0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:51:56 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Sent reply <stream:stream> to client
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:51:56 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:51:56 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:51:56 c2s7f8bd05ecab0	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:52:25 socket	debug	server.lua: client 127.0.0.1:51046 read error: closed
+Jul 08 19:52:25 c2s7f8bd05ecab0	info	Client disconnected: closed
+Jul 08 19:52:25 c2s7f8bd05ecab0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:52:25 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:52:25 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:52:28 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51048 to 5222
+Jul 08 19:52:28 sessionmanager	debug	open sessions now: 7
+Jul 08 19:52:28 c2s7f8bd06038f0	info	Client connected
+Jul 08 19:52:28 c2s7f8bd06038f0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:52:28 c2s7f8bd06038f0	debug	Sent reply <stream:stream> to client
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:52:32 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImFkNTFjYWQ3LThhMmEtNDJjMy1iNjNiLWMzMDdhNjYwYzRmZiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:52:32 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:52:32 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1iNTg4MjAyMmNiZjRjODIwZTdlNTE5NDJhOGIxYTYyMw==</challenge>
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:52:32 c2s7f8bd06038f0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:52:32 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Sent reply <stream:stream> to client
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:52:32 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:52:32 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:52:32 c2s7f8bd06038f0	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:52:45 socket	debug	server.lua: client 127.0.0.1:51048 read error: closed
+Jul 08 19:52:45 c2s7f8bd06038f0	info	Client disconnected: closed
+Jul 08 19:52:45 c2s7f8bd06038f0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:52:45 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:52:45 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:52:48 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51050 to 5222
+Jul 08 19:52:48 sessionmanager	debug	open sessions now: 8
+Jul 08 19:52:48 c2s7f8bd06156b0	info	Client connected
+Jul 08 19:52:48 c2s7f8bd06156b0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:52:48 c2s7f8bd06156b0	debug	Sent reply <stream:stream> to client
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:52:49 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9Ijc5NWMzOGMyLWRlNmQtNGU5Ny05MWM4LWIyNGMxMjZhZmQ5ZCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:52:49 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:52:49 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD04N2YwYjAyODI1NjA0MmZkNGEyYWUzOWJhYTZlMGVkZg==</challenge>
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:52:49 c2s7f8bd06156b0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:52:49 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Sent reply <stream:stream> to client
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:52:49 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:52:49 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:52:49 c2s7f8bd06156b0	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:53:48 socket	debug	server.lua: client 127.0.0.1:51050 read error: closed
+Jul 08 19:53:48 c2s7f8bd06156b0	info	Client disconnected: closed
+Jul 08 19:53:48 c2s7f8bd06156b0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:53:48 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:53:48 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:53:54 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51052 to 5222
+Jul 08 19:53:54 sessionmanager	debug	open sessions now: 9
+Jul 08 19:53:54 c2s7f8bd062b9f0	info	Client connected
+Jul 08 19:53:54 c2s7f8bd062b9f0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:53:54 c2s7f8bd062b9f0	debug	Sent reply <stream:stream> to client
+Jul 08 19:53:54 c2s7f8bd062b9f0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:53:54 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjFhNTMyOGI4LWVjNzEtNDA4MC1hMGQwLTRmNGRjZDRmNTViMSIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:53:54 c2s7f8bd062b9f0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:53:54 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:53:54 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD0yNWIxZjBhOTg1ODNmOTAzMzUyZGQ2MzdjMzJjOWNjNg==</challenge>
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:53:55 c2s7f8bd062b9f0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:53:55 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Sent reply <stream:stream> to client
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:53:55 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:53:55 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:53:55 c2s7f8bd062b9f0	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:54:00 socket	debug	server.lua: client 127.0.0.1:51052 read error: closed
+Jul 08 19:54:00 c2s7f8bd062b9f0	info	Client disconnected: closed
+Jul 08 19:54:00 c2s7f8bd062b9f0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:54:00 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:54:00 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:54:03 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51054 to 5222
+Jul 08 19:54:03 sessionmanager	debug	open sessions now: 10
+Jul 08 19:54:03 c2s7f8bd063c560	info	Client connected
+Jul 08 19:54:03 c2s7f8bd063c560	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:54:03 c2s7f8bd063c560	debug	Sent reply <stream:stream> to client
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:54:04 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjU4MDk3YzNjLWI0MmItNDJmMC1hZWUwLWE5NDE4NTc0M2E2MyIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:54:04 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:54:04 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD02MWEwNmEwOTYyY2MxMDgxNmM2YjFiYTU4N2VhMGUwOA==</challenge>
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:54:04 c2s7f8bd063c560	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:54:04 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Sent reply <stream:stream> to client
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:54:04 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:54:04 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:54:04 c2s7f8bd063c560	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:54:24 c2s7f8bd063c560	debug	Received[c2s]: <presence>
+Jul 08 19:54:24 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:54:24 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:54:24 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:54:24 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:54:24 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:54:24 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:54:24 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:54:24 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:54:24 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:54:24 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 19:54:24 c2s7f8bd063c560	debug	Received[c2s]: <iq id='disco' type='result'>
+Jul 08 19:54:24 stanzarouter	debug	Discarding iq from c2s of type: result
+Jul 08 19:54:28 socket	debug	server.lua: client 127.0.0.1:51054 read error: closed
+Jul 08 19:54:28 c2s7f8bd063c560	info	Client disconnected: closed
+Jul 08 19:54:28 c2s7f8bd063c560	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:54:28 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:54:28 c2s7f8bd063c560	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 19:54:28 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:54:33 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51056 to 5222
+Jul 08 19:54:33 sessionmanager	debug	open sessions now: 11
+Jul 08 19:54:33 c2s7f8bd0655350	info	Client connected
+Jul 08 19:54:33 c2s7f8bd0655350	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:54:33 c2s7f8bd0655350	debug	Sent reply <stream:stream> to client
+Jul 08 19:54:33 c2s7f8bd0655350	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:54:33 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImE0ZWIwNGZhLTY2ZWUtNGQxOS1hNGNjLTVlNTgxMjdkM2I4NCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:54:34 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:54:34 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1lNjE3ODQ2ODUyMzk4MDJhNjhjOTU0YmYxOWMzNDhhMQ==</challenge>
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:54:34 c2s7f8bd0655350	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Sent reply <stream:stream> to client
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:54:34 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:54:34 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:54:34 c2s7f8bd0655350	debug	Received[c2s]: <presence>
+Jul 08 19:54:34 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:54:34 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:54:34 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:54:34 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:54:34 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 19:56:02 socket	debug	server.lua: client 127.0.0.1:51056 read error: closed
+Jul 08 19:56:02 c2s7f8bd0655350	info	Client disconnected: closed
+Jul 08 19:56:02 c2s7f8bd0655350	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:56:02 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:56:02 c2s7f8bd0655350	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 19:56:02 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:56:07 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51058 to 5222
+Jul 08 19:56:07 sessionmanager	debug	open sessions now: 12
+Jul 08 19:56:07 c2s7f8bd0670cd0	info	Client connected
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Sent reply <stream:stream> to client
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:56:07 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImQ1YjllMDA2LWU1YjYtNDNhZS05ZGQ2LTdiZmVmZjA0ODk4ZiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:56:07 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:56:07 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1hYTA5NWY5M2FlYzZmNGI0NjA1ZWEyOGQ3MDdiZmY2Mg==</challenge>
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:56:07 c2s7f8bd0670cd0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Sent reply <stream:stream> to client
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:56:07 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:56:07 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:56:07 c2s7f8bd0670cd0	debug	Received[c2s]: <presence>
+Jul 08 19:56:07 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:56:07 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:56:07 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:56:07 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:56:07 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 19:58:20 socket	debug	server.lua: client 127.0.0.1:51058 read error: closed
+Jul 08 19:58:20 c2s7f8bd0670cd0	info	Client disconnected: closed
+Jul 08 19:58:20 c2s7f8bd0670cd0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 19:58:20 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 19:58:20 c2s7f8bd0670cd0	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 19:58:20 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 19:58:24 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51060 to 5222
+Jul 08 19:58:24 sessionmanager	debug	open sessions now: 13
+Jul 08 19:58:24 c2s7f8bd0690480	info	Client connected
+Jul 08 19:58:24 c2s7f8bd0690480	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:58:24 c2s7f8bd0690480	debug	Sent reply <stream:stream> to client
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:58:27 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjNmMTI3ZjVkLTI5YjMtNGQ4MS05OGUyLTRlZjdjNGUzNTAzOSIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:58:27 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 19:58:27 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD03YTNiYTIwNGFmZWQ2MGVkOWJhZGY1YmMwMGM0ZTg1Yw==</challenge>
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 19:58:27 c2s7f8bd0690480	info	Authenticated as alexander@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Sent reply <stream:stream> to client
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:58:27 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 19:58:27 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s]: <iq type='set'>
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s]: <iq type='get'>
+Jul 08 19:58:27 c2s7f8bd0690480	debug	Received[c2s]: <presence>
+Jul 08 19:58:27 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:58:27 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:58:27 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 19:58:27 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 19:58:27 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:03:33 socket	debug	server.lua: client 127.0.0.1:51060 read error: closed
+Jul 08 20:03:33 c2s7f8bd0690480	info	Client disconnected: closed
+Jul 08 20:03:33 c2s7f8bd0690480	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:03:33 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:03:33 c2s7f8bd0690480	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:03:33 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:03:38 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51062 to 5222
+Jul 08 20:03:38 sessionmanager	debug	open sessions now: 14
+Jul 08 20:03:38 c2s7f8bd06c0810	info	Client connected
+Jul 08 20:03:38 c2s7f8bd06c0810	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:03:38 c2s7f8bd06c0810	debug	Sent reply <stream:stream> to client
+Jul 08 20:03:38 c2s7f8bd06c0810	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:03:38 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImRhNzk5NzczLWVhNjQtNDhlMC1hYjY1LWFmMDlmYTQ0YmY1NiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:03:38 c2s7f8bd06c0810	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:03:38 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:03:38 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1iN2FmNzQ4MWFiMGUyNzdiMzVhYzk2NDkyODdjOWI0Mw==</challenge>
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:03:39 c2s7f8bd06c0810	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Sent reply <stream:stream> to client
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:03:39 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:03:39 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:03:39 c2s7f8bd06c0810	debug	Received[c2s]: <presence>
+Jul 08 20:03:39 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:03:39 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:03:39 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:03:39 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:03:39 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:04:52 socket	debug	server.lua: client 127.0.0.1:51062 read error: closed
+Jul 08 20:04:52 c2s7f8bd06c0810	info	Client disconnected: closed
+Jul 08 20:04:52 c2s7f8bd06c0810	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:04:52 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:04:52 c2s7f8bd06c0810	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:04:52 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:04:56 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51064 to 5222
+Jul 08 20:04:56 sessionmanager	debug	open sessions now: 15
+Jul 08 20:04:56 c2s7f8bd06da520	info	Client connected
+Jul 08 20:04:56 c2s7f8bd06da520	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:04:56 c2s7f8bd06da520	debug	Sent reply <stream:stream> to client
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:04:57 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9Ijg3MTY2ZGFjLWE5YjYtNGQyZS1iOTQ3LWJjNmRhNGQ1MGFmZCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:04:57 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:04:57 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1jMmQyYTM4Mzk3NmUxYmYwNGY5MjQ0ZDNhOTg5OTc4ZQ==</challenge>
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:04:57 c2s7f8bd06da520	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Sent reply <stream:stream> to client
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:04:57 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:04:57 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:04:57 c2s7f8bd06da520	debug	Received[c2s]: <presence>
+Jul 08 20:04:57 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:04:57 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:04:57 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:04:57 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:04:57 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:05:55 socket	debug	server.lua: client 127.0.0.1:51064 read error: closed
+Jul 08 20:05:55 c2s7f8bd06da520	info	Client disconnected: closed
+Jul 08 20:05:55 c2s7f8bd06da520	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:05:55 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:05:55 c2s7f8bd06da520	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:05:55 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:06:00 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51066 to 5222
+Jul 08 20:06:00 sessionmanager	debug	open sessions now: 16
+Jul 08 20:06:00 c2s7f8bd06f3000	info	Client connected
+Jul 08 20:06:00 c2s7f8bd06f3000	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:06:00 c2s7f8bd06f3000	debug	Sent reply <stream:stream> to client
+Jul 08 20:06:00 c2s7f8bd06f3000	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:06:00 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjBlZDE1ZTdhLTJlZmQtNDRlYS05ZWE5LWQzNWE2Nzc3YzdlOCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:06:01 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:06:01 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1lY2Y1MWE3ZGFjYjQwNWY3MjYzM2EwOTY5NDgwM2UxZQ==</challenge>
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:06:01 c2s7f8bd06f3000	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Sent reply <stream:stream> to client
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:06:01 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:06:01 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:06:01 c2s7f8bd06f3000	debug	Received[c2s]: <presence>
+Jul 08 20:06:01 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:06:01 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:06:01 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:06:01 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:06:01 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:07:42 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51067 to 5222
+Jul 08 20:07:42 sessionmanager	debug	open sessions now: 17
+Jul 08 20:07:42 c2s7f8bd05bcae0	info	Client connected
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Sent reply <stream:stream> to client
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s_unauthed]: <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
+Jul 08 20:07:42 socket	debug	server.lua: we need to do tls, but delaying until send buffer empty
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	TLS negotiation started for c2s_unauthed...
+Jul 08 20:07:42 socket	debug	server.lua: attempting to start tls on tcp{client}: 0x7f8bd0923c28
+Jul 08 20:07:42 socket	debug	server.lua: ssl handshake done
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Sent reply <stream:stream> to client
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:07:42 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjUzODVjZTlmLWRiOWYtNDVmYi1hZTBhLWEzODMyYzM1MTVjZCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:07:42 auth_internal_plain	debug	get_password for username 'testuser1' at host 'localhost.localdomain'
+Jul 08 20:07:42 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD00ZjAxNTNlMWI3OGU5Y2JkNzk2Y2JlNzQ0YzU1OTY4Nw==</challenge>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:07:42 c2s7f8bd05bcae0	info	Authenticated as testuser1@localhost.localdomain
+Jul 08 20:07:42 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Sent reply <stream:stream> to client
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_15618A62' type='set'>
+Jul 08 20:07:42 rostermanager	debug	load_roster: asked for: testuser1@localhost.localdomain
+Jul 08 20:07:42 rostermanager	debug	load_roster: loading for new user: testuser1@localhost.localdomain
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Resource bound: testuser1@localhost.localdomain/Heisenberg
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_63F53AEB' type='set' to='localhost.localdomain'>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_01EF64B2' type='get' to='localhost.localdomain'>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_36D98E46' type='set'>
+Jul 08 20:07:42 stanzarouter	debug	Stanza of type iq from c2s has xmlns: jabber:iq:privacy
+Jul 08 20:07:42 stanzarouter	debug	Unhandled c2s stanza: iq; xmlns=jabber:iq:privacy
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_4D30BC38' type='get'>
+Jul 08 20:07:42 datamanager	debug	Assuming empty vcard storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/vcard/testuser1.dat: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_2A41CD9D' type='get'>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <presence>
+Jul 08 20:07:42 localhost.localdomain:presence	debug	outbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 08 20:07:42 localhost.localdomain:presence	debug	inbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 08 20:07:42 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from alexander@localhost.localdomain to testuser1@localhost.localdomain/Heisenberg
+Jul 08 20:07:42 datamanager	debug	Removing empty offline datastore for user testuser1@localhost.localdomain
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <presence>
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='disco' type='result'>
+Jul 08 20:07:42 stanzarouter	debug	Discarding iq from c2s of type: result
+Jul 08 20:07:42 c2s7f8bd05bcae0	debug	Received[c2s]: <iq id='iChat_1DF03087' type='get' to='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:07:42 c2s7f8bd06f3000	debug	Received[c2s]: <iq id='iChat_1DF03087' type='result' to='testuser1@localhost.localdomain/Heisenberg'>
+Jul 08 20:07:56 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='D9C29E27-ECE9-4E3E-B06E-465AD43D38D9' type='chat' to='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:08:00 c2s7f8bd06f3000	debug	Received[c2s]: <message type='chat' to='testuser1@localhost.localdomain' from='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:08:02 c2s7f8bd06f3000	debug	Received[c2s]: <message type='chat' to='testuser1@localhost.localdomain' from='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:08:04 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='7FD7C039-2C0B-4D9B-932B-39FFE8590E13' type='chat' to='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:08:06 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='B2ECC270-397D-4B60-9ECE-9C918CFC26C4' type='chat' to='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:08:12 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='E280DF62-402B-4D7A-8550-A1C30D690340' type='chat' to='alexander@localhost.localdomain/Osprey'>
+Jul 08 20:10:40 socket	debug	server.lua: client 127.0.0.1:51066 read error: closed
+Jul 08 20:10:40 c2s7f8bd06f3000	info	Client disconnected: closed
+Jul 08 20:10:40 c2s7f8bd06f3000	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:10:40 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:10:40 c2s7f8bd06f3000	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:10:40 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:10:43 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51073 to 5222
+Jul 08 20:10:43 sessionmanager	debug	open sessions now: 18
+Jul 08 20:10:43 c2s7f8bd1026620	info	Client connected
+Jul 08 20:10:43 c2s7f8bd1026620	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:10:43 c2s7f8bd1026620	debug	Sent reply <stream:stream> to client
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:10:46 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjkwYjJkYmUyLWFiMDUtNGZjMy1hNzA2LTEzMGM1ZTJiOTYyNSIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:10:46 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:10:46 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1lYjZlYzMxYWM2NTFlN2EzOTBkYTBlMWJkMmNiMjBiYg==</challenge>
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:10:46 c2s7f8bd1026620	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Sent reply <stream:stream> to client
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:10:46 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:10:46 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:10:46 c2s7f8bd1026620	debug	Received[c2s]: <presence>
+Jul 08 20:10:46 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:10:46 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:10:46 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:10:46 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:10:46 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:12:38 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='89039A75-94ED-4F29-8E0E-3A458700AC4E' type='chat' to='alexander@localhost.localdomain'>
+Jul 08 20:13:54 socket	debug	server.lua: client 127.0.0.1:51073 read error: closed
+Jul 08 20:13:54 c2s7f8bd1026620	info	Client disconnected: closed
+Jul 08 20:13:54 c2s7f8bd1026620	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:13:54 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:13:54 c2s7f8bd1026620	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:13:54 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:13:59 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51076 to 5222
+Jul 08 20:13:59 sessionmanager	debug	open sessions now: 19
+Jul 08 20:13:59 c2s7f8bd104fb00	info	Client connected
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Sent reply <stream:stream> to client
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:13:59 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjBlOTM4NWU1LTc1ZmMtNGE1OC05MTNhLTg5ZjMzMjk2M2NmYiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:13:59 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:13:59 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1iN2M4NTQyOGZkYzRjOWFjNjg2ZTg2ZjI2MmE4N2NkYw==</challenge>
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:13:59 c2s7f8bd104fb00	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Sent reply <stream:stream> to client
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:13:59 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:13:59 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:13:59 c2s7f8bd104fb00	debug	Received[c2s]: <presence>
+Jul 08 20:13:59 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:13:59 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:13:59 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:13:59 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:13:59 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:14:01 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='99F8AFFF-FE4A-429F-94B4-50AD9AEAC46E' type='chat' to='alexander@localhost.localdomain'>
+Jul 08 20:15:43 socket	debug	server.lua: client 127.0.0.1:51076 read error: closed
+Jul 08 20:15:43 c2s7f8bd104fb00	info	Client disconnected: closed
+Jul 08 20:15:43 c2s7f8bd104fb00	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:15:43 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:15:43 c2s7f8bd104fb00	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:15:43 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:15:55 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51079 to 5222
+Jul 08 20:15:55 sessionmanager	debug	open sessions now: 20
+Jul 08 20:15:55 c2s7f8bd106f840	info	Client connected
+Jul 08 20:15:55 c2s7f8bd106f840	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:15:55 c2s7f8bd106f840	debug	Sent reply <stream:stream> to client
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:15:56 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjVhYjY5ZGQ3LTI0YTEtNDQ1Yy05M2VlLWE1YTZkMDkwNTQ4NSIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:15:56 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:15:56 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1iMmJmNGU4NmZhNmRhZGNmMmJmZTVmNjIzOGQ3MzE5OQ==</challenge>
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:15:56 c2s7f8bd106f840	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Sent reply <stream:stream> to client
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:15:56 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:15:56 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:15:56 c2s7f8bd106f840	debug	Received[c2s]: <presence>
+Jul 08 20:15:56 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:15:56 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:15:56 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:15:56 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:15:56 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:16:01 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='4285D46D-AD21-416C-9061-FD07A4B0E01E' type='chat' to='alexander@localhost.localdomain'>
+Jul 08 20:16:43 socket	debug	server.lua: client 127.0.0.1:51079 read error: closed
+Jul 08 20:16:43 c2s7f8bd106f840	info	Client disconnected: closed
+Jul 08 20:16:43 c2s7f8bd106f840	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:16:43 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:16:43 c2s7f8bd106f840	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:16:43 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:16:46 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51082 to 5222
+Jul 08 20:16:46 sessionmanager	debug	open sessions now: 21
+Jul 08 20:16:46 c2s7f8bd10896a0	info	Client connected
+Jul 08 20:16:46 c2s7f8bd10896a0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:16:46 c2s7f8bd10896a0	debug	Sent reply <stream:stream> to client
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:16:48 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjNhOWZiMDZlLTViM2MtNDE4Mi1iOGVjLTRhYmE4OWMzMjA1NyIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:16:48 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:16:48 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1lNjJkODk5ZTk3YjRiYTRmOTNjNDFlOWY0MTQ5MzNhNA==</challenge>
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:16:48 c2s7f8bd10896a0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Sent reply <stream:stream> to client
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:16:48 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:16:48 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:16:48 c2s7f8bd10896a0	debug	Received[c2s]: <presence>
+Jul 08 20:16:48 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:16:48 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:16:48 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:16:48 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:16:48 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:17:08 socket	debug	server.lua: client 127.0.0.1:51082 read error: closed
+Jul 08 20:17:08 c2s7f8bd10896a0	info	Client disconnected: closed
+Jul 08 20:17:08 c2s7f8bd10896a0	info	Destroying session for alexander@localhost.localdomain/Osprey (alexander@localhost.localdomain)
+Jul 08 20:17:08 sessionmanager	debug	All resources of alexander are now offline
+Jul 08 20:17:08 c2s7f8bd10896a0	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 20:17:08 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:17:11 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51084 to 5222
+Jul 08 20:17:11 sessionmanager	debug	open sessions now: 22
+Jul 08 20:17:11 c2s7f8bd109f0e0	info	Client connected
+Jul 08 20:17:11 c2s7f8bd109f0e0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:17:11 c2s7f8bd109f0e0	debug	Sent reply <stream:stream> to client
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:17:14 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9ImM2NmZiZDQxLWI4MTctNDBiNy04NDE0LWNlMmI0ZGNkMDRjMiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:17:14 auth_internal_plain	debug	get_password for username 'alexander' at host 'localhost.localdomain'
+Jul 08 20:17:14 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD1hMTNkMDgyNDg1NWVmZTlkZTNlZWNlZTk4YzhiNDM2ZA==</challenge>
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 20:17:14 c2s7f8bd109f0e0	info	Authenticated as alexander@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Sent reply <stream:stream> to client
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:17:14 rostermanager	debug	load_roster: asked for: alexander@localhost.localdomain
+Jul 08 20:17:14 rostermanager	debug	load_roster: loading for new user: alexander@localhost.localdomain
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Resource bound: alexander@localhost.localdomain/Osprey
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s]: <iq type='set'>
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s]: <iq type='get'>
+Jul 08 20:17:14 c2s7f8bd109f0e0	debug	Received[c2s]: <presence>
+Jul 08 20:17:14 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser1@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from testuser1@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:17:14 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser2@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser2@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:17:14 localhost.localdomain:presence	debug	outbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:presence	debug	inbound presence probe from alexander@localhost.localdomain for testuser3@localhost.localdomain
+Jul 08 20:17:14 localhost.localdomain:presence	debug	broadcasted presence of 0 resources from testuser3@localhost.localdomain to alexander@localhost.localdomain/Osprey
+Jul 08 20:17:14 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/alexander.list: No such file or directory') for user: alexander@localhost.localdomain
+Jul 08 20:17:54 c2s7f8bd05bcae0	debug	Received[c2s]: <message id='E59A3B9F-2744-4DAC-8D1D-3B1FB12D7AB1' type='chat' to='alexander@localhost.localdomain'>
+Jul 08 20:22:33 c2s7f8bd05bcae0	debug	Received[c2s]: <presence>
+Jul 08 20:34:25 c2s7f8bd05bcae0	debug	Received[c2s]: <presence>
+Jul 08 20:36:19 c2s7f8bd05bcae0	debug	Received[c2s]: <presence>
+Jul 08 20:37:23 c2s7f8bd05bcae0	debug	Received </stream:stream>
+Jul 08 20:37:23 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 20:37:23 c2s7f8bd05bcae0	info	Client disconnected: session closed
+Jul 08 20:37:23 c2s7f8bd05bcae0	info	Destroying session for testuser1@localhost.localdomain/Heisenberg (testuser1@localhost.localdomain)
+Jul 08 20:37:23 sessionmanager	debug	All resources of testuser1 are now offline
+Jul 08 20:37:23 c2s7f8bd05bcae0	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 23:31:08 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51089 to 5222
+Jul 08 23:31:08 sessionmanager	debug	open sessions now: 23
+Jul 08 23:31:08 c2s7f8bd05dd9e0	info	Client connected
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Sent reply <stream:stream> to client
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s_unauthed]: <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
+Jul 08 23:31:08 socket	debug	server.lua: we need to do tls, but delaying until send buffer empty
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	TLS negotiation started for c2s_unauthed...
+Jul 08 23:31:08 socket	debug	server.lua: attempting to start tls on tcp{client}: 0x7f8bd08f7428
+Jul 08 23:31:08 socket	debug	server.lua: ssl handshake done
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Sent reply <stream:stream> to client
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 23:31:08 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjVlZmM2NTJhLWFlYWUtNDlkYy1hMDFhLWZlY2VmZTBhOTU3ZCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 23:31:08 auth_internal_plain	debug	get_password for username 'testuser1' at host 'localhost.localdomain'
+Jul 08 23:31:08 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD05N2JlM2QwM2Y3NmM3ODllZTMxNjdhOWUwOGRkMWRhYg==</challenge>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	info	Authenticated as testuser1@localhost.localdomain
+Jul 08 23:31:08 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Sent reply <stream:stream> to client
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <iq id='iChat_073E7D3A' type='set'>
+Jul 08 23:31:08 rostermanager	debug	load_roster: asked for: testuser1@localhost.localdomain
+Jul 08 23:31:08 rostermanager	debug	load_roster: loading for new user: testuser1@localhost.localdomain
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Resource bound: testuser1@localhost.localdomain/Heisenberg
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <iq id='iChat_23BD1EA1' type='set' to='localhost.localdomain'>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <iq id='iChat_15062634' type='get' to='localhost.localdomain'>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <iq id='iChat_299A108A' type='set'>
+Jul 08 23:31:08 stanzarouter	debug	Stanza of type iq from c2s has xmlns: jabber:iq:privacy
+Jul 08 23:31:08 stanzarouter	debug	Unhandled c2s stanza: iq; xmlns=jabber:iq:privacy
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <iq id='iChat_6DE090C1' type='get'>
+Jul 08 23:31:08 datamanager	debug	Assuming empty vcard storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/vcard/testuser1.dat: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <iq id='iChat_27702FA0' type='get'>
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <presence>
+Jul 08 23:31:08 localhost.localdomain:presence	debug	outbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 08 23:31:08 localhost.localdomain:presence	debug	inbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 08 23:31:08 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from alexander@localhost.localdomain to testuser1@localhost.localdomain/Heisenberg
+Jul 08 23:31:08 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/testuser1.list: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 08 23:31:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <presence>
+Jul 08 23:46:08 c2s7f8bd05dd9e0	debug	Received[c2s]: <presence>
+Jul 08 23:46:14 c2s7f8bd05dd9e0	debug	Received </stream:stream>
+Jul 08 23:46:14 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 08 23:46:14 c2s7f8bd05dd9e0	info	Client disconnected: session closed
+Jul 08 23:46:14 c2s7f8bd05dd9e0	info	Destroying session for testuser1@localhost.localdomain/Heisenberg (testuser1@localhost.localdomain)
+Jul 08 23:46:14 sessionmanager	debug	All resources of testuser1 are now offline
+Jul 08 23:46:14 c2s7f8bd05dd9e0	debug	Received[c2s]: <presence type='unavailable'>
+Jul 08 23:47:47 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51380 to 5222
+Jul 08 23:47:47 sessionmanager	debug	open sessions now: 24
+Jul 08 23:47:47 c2s7f8bd05088b0	info	Client connected
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Sent reply <stream:stream> to client
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s_unauthed]: <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
+Jul 08 23:47:47 socket	debug	server.lua: we need to do tls, but delaying until send buffer empty
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	TLS negotiation started for c2s_unauthed...
+Jul 08 23:47:47 socket	debug	server.lua: attempting to start tls on tcp{client}: 0x7f8bd0877a28
+Jul 08 23:47:47 socket	debug	server.lua: ssl handshake done
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Sent reply <stream:stream> to client
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 23:47:47 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9Ijg2MTg0ODg4LWJmZjUtNDM3ZS1hOTM2LTlmYWM5ZDFiYWYxYiIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 23:47:47 auth_internal_plain	debug	get_password for username 'testuser1' at host 'localhost.localdomain'
+Jul 08 23:47:47 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD0zYWJmMjNhMjY2YjQ2ZWE0YWUzNzE0ZjVjZjEzZDdkZQ==</challenge>
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 08 23:47:47 c2s7f8bd05088b0	info	Authenticated as testuser1@localhost.localdomain
+Jul 08 23:47:47 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Sent reply <stream:stream> to client
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <iq id='iChat_4E91DD51' type='set'>
+Jul 08 23:47:47 rostermanager	debug	load_roster: asked for: testuser1@localhost.localdomain
+Jul 08 23:47:47 rostermanager	debug	load_roster: loading for new user: testuser1@localhost.localdomain
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Resource bound: testuser1@localhost.localdomain/Heisenberg
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <iq id='iChat_4208E60E' type='set' to='localhost.localdomain'>
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <iq id='iChat_0E0AA4C1' type='get' to='localhost.localdomain'>
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <iq id='iChat_56BC7F6D' type='set'>
+Jul 08 23:47:47 stanzarouter	debug	Stanza of type iq from c2s has xmlns: jabber:iq:privacy
+Jul 08 23:47:47 stanzarouter	debug	Unhandled c2s stanza: iq; xmlns=jabber:iq:privacy
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <iq id='iChat_50BED90F' type='get'>
+Jul 08 23:47:47 datamanager	debug	Assuming empty vcard storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/vcard/testuser1.dat: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <iq id='iChat_00ED41F1' type='get'>
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <presence>
+Jul 08 23:47:47 localhost.localdomain:presence	debug	outbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 08 23:47:47 localhost.localdomain:presence	debug	inbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 08 23:47:47 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from alexander@localhost.localdomain to testuser1@localhost.localdomain/Heisenberg
+Jul 08 23:47:47 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/testuser1.list: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 08 23:47:47 c2s7f8bd05088b0	debug	Received[c2s]: <presence>
+Jul 09 00:10:55 c2s7f8bd05088b0	debug	Received </stream:stream>
+Jul 09 00:10:55 socket	debug	server.lua: closed client handler and removed socket from list
+Jul 09 00:10:55 c2s7f8bd05088b0	info	Client disconnected: session closed
+Jul 09 00:10:55 c2s7f8bd05088b0	info	Destroying session for testuser1@localhost.localdomain/Heisenberg (testuser1@localhost.localdomain)
+Jul 09 00:10:55 sessionmanager	debug	All resources of testuser1 are now offline
+Jul 09 00:10:55 c2s7f8bd05088b0	debug	Received[c2s]: <presence type='unavailable'>
+Jul 09 18:15:59 socket	debug	server.lua: accepted new client connection from 127.0.0.1:51592 to 5222
+Jul 09 18:15:59 sessionmanager	debug	open sessions now: 12
+Jul 09 18:15:59 c2s7f8bd1038b00	info	Client connected
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Sent reply <stream:stream> to client
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s_unauthed]: <starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'>
+Jul 09 18:15:59 socket	debug	server.lua: we need to do tls, but delaying until send buffer empty
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	TLS negotiation started for c2s_unauthed...
+Jul 09 18:15:59 socket	debug	server.lua: attempting to start tls on tcp{client}: 0x7f8bd08ffc28
+Jul 09 18:15:59 socket	debug	server.lua: ssl handshake done
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Sent reply <stream:stream> to client
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s_unauthed]: <auth mechanism='DIGEST-MD5' xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 09 18:15:59 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cmVhbG09ImxvY2FsaG9zdC5sb2NhbGRvbWFpbiIsbm9uY2U9IjdhNjY5MzBkLTg4ZjUtNDIwYy04NzhkLTk3MjZjN2Q2NTA5NCIscW9wPSJhdXRoIixjaGFyc2V0PXV0Zi04LGFsZ29yaXRobT1tZDUtc2Vzcw==</challenge>
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 09 18:15:59 auth_internal_plain	debug	get_password for username 'testuser1' at host 'localhost.localdomain'
+Jul 09 18:15:59 localhost.localdomain:saslauth	debug	sasl reply: <challenge xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>cnNwYXV0aD02Mjc0MGJkNDViNjBkNzE4M2FkMmRiNDk2MDI1MTlkMA==</challenge>
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s_unauthed]: <response xmlns='urn:ietf:params:xml:ns:xmpp-sasl'>
+Jul 09 18:15:59 c2s7f8bd1038b00	info	Authenticated as testuser1@localhost.localdomain
+Jul 09 18:15:59 localhost.localdomain:saslauth	debug	sasl reply: <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'></success>
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Client sent opening <stream:stream> to localhost.localdomain
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Sent reply <stream:stream> to client
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <iq id='iChat_72C6BA27' type='set'>
+Jul 09 18:15:59 rostermanager	debug	load_roster: asked for: testuser1@localhost.localdomain
+Jul 09 18:15:59 rostermanager	debug	load_roster: loading for new user: testuser1@localhost.localdomain
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Resource bound: testuser1@localhost.localdomain/Heisenberg
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <iq id='iChat_76E2A4A9' type='set' to='localhost.localdomain'>
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <iq id='iChat_704CA787' type='get' to='localhost.localdomain'>
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <iq id='iChat_092E0C56' type='set'>
+Jul 09 18:15:59 stanzarouter	debug	Stanza of type iq from c2s has xmlns: jabber:iq:privacy
+Jul 09 18:15:59 stanzarouter	debug	Unhandled c2s stanza: iq; xmlns=jabber:iq:privacy
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <iq id='iChat_56A9EE94' type='get'>
+Jul 09 18:15:59 datamanager	debug	Assuming empty vcard storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/vcard/testuser1.dat: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <iq id='iChat_17AE44D7' type='get'>
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <presence>
+Jul 09 18:15:59 localhost.localdomain:presence	debug	outbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 09 18:15:59 localhost.localdomain:presence	debug	inbound presence probe from testuser1@localhost.localdomain for alexander@localhost.localdomain
+Jul 09 18:15:59 localhost.localdomain:presence	debug	broadcasted presence of 1 resources from alexander@localhost.localdomain to testuser1@localhost.localdomain/Heisenberg
+Jul 09 18:15:59 datamanager	debug	Assuming empty offline storage ('cannot open /usr/local/Cellar/prosody/0.8.2/var/lib/prosody/localhost%2elocaldomain/offline/testuser1.list: No such file or directory') for user: testuser1@localhost.localdomain
+Jul 09 18:15:59 c2s7f8bd1038b00	debug	Received[c2s]: <presence>

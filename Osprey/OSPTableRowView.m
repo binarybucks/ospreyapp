@@ -8,7 +8,6 @@
 }
 
 - (void)awakeFromNib {
-        LOGFUNCTIONCALL
         gradientTopColor = [NSColor colorFromHexRGB:@"78bee5"];
         gradientBottomColor =  [NSColor colorFromHexRGB:@"469bcf"];
         fillGradient = [[NSGradient alloc] initWithStartingColor:gradientBottomColor endingColor:gradientTopColor];

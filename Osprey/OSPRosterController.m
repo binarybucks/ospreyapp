@@ -87,9 +87,6 @@
         [rosterTable setDoubleAction:@selector(chat:)];
         [rosterTable setTarget:self];
         
-        
-        
-        NSLog(@"FOO: %@", [[[self xmppStream] myJID] bare] );
         [self _setArrayControllerFetchPredicate];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setArrayControllerFetchPredicate) name:@"UserChangedJid" object:nil];

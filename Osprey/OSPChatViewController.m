@@ -74,7 +74,7 @@ typedef enum {
 }
 
 - (void) awakeFromNib {
-    [inputField bind:@"hidden" toObject:[[NSApp delegate] statusController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"CNVConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
+    [inputField bind:@"hidden" toObject:[[NSApp delegate] statusController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
 }
 
 

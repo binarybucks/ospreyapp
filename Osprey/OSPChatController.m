@@ -123,7 +123,6 @@
             DDLogError(@"%@",[error description]);
         }
     }    
-    DDLogVerbose(@"Returning %@ for %@", cvc, jid);
     return cvc;
 }
 

@@ -64,7 +64,10 @@
     }
 
     Class GAB = NSClassFromString(@"GrowlApplicationBridge");
-	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)])
+    NSLog(@"gab %@", GAB);
+	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)]) {
+        NSLog(@"asdf");
+        
 		[GAB notifyWithTitle:title
                  description:string
             notificationName:@"notification"
@@ -73,6 +76,7 @@
                     isSticky:NO
                 clickContext:userJidForCallback
                   identifier:nil];
+    }
 
 }
 

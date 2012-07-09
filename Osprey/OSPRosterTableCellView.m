@@ -5,9 +5,27 @@
 
 // Color and style for custom statusTextfield
 - (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle {
-    LOGFUNCTIONCALL
-    NSColor *textColor = (backgroundStyle == NSBackgroundStyleDark) ? [NSColor windowBackgroundColor] : [NSColor controlShadowColor];
-    self.statusTextfield.textColor = textColor;
+    
+    if (backgroundStyle == NSBackgroundStyleDark) {
+        self.statusTextfield.textColor = [NSColor windowBackgroundColor];
+        
+        NSShadow *shadow = [[NSShadow alloc] init];
+        [shadow setShadowColor:[NSColor blackColor]];
+        [shadow setShadowBlurRadius:2.0];
+        [shadow setShadowOffset:NSMakeSize(2.0, 2.0)];
+        self.statusTextfield.shadow = shadow;
+        
+        
+        
+        self.textField.textColor = [NSColor windowBackgroundColor];
+
+    } else {
+        self.statusTextfield.textColor = [NSColor controlShadowColor];
+        self.textField.textColor = [NSColor controlShadowColor];
+        
+        
+    }
+    
     [super setBackgroundStyle:backgroundStyle];
 }
 
