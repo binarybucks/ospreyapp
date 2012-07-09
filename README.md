@@ -19,7 +19,7 @@ You might contribute to the project in many ways,
 Just get in touch via Twitter or fire your awesome contributions at us directly. 
 
 ## Contributors
-* [BinaryBucks](https://twitter.com/binarybucks) - Founder & lead developer
+* [BinaryBucks](https://twitter.com/binarybucks) - Lonely Lead developer :'(
 
 ## Licensing
 
