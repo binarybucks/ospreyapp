@@ -1,5 +1,4 @@
 # Osprey
-====================
 
 Osprey is a free and open source Mac instant messaging client for XMPP networks such as Google Talk or Facebook. 
 While there are many clients for Mac that also offer great features, most of them do not feel native or are no longer maintained. 
@@ -34,4 +33,3 @@ terms:
 * [INAppStoreWindow](https://github.com/indragiek/INAppStoreWindow/)
 * [INKeyChainAccess](https://github.com/indragiek/INKeychainAccess)
 * [INPopoverController](https://github.com/indragiek/INPopoverController)
-
