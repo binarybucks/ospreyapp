@@ -18,6 +18,9 @@ You might contribute to the project in many ways,
 
 Just get in touch via Twitter or fire your awesome contributions at us directly. 
 
+## Contributors
+* [BinaryBucks](https://twitter.com/binarybucks) - Founder & lead developer
+
 ## Licensing
 
 Osprey is licensed under the [BSD 3-Clause license](http://www.opensource.org/licenses/BSD-3-Clause).
@@ -32,5 +35,3 @@ terms:
 * [INKeyChainAccess](https://github.com/indragiek/INKeychainAccess)
 * [INPopoverController](https://github.com/indragiek/INPopoverController)
 
-## Contributors
-* [BinaryBucks](https://twitter.com/binarybucks) - Founder & lead developer
