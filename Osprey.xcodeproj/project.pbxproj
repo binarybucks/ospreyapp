@@ -454,7 +454,7 @@
 		119164F015A9AFAD0021C203 /* OSPPopoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPPopoverHeaderView.m; sourceTree = "<group>"; };
 		119164F115A9AFAD0021C203 /* OSPPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPPreferencesController.h; sourceTree = "<group>"; };
 		119164F215A9AFAD0021C203 /* OSPPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPPreferencesController.m; sourceTree = "<group>"; };
-		119164F315A9AFAD0021C203 /* Osprey-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Osprey-Info.plist"; sourceTree = "<group>"; };
+		119164F315A9AFAD0021C203 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		119164F415A9AFAD0021C203 /* Osprey-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Osprey-Prefix.pch"; sourceTree = "<group>"; };
 		119164F515A9AFAD0021C203 /* OSPRosterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPRosterController.h; sourceTree = "<group>"; };
 		119164F615A9AFAD0021C203 /* OSPRosterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPRosterController.m; sourceTree = "<group>"; };
@@ -1278,7 +1278,7 @@
 			children = (
 				11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */,
 				119164D615A9AFAD0021C203 /* main.m */,
-				119164F315A9AFAD0021C203 /* Osprey-Info.plist */,
+				119164F315A9AFAD0021C203 /* Info.plist */,
 				119164F415A9AFAD0021C203 /* Osprey-Prefix.pch */,
 				1191651315A9AFAD0021C203 /* Types.h */,
 				115B0AEF15A9B62A001EB763 /* Credits.rtf */,
@@ -1579,7 +1579,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Osprey/Osprey-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
-				INFOPLIST_FILE = "Osprey/Osprey-Info.plist";
+				INFOPLIST_FILE = Osprey/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Osprey/XMPPFramework/Vendor/libidn\"",
@@ -1601,7 +1601,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Osprey/Osprey-Prefix.pch";
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
-				INFOPLIST_FILE = "Osprey/Osprey-Info.plist";
+				INFOPLIST_FILE = Osprey/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Osprey/XMPPFramework/Vendor/libidn\"",

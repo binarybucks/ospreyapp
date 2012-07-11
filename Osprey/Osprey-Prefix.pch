@@ -8,7 +8,11 @@
     #import "OSPAppDelegate.h"
 
     #define LOGFUNCTIONCALL DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #ifdef DEBUG
+        static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #else
+        static const int ddLogLevel = LOG_LEVEL_ERROR;
+    #endif
 
     #define KEYCHAIN_SERVICE_NAME @"OspreyApp"
 

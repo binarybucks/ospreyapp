@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.social-networking</string>
 	<key>LSMinimumSystemVersion</key>
@@ -34,7 +34,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUFeedUrl</key>
+	<key>SUFeedURL</key>
 	<string>http://ospreyapp.org/downloads/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>sparklePublicDSAKey.pem</string>
