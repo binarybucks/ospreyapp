@@ -34,6 +34,8 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedUrl</key>
+	<string>http://ospreyapp.org/downloads/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>sparklePublicDSAKey.pem</string>
 </dict>

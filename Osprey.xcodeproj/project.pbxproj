@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11203E5515ADE98600311AD3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11203E5415ADE98600311AD3 /* Sparkle.framework */; };
+		11203E5615ADE99400311AD3 /* Sparkle.framework in Copy Sparkle.framwork files */ = {isa = PBXBuildFile; fileRef = 11203E5415ADE98600311AD3 /* Sparkle.framework */; };
 		1131D16215A9F6D00030AA78 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131D16115A9F6D00030AA78 /* INAppStoreWindow.m */; };
 		1131D16F15A9FA5D0030AA78 /* Growl.framework in Copy Growl.framework files */ = {isa = PBXBuildFile; fileRef = 1131D16B15A9F8C30030AA78 /* Growl.framework */; };
 		115B0AE815A9B547001EB763 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 115B0AE715A9B546001EB763 /* libresolv.dylib */; };
@@ -159,8 +161,6 @@
 		1191654E15A9B3400021C203 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191654D15A9B3400021C203 /* CoreLocation.framework */; };
 		1191655015A9B3630021C203 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191654F15A9B3630021C203 /* SystemConfiguration.framework */; };
 		1191655215A9B42D0021C203 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191655115A9B42D0021C203 /* Security.framework */; };
-		11ED0C5815ADDF1300F0930E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11ED0C5715ADDF1300F0930E /* Sparkle.framework */; };
-		11ED0C5A15ADDF6100F0930E /* Sparkle.framework in Copy Sparkle.framwork files */ = {isa = PBXBuildFile; fileRef = 11ED0C5715ADDF1300F0930E /* Sparkle.framework */; };
 		11ED0C5C15ADE20600F0930E /* sparklePublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */; };
 /* End PBXBuildFile section */
 
@@ -182,7 +182,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				11ED0C5A15ADDF6100F0930E /* Sparkle.framework in Copy Sparkle.framwork files */,
+				11203E5615ADE99400311AD3 /* Sparkle.framework in Copy Sparkle.framwork files */,
 			);
 			name = "Copy Sparkle.framwork files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +190,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11203E5415ADE98600311AD3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Osprey/Sparkle.framework; sourceTree = "<group>"; };
 		1131D16015A9F6D00030AA78 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
 		1131D16115A9F6D00030AA78 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
 		1131D16B15A9F8C30030AA78 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Osprey/Growl.framework; sourceTree = "<group>"; };
@@ -493,7 +494,6 @@
 		1191654D15A9B3400021C203 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1191654F15A9B3630021C203 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1191655115A9B42D0021C203 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		11ED0C5715ADDF1300F0930E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sparklePublicDSAKey.pem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -510,7 +510,7 @@
 				1191654A15A9B1A30021C203 /* Quartz.framework in Frameworks */,
 				1191633C15A9AECC0021C203 /* Cocoa.framework in Frameworks */,
 				119164BC15A9AF100021C203 /* libidn.a in Frameworks */,
-				11ED0C5815ADDF1300F0930E /* Sparkle.framework in Frameworks */,
+				11203E5515ADE98600311AD3 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +537,7 @@
 		1191633A15A9AECC0021C203 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				11ED0C5715ADDF1300F0930E /* Sparkle.framework */,
+				11203E5415ADE98600311AD3 /* Sparkle.framework */,
 				1131D16B15A9F8C30030AA78 /* Growl.framework */,
 				115B0AE715A9B546001EB763 /* libresolv.dylib */,
 				1191655115A9B42D0021C203 /* Security.framework */,
@@ -570,7 +570,7 @@
 				1191654315A9AFC10021C203 /* Controller */,
 				1191654215A9AFB40021C203 /* Vendor */,
 				119164BF15A9AF5C0021C203 /* Interface */,
-				119164BD15A9AF310021C203 /* Ressources */,
+				119164BD15A9AF310021C203 /* Resources */,
 				1191635C15A9AF0F0021C203 /* XMPPFramework */,
 			);
 			path = Osprey;
@@ -1150,13 +1150,13 @@
 			path = libidn;
 			sourceTree = "<group>";
 		};
-		119164BD15A9AF310021C203 /* Ressources */ = {
+		119164BD15A9AF310021C203 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				1191654615A9AFE70021C203 /* Misc */,
 				119164BE15A9AF4C0021C203 /* Images */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		119164BE15A9AF4C0021C203 /* Images */ = {
