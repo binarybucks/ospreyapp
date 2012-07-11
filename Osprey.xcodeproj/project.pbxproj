@@ -112,7 +112,6 @@
 		119164B815A9AF100021C203 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1191644F15A9AF100021C203 /* DDXMLDocument.m */; };
 		119164B915A9AF100021C203 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1191645115A9AF100021C203 /* DDXMLElement.m */; };
 		119164BA15A9AF100021C203 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1191645315A9AF100021C203 /* DDXMLNode.m */; };
-		119164BB15A9AF100021C203 /* libidn-1.24.tar.gz in Resources */ = {isa = PBXBuildFile; fileRef = 1191645815A9AF100021C203 /* libidn-1.24.tar.gz */; };
 		119164BC15A9AF100021C203 /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191645915A9AF100021C203 /* libidn.a */; };
 		119164C115A9AF6A0021C203 /* chat.html in Resources */ = {isa = PBXBuildFile; fileRef = 119164C015A9AF6A0021C203 /* chat.html */; };
 		119164C615A9AF740021C203 /* Account.icns in Resources */ = {isa = PBXBuildFile; fileRef = 119164C215A9AF740021C203 /* Account.icns */; };
@@ -406,7 +405,6 @@
 		1191645315A9AF100021C203 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
 		1191645515A9AF100021C203 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
 		1191645715A9AF100021C203 /* idn-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "idn-int.h"; sourceTree = "<group>"; };
-		1191645815A9AF100021C203 /* libidn-1.24.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "libidn-1.24.tar.gz"; sourceTree = "<group>"; };
 		1191645915A9AF100021C203 /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		1191645A15A9AF100021C203 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringprep.h; sourceTree = "<group>"; };
 		119164C015A9AF6A0021C203 /* chat.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = chat.html; sourceTree = "<group>"; };
@@ -1143,7 +1141,6 @@
 			isa = PBXGroup;
 			children = (
 				1191645715A9AF100021C203 /* idn-int.h */,
-				1191645815A9AF100021C203 /* libidn-1.24.tar.gz */,
 				1191645915A9AF100021C203 /* libidn.a */,
 				1191645A15A9AF100021C203 /* stringprep.h */,
 			);
@@ -1362,7 +1359,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				119164B615A9AF100021C203 /* README.txt in Resources */,
-				119164BB15A9AF100021C203 /* libidn-1.24.tar.gz in Resources */,
 				119164C115A9AF6A0021C203 /* chat.html in Resources */,
 				119164C615A9AF740021C203 /* Account.icns in Resources */,
 				119164C715A9AF740021C203 /* Appearence.icns in Resources */,
