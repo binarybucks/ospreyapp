@@ -12,7 +12,6 @@
     IBOutlet NSArrayController *openChatsArrayController;
     IBOutlet OSPTableView      * openChatsTable;
     IBOutlet NSView *chatView;
-    IBOutlet NSTextField *windowTitle;
     
     bool initialAwakeFromNibCallFinished;
     int summedUnreadCount;

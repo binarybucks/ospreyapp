@@ -61,6 +61,7 @@ typedef enum {
         
         processingQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
         dispatch_suspend(processingQueue);
+        processionQueueIsSuspended = YES;
 
     }
     return self;
@@ -98,9 +99,13 @@ typedef enum {
 }
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
-    NSLog(@"resuming queue");
     isWebViewReady = YES;
-    dispatch_resume(processingQueue);
+    // There is no way to know if a queue is suspended and suspending a already suspended queue crashes 
+    if (processionQueueIsSuspended) {
+        NSLog(@"resuming queue");
+        dispatch_resume(processingQueue);
+        processionQueueIsSuspended = NO;
+    }
 }
 
 
@@ -122,26 +127,27 @@ typedef enum {
 
 // Convenience accessors to processing queue
 - (void) displayChatMessage:(XMPPMessage*)message {
-    [self display:message withKind:@"Chat"];
+    [self dispatch:message toSelector:@selector(_displayChatMessage:)];
+
 }
 - (void) displayAttentionMessage:(XMPPMessage*)message {
-    [self display:message withKind:@"Attention"];
+    [self dispatch:message toSelector:@selector(_displayAttentionMessage:)];
+
 }
 - (void) displayPresenceMessage:(XMPPPresence*)message {
-    [self display:message withKind:@"Presence"];    
+    [self dispatch:message toSelector:@selector(_displayPresenceMessage:)];
+     
 }
 
 // Processing queue scheduler
-- (void) display:(NSXMLElement*)object withKind:(NSString*)kind {
-    NSLog(@"Kind: %@", kind);
+- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector {
     dispatch_block_t block = ^{ @autoreleasepool {
-        SEL selector = NSSelectorFromString([NSString stringWithFormat:@"_display%@Message:", kind]);
-        if ([self respondsToSelector:selector]) {
+        //    if ([self respondsToSelector:selector]) {
             dispatch_async(dispatch_get_main_queue(), ^{  
-                [self performSelector:selector withObject:object];
+                [self tryToPerform:selector with:object];
             });
         }
-    }};
+    };
 	
 	if (isWebViewReady) {  block(); } 
     else { self.loadView; dispatch_async(processingQueue, block); }    

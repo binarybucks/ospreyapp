@@ -12,7 +12,6 @@
 @synthesize window = _window;
 
 @synthesize chatController;
-
 @synthesize statusController;
 @synthesize xmppvCardAvatarModule;
 @synthesize xmppvCardTempModule;
@@ -24,7 +23,6 @@
 @synthesize xmppRoster;
 @synthesize xmppRosterStorage;
 @synthesize managedObjectContext;
-@synthesize notificationController;
 @synthesize xmppAttentionModule;
 - (id)init
 {

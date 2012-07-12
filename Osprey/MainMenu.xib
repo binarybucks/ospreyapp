@@ -2210,7 +2210,7 @@ A</bytes>
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomView" id="1006017434">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSTextField" id="705525174">
@@ -2218,6 +2218,8 @@ A</bytes>
 						<int key="NSvFlags">258</int>
 						<string key="NSFrame">{{-2, 12}, {608, 17}}</string>
 						<reference key="NSSuperview" ref="1006017434"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:3944</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="136917222">
@@ -2234,6 +2236,8 @@ A</bytes>
 					</object>
 				</array>
 				<string key="NSFrameSize">{603, 40}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="705525174"/>
 				<string key="NSReuseIdentifierKey">_NS:1192</string>
 				<string key="NSClassName">OSPTitleBarView</string>
@@ -4017,6 +4021,28 @@ A</bytes>
 						</object>
 					</object>
 					<int key="connectionID">1219</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.displayName</string>
+						<reference key="source" ref="705525174"/>
+						<reference key="destination" ref="1024992337"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="705525174"/>
+							<reference key="NSDestination" ref="1024992337"/>
+							<string key="NSLabel">value: selection.displayName</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.displayName</string>
+							<dictionary key="NSOptions">
+								<string key="NSMultipleValuesPlaceholder">Osprey</string>
+								<string key="NSNoSelectionPlaceholder">Osprey</string>
+								<string key="NSNotApplicablePlaceholder">Osprey</string>
+								<string key="NSNullPlaceholder">Osprey</string>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">1309</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -5888,7 +5914,7 @@ A</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1298</int>
+			<int key="maxID">1309</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5924,8 +5950,6 @@ A</bytes>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="chatController">OSPChatController</string>
-						<string key="notificationController">OSPNotificationController</string>
-						<string key="rosterController">OSPRosterController</string>
 						<string key="rosterPopover">NSPopover</string>
 						<string key="rosterPopoverButton">NSButton</string>
 						<string key="splitView">NSSplitView</string>
@@ -5937,14 +5961,6 @@ A</bytes>
 						<object class="IBToOneOutletInfo" key="chatController">
 							<string key="name">chatController</string>
 							<string key="candidateClassName">OSPChatController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="notificationController">
-							<string key="name">notificationController</string>
-							<string key="candidateClassName">OSPNotificationController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="rosterController">
-							<string key="name">rosterController</string>
-							<string key="candidateClassName">OSPRosterController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rosterPopover">
 							<string key="name">rosterPopover</string>
@@ -6028,14 +6044,6 @@ A</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">OSPNotificationController</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/OSPNotificationController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">OSPPreferencesController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -6114,52 +6122,6 @@ A</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/OSPPreferencesController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">OSPRosterController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="chat:">id</string>
-						<string key="filterRoster:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="chat:">
-							<string key="name">chat:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="filterRoster:">
-							<string key="name">filterRoster:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="arrayController">NSArrayController</string>
-						<string key="rosterTable">NSTableView</string>
-						<string key="scrollView">NSScrollView</string>
-						<string key="searchField">NSSearchField</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="arrayController">
-							<string key="name">arrayController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="rosterTable">
-							<string key="name">rosterTable</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="scrollView">
-							<string key="name">scrollView</string>
-							<string key="candidateClassName">NSScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="searchField">
-							<string key="name">searchField</string>
-							<string key="candidateClassName">NSSearchField</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/OSPRosterController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

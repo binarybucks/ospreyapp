@@ -1,9 +1,16 @@
 #import "OSPNotificationController.h"
 #import "NSXMLElement+XMPP.h"
-@implementation OSPNotificationController {
-    
-}
 
+#define RECEIVED_CHAT_MESSAGE_NOTIFICATION_NAME @"incommingChatMessage"
+#define RECEIVED_CHAT_MESSAGE_HUMAN_READABLE @"Incomming chat message"
+
+#define RECEIVED_ATTENTION_REQUEST_NOTIFICATION_NAME @"incommingAttentionRequest"
+#define RECEIVED_ATTENTION_REQUEST_HUMAN_READABLE @"Incomming attention request"
+
+
+@implementation OSPNotificationController
+
+# pragma mark - Init
 - (id) init {
     self = [super init];
     if (self) {
@@ -33,62 +40,78 @@
     return self;
 }
 
+#pragma mark - Growl registration
 - (NSDictionary *) registrationDictionaryForGrowl {
     LOGFUNCTIONCALL
 	NSDictionary *notificationsWithDescriptions = [NSDictionary dictionaryWithObjectsAndKeys:
-												   @"Received chat message", @"receivedChatMessage",				
+												   RECEIVED_CHAT_MESSAGE_HUMAN_READABLE, RECEIVED_CHAT_MESSAGE_NOTIFICATION_NAME, 
+                                                   RECEIVED_ATTENTION_REQUEST_HUMAN_READABLE, RECEIVED_ATTENTION_REQUEST_NOTIFICATION_NAME,				
 												   nil];
 	
 	NSArray *allNotifications = [notificationsWithDescriptions allKeys];
 		
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
-							 @"MultiGrowlExample", GROWL_APP_NAME,
+							 APP_NAME, GROWL_APP_NAME,
 							 allNotifications, GROWL_NOTIFICATIONS_ALL,
 							 allNotifications,	GROWL_NOTIFICATIONS_DEFAULT,
 							 notificationsWithDescriptions,	GROWL_NOTIFICATIONS_HUMAN_READABLE_NAMES,
 							 nil];	
+    NSLog(@"growl registration: %@", regDict);
 	return regDict;
 }
 
 
 
 
-+ (void)growlNotificationFromMessage:(XMPPMessage*)message boundToUser:(OSPUserStorageObject*)userForCallback;
-{
-    [OSPNotificationController growlNotificationFromString:[[message elementForName:@"body"] stringValue] withTitle:userForCallback.displayName boundToUserBareJid:userForCallback.jid.bare];
++ (void)growlNotificationForIncommingMessage:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
+    [OSPNotificationController genericGrowlNotification:[user displayName] 
+                                            description:[[message elementForName:@"body"] stringValue] 
+                                       notificationName:RECEIVED_CHAT_MESSAGE_NOTIFICATION_NAME 
+                                               iconData:nil 
+                                               priority:0 
+                                               isSticky:NO 
+                                           clickContext:user.jid.bare];
 }
 
-+ (void)growlNotificationFromString:(NSString*)string withTitle:(NSString*)title boundToUserBareJid:(NSString*)userJidForCallback {
++ (void)growlNotificationForIncommingAttentionRequest:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
+    [OSPNotificationController genericGrowlNotification:[user displayName] 
+                                            description:@"wants wants your attention!" 
+                                       notificationName:RECEIVED_ATTENTION_REQUEST_NOTIFICATION_NAME 
+                                               iconData:nil 
+                                               priority:0 
+                                               isSticky:NO 
+                                           clickContext:user.jid.bare];
+}
+
+
+// Provides a generic interface for sending growl messages, but checks if notifications are enabled in the preferences
++ (void) genericGrowlNotification:(NSString *)title
+                      description:(NSString *)description
+                 notificationName:(NSString *)notifName
+                         iconData:(NSData *)iconData
+                         priority:(signed int)priority
+                         isSticky:(BOOL)isSticky
+                     clickContext:(id)clickContext {
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS]) {
         return;
     }
-
+    
     Class GAB = NSClassFromString(@"GrowlApplicationBridge");
     NSLog(@"gab %@", GAB);
 	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)]) {
-        NSLog(@"asdf");
-        
-		[GAB notifyWithTitle:title
-                 description:string
-            notificationName:@"notification"
-                    iconData:nil
-                    priority:0
-                    isSticky:NO
-                clickContext:userJidForCallback
-                  identifier:nil];
+        [GAB notifyWithTitle:title
+                 description:description
+            notificationName:notifName
+                    iconData:iconData
+                    priority:priority
+                    isSticky:isSticky
+                clickContext:clickContext];
     }
-
 }
-
-
 
 - (void) growlNotificationWasClicked:(id)clickContext {
     [[[NSApp delegate] chatController] openChatWithJid:[XMPPJID jidWithString:clickContext]];
 }
-
-
-
-
-
 
 @end

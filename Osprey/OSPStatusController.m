@@ -270,7 +270,7 @@
     
     //    + (NSString*)passwordForAccount:(NSString*)account serviceName:(NSString*)name error:(NSError**)error;
 
-    success = [[self xmppStream] authenticateWithPassword:[INKeychainAccess passwordForAccount:self.xmppStream.myJID.bare serviceName:KEYCHAIN_SERVICE_NAME error:&authError] error:&error];
+    success = [[self xmppStream] authenticateWithPassword:[INKeychainAccess passwordForAccount:self.xmppStream.myJID.bare serviceName:APP_NAME error:&authError] error:&error];
 
 //	}
 	

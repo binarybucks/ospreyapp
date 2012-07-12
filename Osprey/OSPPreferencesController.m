@@ -205,7 +205,7 @@ NSString * const View3IconImageName =   @"Developer";
     if ([jid length] == 0)
         return; 
     NSError *err = nil;
-    NSString *password = [INKeychainAccess passwordForAccount:jid serviceName:KEYCHAIN_SERVICE_NAME error:&err];
+    NSString *password = [INKeychainAccess passwordForAccount:jid serviceName:APP_NAME error:&err];
     
     if (([password length] == 0) || (!password)) {
         [passwordTextField setStringValue:@""];
@@ -226,12 +226,12 @@ NSString * const View3IconImageName =   @"Developer";
     if (([jid length] == 0) || ([pw length] == 0)) 
         return; 
     
-    keyChainItem = [INKeychainAccess itemRefForAccount:jid serviceName:KEYCHAIN_SERVICE_NAME error:&kcErr];
+    keyChainItem = [INKeychainAccess itemRefForAccount:jid serviceName:APP_NAME error:&kcErr];
 
     if (keyChainItem == nil) {
-        [INKeychainAccess addKeychainItemForAccount:jid withPassword:pw serviceName:KEYCHAIN_SERVICE_NAME error:&setErr];
+        [INKeychainAccess addKeychainItemForAccount:jid withPassword:pw serviceName:APP_NAME error:&setErr];
     } else {
-        [INKeychainAccess setPassword:[sender stringValue] forAccount:[jidTextField stringValue] serviceName:KEYCHAIN_SERVICE_NAME error:&setErr];
+        [INKeychainAccess setPassword:[sender stringValue] forAccount:[jidTextField stringValue] serviceName:APP_NAME error:&setErr];
     }
     
     if (setErr) {

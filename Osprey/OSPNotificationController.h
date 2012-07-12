@@ -2,7 +2,17 @@
 #import <Growl/Growl.h>
 
 @interface OSPNotificationController : NSObject <GrowlApplicationBridgeDelegate>
-+ (void)growlNotificationFromString:(NSString*)string withTitle:(NSString*)title boundToUserBareJid:(NSString*)userJidForCallback;
-+ (void)growlNotificationFromMessage:(XMPPMessage*)message boundToUser:(OSPUserStorageObject*)userForCallback;
+
++ (void)growlNotificationForIncommingMessage:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user;
++ (void)growlNotificationForIncommingAttentionRequest:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user;
+
++ (void) genericGrowlNotification:(NSString *)title
+                      description:(NSString *)description
+                 notificationName:(NSString *)notifName
+                         iconData:(NSData *)iconData
+                         priority:(signed int)priority
+                         isSticky:(BOOL)isSticky
+                     clickContext:(id)clickContext;
+
 
 @end

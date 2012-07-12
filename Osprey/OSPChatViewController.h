@@ -20,18 +20,17 @@
     BOOL isWebViewReady;
     
     dispatch_queue_t processingQueue;
-
+    BOOL processionQueueIsSuspended;
 }
 
 - (id)initWithRemoteJid:(XMPPJID*)rjid;
 - (void) focusInputField;
 - (IBAction) send:(id)sender;
-- (void) receive:(XMPPMessage*)message;
 
 
 - (void) displayChatMessage:(XMPPMessage*)message;
 - (void) displayAttentionMessage:(XMPPMessage*)message;
 - (void) displayPresenceMessage:(XMPPPresence*)message;
-- (void) display:(NSXMLElement*)object withKind:(NSString*)kind;
+- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector;
 
 @end

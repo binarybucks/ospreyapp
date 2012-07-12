@@ -149,7 +149,6 @@
 	[chatView addSubview:targetView];	
     
     [openChatsArrayController setSelectedObjects:[NSArray arrayWithObject:user]];
-    [windowTitle setStringValue:[user displayName]];
     [cvc focusInputField];
 }
 
@@ -211,7 +210,7 @@
     [cvc displayChatMessage:message];
 
     [self _incrementUnreadCounterForUserIfNeccessary:user];
-    [OSPNotificationController growlNotificationFromMessage:message boundToUser:user];
+    [OSPNotificationController growlNotificationForIncommingMessage:message fromUser:user];
 }
 
 // Attention messages
@@ -219,11 +218,10 @@
     OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];        
     OSPChatViewController *cvc = [self _chatViewControllerForUser:user];    
 
-    
     [cvc displayAttentionMessage:message];
     
     [self _incrementUnreadCounterForUserIfNeccessary:user];
-    [OSPNotificationController growlNotificationFromString:[[message elementForName:@"body"] stringValue] withTitle:user.displayName boundToUserBareJid:user.jid.bare];
+    [OSPNotificationController growlNotificationForIncommingAttentionRequest:message fromUser:user];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
@@ -242,48 +240,6 @@
     [self handleAttentionMessage:message];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//- (void) handleReceivedMessage:(XMPPMessage*)message {
-//    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];        
-//    OSPChatViewController *cvc = [self _chatViewControllerForUser:user];    
-//    [cvc receive:message];
-//}
-//
-//- (void) handleReceivedAttentioneMessage:(XMPPMessage*)message {
-//    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];        
-//    OSPChatViewController *cvc = [self _chatViewControllerForUser:user];    
-//    
-//    if (![message isAttentionMessageWithBody])
-//    
-//    [cvc receive:message];
-//    
-//    [self _incrementUnreadCounterForUserIfNeccessary:user];
-//    [OSPNotificationController displayNotificationForAttentionMessage:message fromUser:user];
-//}
-//
-//
-
-//
-
-
-
 - (void)_incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user {
     BOOL userIsSelected = openChatsArrayController.selectedObjects.lastObject == user;
     BOOL windowsIsKeyWindow = [[[NSApp delegate] window] isKeyWindow];
@@ -293,10 +249,8 @@
         summedUnreadCount++;
         [self _setBadgeLabelToCurrentSummedUnreadCount];
     }
-    
-
-    
 }
+
 - (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user {
     if (!user.unreadMessages) {
         return;
