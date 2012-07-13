@@ -11,8 +11,8 @@ Osprey tries to change that by bringing a lightweight application with a minimal
 ### Contribute
 If you see something that needs improvement, you are always welcome to submit it as an [issue](https://github.com/binarybucks/ospreyapp/issues). 
 But if you can find it in your heart, feel free to fix it yourself and send a pull request. We promise not to bite! 
-Also, Osprey was founded by developers and not designers. 
 
+Also, Osprey was founded by developers and not designers. 
 So if you enjoy pushing pixels, just get in touch with us via [Twitter](https://twitter.com/ospreyapp/) and enjoy our everlasting gratitude.  
 
 
