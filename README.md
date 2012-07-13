@@ -6,27 +6,21 @@ Osprey tries to change that by bringing a lightweight application with a minimal
 
 ![Osprey](http://ospreyapp.org/images/osprey_0.1.0_screen.png)
 
-[Download](http://ospreyapp.org/downloads/0.1.0/Osprey.dmg) the latest version and try Osprey right now.
-Also make sure to follow us on [Twitter](https://twitter.com/ospreyapp/) for updates.
+[Download](http://ospreyapp.org/downloads/0.1.0/Osprey.dmg) the latest version and try Osprey right now.Also make sure to follow us on [Twitter](https://twitter.com/ospreyapp/) for updates and don't hesitate to report bugs to our bugtracker 
 
-## Contribute
+### Contribute
+If you see something that needs improvement, you are always welcome to submit it as an [issue](https://github.com/binarybucks/ospreyapp/issues). 
+But if you can find it in your heart, feel free to fix it yourself and send a pull request. We promise not to bite! 
+Also, Osprey was founded by developers and not designers. 
 
-You might contribute to the project in many ways, 
-* Graphics development (icons/webpages/branding) 
-* User interface development
-* Bug reporting / Testing
-* Code development
+So if you enjoy pushing pixels, just get in touch with us via [Twitter](https://twitter.com/ospreyapp/) and enjoy our everlasting gratitude.  
 
-Just get in touch via Twitter or fire your awesome contributions at us directly. 
 
-## Contributors
-* [BinaryBucks](https://twitter.com/binarybucks) - Lonely Lead developer :'(
-
-## Licensing
+### Licensing
 
 Osprey is licensed under the [BSD 3-Clause license](http://www.opensource.org/licenses/BSD-3-Clause).
 
-## Third-party Libraries
+### Third-party Libraries
 
 The following dependencies are bundled with this application, but are licensed under separate
 terms:
