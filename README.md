@@ -6,7 +6,7 @@ Osprey tries to change that by bringing a lightweight application with a minimal
 
 ![Osprey](http://ospreyapp.org/images/osprey_0.1.0_screen.png)
 
-[Download](http://ospreyapp.org/downloads/0.1.0/Osprey.dmg) the latest version and try Osprey right now.Also make sure to follow us on [Twitter](https://twitter.com/ospreyapp/) for updates and don't hesitate to report bugs to our bugtracker 
+Head over to [Ospreyapp.org](http://ospreyapp.org) to get the latest version and try Osprey right now.Also make sure to follow us on [Twitter](https://twitter.com/ospreyapp/) for updates and don't hesitate to report bugs to our bugtracker 
 
 ### Contribute
 If you see something that needs improvement, you are always welcome to submit it as an [issue](https://github.com/binarybucks/ospreyapp/issues). 
