@@ -14,7 +14,7 @@
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardAvatarModule.h"
 #import "XMPPRoster.h"
-#import "XMPPRosterCoreDataStorage.h"
+#import "OSPRosterCoreDataStorage.h"
 #import "XMPPAttentionModule.h"
 #import "XMPPvCardCoreDataStorage.h"
 #import "DDTTYLogger.h"
@@ -26,7 +26,7 @@
     XMPPStream                          *xmppStream;
 	XMPPReconnect                       *xmppReconnect;
     XMPPRoster                          *xmppRoster;
-    XMPPRosterCoreDataStorage           *xmppRosterStorage;
+    OSPRosterCoreDataStorage           *xmppRosterStorage;
     NSManagedObjectContext              *managedObjectContext;
     XMPPPing                            *xmppPing;
 	XMPPTime                            *xmppTime;

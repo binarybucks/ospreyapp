@@ -1,5 +1,3 @@
-#import "XMPPUserCoreDataStorageObject.h"
-
-@interface OSPCoreDataToNSImageTransformer : XMPPUserCoreDataStorageObject
+@interface OSPCoreDataToNSImageTransformer : NSValueTransformer
 
 @end

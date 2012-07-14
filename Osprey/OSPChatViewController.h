@@ -1,5 +1,4 @@
 #import <Cocoa/Cocoa.h>
-#import "XMPPUserCoreDataStorageObject.h"
 #import <WebKit/WebKit.h>
 #import <WebKit/WebResourceLoadDelegate.h>
 #import <WebKit/WebFrameLoadDelegate.h>
