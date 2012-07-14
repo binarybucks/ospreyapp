@@ -39,7 +39,7 @@
 		// Initialize XMPP modules
 		xmppStream =                [[XMPPStream alloc] init];
         xmppReconnect =             [[XMPPReconnect alloc] init];
-        xmppRosterStorage =         [[OSPRosterStorage alloc] initWithDatabaseFilename:@"XMPPRoster"];
+        xmppRosterStorage =         [[OSPRosterStorage alloc] init];
         xmppRoster =                [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
         xmppCapabilitiesStorage =   [XMPPCapabilitiesCoreDataStorage sharedInstance];
         xmppCapabilities =          [[XMPPCapabilities alloc] initWithCapabilitiesStorage:xmppCapabilitiesStorage];
