@@ -133,8 +133,13 @@
     }
 }
 
-- (IBAction)togglePopover:(id)sender
-{
+// popover should probably be hanled by the rosterController
+- (void)closeRosterPopover {
+    NSLog(@"closing");
+        [popoverController closePopover:rosterPopover];
+    }
+
+- (IBAction)openRosterPopover:(id)sender {
     [popoverController presentPopoverFromRect:[rosterPopoverButton frame] inView:[rosterPopoverButton superview] preferredArrowDirection:INPopoverArrowDirectionDown anchorsToPositionView:YES];
 }
 

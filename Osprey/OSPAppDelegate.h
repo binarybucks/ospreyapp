@@ -63,6 +63,7 @@
 @property (weak)    IBOutlet OSPChatController          *chatController;
 @property (weak)    IBOutlet OSPStatusController        *statusController;
 
-- (IBAction)togglePopover:(id)sender;
+- (void)closeRosterPopover;
+- (IBAction)openRosterPopover:(id)sender;
 
 @end

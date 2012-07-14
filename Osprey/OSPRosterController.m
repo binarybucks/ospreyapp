@@ -98,8 +98,10 @@
 
 - (IBAction)chat:(id)sender
 {
-	if ([rosterTable selectedRow] >= 0)
+	if ([rosterTable selectedRow] >= 0) {
         [[self chatController] openChatWithUser:[[arrayController selectedObjects] objectAtIndex:0]];
+        [[NSApp delegate] closeRosterPopover];
+    }
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView shouldEditTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
@@ -108,20 +110,31 @@
 }
 
 -(BOOL)control:(NSControl*)control textView:(NSTextView*)textView doCommandBySelector:(SEL)commandSelector {
+    // selecting the next and previous item behaves strange when scrolling fast yet
     
-
     if(commandSelector == @selector(moveUp:)) {
         if ([arrayController canSelectPrevious]) {
             [arrayController selectPrevious:nil];
+            [rosterTable scrollRowToVisible:[arrayController selectionIndex]-1];
         }
         return YES;
     }
     else if(commandSelector == @selector(moveDown:)) {
         if ([arrayController canSelectNext]) {
             [arrayController selectNext:nil];
+            [rosterTable scrollRowToVisible:[arrayController selectionIndex]+1];
         }
         return YES;
     }
+    else if(commandSelector == @selector(insertNewline:)) {
+        [self chat:nil];
+        return YES;
+    }
+    else if(commandSelector == @selector(cancelOperation:)) {
+        [[NSApp delegate] closeRosterPopover];
+        return YES;
+    }   
+    
     return NO;
 }
 

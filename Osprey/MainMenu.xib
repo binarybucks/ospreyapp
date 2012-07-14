@@ -1130,6 +1130,15 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
+								<object class="NSMenuItem" id="1003802588">
+									<reference key="NSMenu" ref="835318025"/>
+									<string key="NSTitle">Open chat...</string>
+									<string key="NSKeyEquiv">n</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="934539524">
 									<reference key="NSMenu" ref="835318025"/>
 									<string key="NSTitle">Close chat</string>
@@ -2955,14 +2964,6 @@ A</bytes>
 					<int key="connectionID">849</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">togglePopover:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="98877229"/>
-					</object>
-					<int key="connectionID">850</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">chatController</string>
 						<reference key="source" ref="976324537"/>
@@ -2977,6 +2978,22 @@ A</bytes>
 						<reference key="destination" ref="97721039"/>
 					</object>
 					<int key="connectionID">1310</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openRosterPopover:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1003802588"/>
+					</object>
+					<int key="connectionID">1314</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openRosterPopover:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="98877229"/>
+					</object>
+					<int key="connectionID">1315</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -4416,6 +4433,7 @@ A</bytes>
 							<reference ref="61715670"/>
 							<reference ref="603279301"/>
 							<reference ref="291459701"/>
+							<reference ref="1003802588"/>
 						</array>
 						<reference key="parent" ref="713487014"/>
 					</object>
@@ -5669,6 +5687,11 @@ A</bytes>
 						<reference key="object" ref="374052619"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1313</int>
+						<reference key="object" ref="1003802588"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -5714,6 +5737,7 @@ A</bytes>
 				<string key="1297.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="130.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="131.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1313.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="134.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="143.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5938,7 +5962,7 @@ A</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1312</int>
+			<int key="maxID">1315</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5961,17 +5985,20 @@ A</bytes>
 				<object class="IBPartialClassDescription">
 					<string key="className">OSPAppDelegate</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">togglePopover:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">togglePopover:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="openRosterPopover:">id</string>
+						<string key="togglePopover:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="openRosterPopover:">
+							<string key="name">openRosterPopover:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="togglePopover:">
 							<string key="name">togglePopover:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="chatController">OSPChatController</string>
 						<string key="rosterPopover">NSPopover</string>
@@ -6019,25 +6046,17 @@ A</bytes>
 				<object class="IBPartialClassDescription">
 					<string key="className">OSPChatController</string>
 					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="closeSelectedChat:">id</string>
-						<string key="selectNextChat:">id</string>
-						<string key="selectPreviousChat:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="closeSelectedChat:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">closeSelectedChat:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">closeSelectedChat:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">closeSelectedChat:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="selectNextChat:">
-							<string key="name">selectNextChat:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectPreviousChat:">
-							<string key="name">selectPreviousChat:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="chatView">NSView</string>
 						<string key="openChatsArrayController">NSArrayController</string>
