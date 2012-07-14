@@ -188,8 +188,6 @@
                            withJID:(XMPPJID *)jid
                   streamBareJidStr:(NSString *)streamBareJidStr
 {
-    NSLog(@"Inserting new with jid");
-
 	if (jid == nil)
 	{
 		NSLog(@"XMPPUserCoreDataStorageObject: invalid jid (nil)");
@@ -214,13 +212,8 @@
                           withItem:(NSXMLElement *)item
                   streamBareJidStr:(NSString *)streamBareJidStr
 {
-    NSLog(@"Inserting new with item");
-
 	NSString *jidStr = [item attributeStringValueForName:@"jid"];
 	XMPPJID *jid = [XMPPJID jidWithString:jidStr];
-	
-    NSLog(@"Jid for insert is is %@", jid);
-
     
 	if (jid == nil)
 	{
@@ -266,10 +259,8 @@
 
 - (void)updateWithItem:(NSXMLElement *)item
 {
-    NSLog(@"Updating user with item");
 	NSString *jidStr = [item attributeStringValueForName:@"jid"];
 	XMPPJID *jid = [XMPPJID jidWithString:jidStr];
-    NSLog(@"Jid for update is is %@", jid);
 
 	if (jid == nil)
 	{
@@ -286,7 +277,6 @@
 	self.ask = [item attributeStringValueForName:@"ask"];
 	
 	[self updateGroupsWithItem:item];
-    NSLog(@"update end");
 
 }
 

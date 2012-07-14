@@ -9,7 +9,6 @@
 - (id)transformedValue:(id)value
 {    
     int status = [value intValue];
-    NSLog(@"ConnectionState: %d", status);
 
     if (!status) {
         return @"Disconnected";

@@ -319,23 +319,16 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 	// The passed parameter is a subnode of the IQ, and we need to pass it to an asynchronous operation.
 	NSXMLElement *item = [itemSubElement copy];
 	[self scheduleBlock:^{
-        NSLog(@"START");
-
 		NSManagedObjectContext *moc = [self managedObjectContext];
-		NSLog(@"Rosterpopulationset %@", rosterPopulationSet);
 		if ([rosterPopulationSet containsObject:[NSNumber numberWithPtr:(__bridge void *)stream]])
 		{
-            NSLog(@"1");
 			NSString *streamBareJidStr = [[self myJIDForXMPPStream:stream] bare];
-			
 			[XMPPUserCoreDataStorageObject insertInManagedObjectContext:moc
 			                                                   withItem:item
 			                                           streamBareJidStr:streamBareJidStr];
 		}
 		else
 		{
-            NSLog(@"2");
-
 			NSString *jidStr = [item attributeStringValueForName:@"jid"];
 			XMPPJID *jid = [[XMPPJID jidWithString:jidStr] bareJID];
 			
@@ -344,8 +337,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 			NSString *subscription = [item attributeStringValueForName:@"subscription"];
 			if ([subscription isEqualToString:@"remove"])
 			{
-                NSLog(@"3");
-
 				if (user)
 				{
 					[moc deleteObject:user];
@@ -353,18 +344,12 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 			}
 			else
 			{
-                NSLog(@"4");
-
 				if (user)
 				{
-                    NSLog(@"5");
-
 					[user updateWithItem:item];
 				}
 				else
 				{
-                    NSLog(@"6");
-
 					NSString *streamBareJidStr = [[self myJIDForXMPPStream:stream] bare];
 					
 					[XMPPUserCoreDataStorageObject insertInManagedObjectContext:moc
@@ -373,8 +358,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 				}
 			}
 		}
-        NSLog(@"END");
-
 	}];
 }
 
@@ -454,7 +437,6 @@ static XMPPRosterCoreDataStorage *sharedInstance;
 - (void)clearAllUsersAndResourcesForXMPPStream:(XMPPStream *)stream
 {
 	XMPPLogTrace();
-	NSLog(@"Nuking roster database");
 	[self scheduleBlock:^{
 		
 		// Note: Deleting a user will delete all associated resources

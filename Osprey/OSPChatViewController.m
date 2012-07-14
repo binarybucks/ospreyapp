@@ -102,7 +102,6 @@ typedef enum {
     isWebViewReady = YES;
     // There is no way to know if a queue is suspended and suspending a already suspended queue crashes 
     if (processionQueueIsSuspended) {
-        NSLog(@"resuming queue");
         dispatch_resume(processingQueue);
         processionQueueIsSuspended = NO;
     }
@@ -149,7 +148,7 @@ typedef enum {
         }
     };
 	
-	if (isWebViewReady) {  block(); } 
+	if (isWebViewReady == YES) {  block(); } 
     else { self.loadView; dispatch_async(processingQueue, block); }    
 }
 
@@ -187,7 +186,6 @@ typedef enum {
 }
 
 - (void) _displayAttentionMessage:(XMPPMessage*)message {
-    XMPPJID *fromJID = [[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]] bareJID]; 
     DOMHTMLElement *messageElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
 
     streakElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];

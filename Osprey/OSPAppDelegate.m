@@ -76,6 +76,21 @@
         [managedObjectContext setPersistentStoreCoordinator:coordinator];
         [managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy    ];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_mocDidChange:) name:NSManagedObjectContextDidSaveNotification object:nil];
+
+    
+        // Set register preferences defaults 
+        NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              @"Osprey", STDUSRDEF_ACCOUNTRESOURCE,
+                                              [NSNumber numberWithInt:5222], STDUSRDEF_ACCOUNTPORT,
+                                              [NSNumber numberWithBool:NO], STDUSRDEF_ACCOUNTOLDSSL,
+                                              [NSNumber numberWithInt:online], STDUSRDEF_ACCOUNTSTATUSAFTERCONNECT,
+                                              [NSNumber numberWithInt:24], STDUSRDEF_ACCOUNTONLINEPRIORITY,
+                                              [NSNumber numberWithInt:0], STDUSRDEF_ACCOUNTAWAYPRIORITY,
+                                              [NSNumber numberWithBool:YES], STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS,
+                                              [NSNumber numberWithBool:NO], STDUSRDEF_GENERALCONNECTONSTARTUP,
+                                              nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
+
     }
     
 	return self;
@@ -83,10 +98,14 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+
+    
+    
     //  Set height of titlebar and center traffic lights
     ((INAppStoreWindow*)self.window).centerFullScreenButton = YES;
     ((INAppStoreWindow*)self.window).titleBarHeight = 40;
     
+    // Set style of roster button
     [[rosterPopoverButton cell] setBezelStyle:NSTexturedRoundedBezelStyle];
     [rosterPopoverButton setImage:[NSImage imageNamed:@"plus"]];
 

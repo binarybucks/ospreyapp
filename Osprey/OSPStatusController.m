@@ -16,7 +16,7 @@
 
 - (void)anErrorOccured:(EErrorState)state withErrorString:(NSString*)errorStr {
     LOGFUNCTIONCALL
-    NSLog(@"Error: %@", errorStr);
+    DDLogError(@"An error occured: %@", errorStr);
     // Dont override exisiting error states
     if (!errorState) {
         [self setValue:[NSNumber numberWithBool: YES] forKey:@"hasError"];
@@ -41,7 +41,6 @@
 }
 - (id)init
 {   
-    LOGFUNCTIONCALL
     self = [super init];
     if (self) {
         
@@ -56,7 +55,7 @@
 	[[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [statusMenu setAutoenablesItems:NO];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"General.ConnectOnStartup"]) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_GENERALCONNECTONSTARTUP]) {
         [self connect:nil];
     }
 }
@@ -65,7 +64,7 @@
     
     // Just add if not already set
     if (connectionState & connectionStateValue) {
-        DDLogVerbose(@"Not adding connectionState %d because it is already contained in %d", connectionStateValue, connectionState);
+        //DDLogVerbose(@"Not adding connectionState %d because it is already contained in %d", connectionStateValue, connectionState);
         return;
     }
     
@@ -76,7 +75,7 @@
     
     // Just remove if already set
     if (! (connectionState & connectionStateValue)) {
-        DDLogVerbose(@"Not removing connectionState %d because it is not contained in %d", connectionStateValue, connectionState);
+        //DDLogVerbose(@"Not removing connectionState %d because it is not contained in %d", connectionStateValue, connectionState);
         return;
     }
     
@@ -355,7 +354,7 @@
 
 - (IBAction)displayErrorSheet:(id)sender {
     if (errorState) {
-        NSLog(@"state in errorsheet: %d", errorState);
+        DDLogVerbose(@"state in errorsheet: %d", errorState);
         SEL sel = @selector(sheetClosed:returnCode:contextInfo:);
         NSString *title;
         
@@ -373,7 +372,7 @@
 
 - (void)sheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
     if (returnCode == NSAlertDefaultReturn) {
-        NSLog(@"Default return");
+        DDLogVerbose(@"Default return");
     }
 }
 @end

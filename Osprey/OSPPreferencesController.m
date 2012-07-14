@@ -165,34 +165,8 @@ NSString * const View3IconImageName =   @"Developer";
 	return item;
 }
 
-# pragma mark - Log path selection
--(IBAction)choseLogPath:(id)sender {
-    LOGFUNCTIONCALL
-    NSOpenPanel *tvarNSOpenPanelObj = [NSOpenPanel openPanel]; 
-    [tvarNSOpenPanelObj setAllowsMultipleSelection:NO];
-    [tvarNSOpenPanelObj setCanChooseFiles:NO];
-    [tvarNSOpenPanelObj setCanChooseDirectories:YES];
-    
-    [tvarNSOpenPanelObj setCanCreateDirectories:YES];
-
-    NSInteger tvarNSInteger = [tvarNSOpenPanelObj runModal]; 
-    
-    if(tvarNSInteger == NSOKButton)
-    { 
-        NSLog(@"doOpen we have an OK button"); 
-    } else if(tvarNSInteger == NSCancelButton) { 
-        NSLog(@"doOpen we have a Cancel button"); 
-        return; 
-    } else { 
-        NSLog(@"doOpen tvarInt not equal 1 or zero = %3ld",tvarNSInteger);
-        return; 
-    } // end if NSString * tvarDirectory = [tvarNSOpenPanelObj directory]; NSLog(@"doOpen directory = %@",tvarDirectory); NSString * tvarFilename = [tvarNSOpenPanelObj filename]; NSLog(@"doOpen filename = %@",tvarFilename);
-    NSURL * tvarDirectory = [tvarNSOpenPanelObj directoryURL]; 
-    [[NSUserDefaults standardUserDefaults] setURL:tvarDirectory forKey:@"LogPath"];
-    
-    [logPathButton selectItem:logPathMenuItem];
-}
-    
+// If the user changes the jid in the preferences we send a UserChangedJid notification to filter the roster by the new jid
+// Additionally, we look up the password for the new jid, so the user does not have to enter it again
 -(IBAction)changeJid:(id)sender {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UserChangedJid"
@@ -201,6 +175,45 @@ NSString * const View3IconImageName =   @"Developer";
 }
 
 
+// If the user changes password, we store it savely in the keychain. 
+// If no entry exists, we have to create it first
+-(IBAction)changePassword:(id)sender {    
+    NSString *jid = [jidTextField stringValue];
+    NSString *pw =  [passwordTextField stringValue];
+    NSError *kcErr = nil;
+    NSError *setErr = nil;
+    
+    SecKeychainItemRef keyChainItem = nil;
+    
+    if (([jid length] == 0) || ([pw length] == 0)) 
+        return; 
+    
+    keyChainItem = [INKeychainAccess itemRefForAccount:jid serviceName:APP_NAME error:&kcErr];
+    
+    if (keyChainItem == nil) {
+        [INKeychainAccess addKeychainItemForAccount:jid withPassword:pw serviceName:APP_NAME error:&setErr];
+    } else {
+        [INKeychainAccess setPassword:[sender stringValue] forAccount:[jidTextField stringValue] serviceName:APP_NAME error:&setErr];
+    }
+    
+    if (setErr) {
+        DDLogError(@"Error setting password :%@", setErr);
+    }
+}
+
+// This is triggered whenever the value of the jid textfield changes.
+// This automatically writes the server part of a jid to the server textfield while the user is entering his jid. 
+// There are situations where the part after the @ is not the server, that is impossible to know for us
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    
+    NSRange range = [jidTextField.stringValue rangeOfString:@"@"];
+    
+    if (range.location != NSNotFound){
+        [serverTextField setStringValue:[jidTextField.stringValue substringFromIndex:range.location+1]];
+    }
+}
+
+// Looks up the passwort for the specific jid and sets is as value for the password textfield
 - (void)setPasswordForJid:(NSString*)jid {
     if ([jid length] == 0)
         return; 
@@ -213,32 +226,4 @@ NSString * const View3IconImageName =   @"Developer";
         [passwordTextField setStringValue:password];
     }
 }
-
-
--(IBAction)changePassword:(id)sender {    
-    NSString *jid = [jidTextField stringValue];
-    NSString *pw =  [passwordTextField stringValue];
-    NSError *kcErr = nil;
-    NSError *setErr = nil;
-
-    SecKeychainItemRef keyChainItem = nil;
-    
-    if (([jid length] == 0) || ([pw length] == 0)) 
-        return; 
-    
-    keyChainItem = [INKeychainAccess itemRefForAccount:jid serviceName:APP_NAME error:&kcErr];
-
-    if (keyChainItem == nil) {
-        [INKeychainAccess addKeychainItemForAccount:jid withPassword:pw serviceName:APP_NAME error:&setErr];
-    } else {
-        [INKeychainAccess setPassword:[sender stringValue] forAccount:[jidTextField stringValue] serviceName:APP_NAME error:&setErr];
-    }
-    
-    if (setErr) {
-        DDLogError(@"Error setting password :%@", setErr);
-    }
-}
-
-
-
 @end

@@ -23,10 +23,6 @@
 - (void)openChatWithJid:(XMPPJID*)jid;    
 
 - (void)closeChatWithUser:(id <XMPPUser>)user;
-
-
-- (IBAction)selectNextChat:(id)sender;
-- (IBAction)selectPreviousChat:(id)sende;
 - (IBAction)closeSelectedChat:(id)sender;
 
 @end

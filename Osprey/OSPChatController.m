@@ -59,7 +59,7 @@
 - (void) _setArrayControllerFilterPredicate {
 
     NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
-    DDLogVerbose(@"FETCHING OPEN CHATS WITH %@", jid);
+    DDLogVerbose(@"Fetching open chats for jid %@", jid);
     NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@ AND chatOpened != nil", jid];
     
     [openChatsArrayController setFetchPredicate:fetchPredicate];
@@ -99,8 +99,8 @@
 - (OSPChatViewController*) _chatViewControllerForUser:(OSPUserStorageObject*)user {
     
     NSString *jid = [[user jid] bare];
-    if (jid == nil)
-        return;
+    if (jid == nil) // ohoh
+        return nil;
     
     DDLogVerbose(@"ChatViewController for %@ was requested", jid);
     OSPChatViewController *cvc = [openChatViewControllers valueForKey:jid];
@@ -161,8 +161,8 @@
     [((OSPUserStorageObject*)user) setValue:nil forKey:@"chatOpened"];
     NSError *error = nil;
     if (![self.managedObjectContext save:&error]) {
-        NSLog(@"save failed");
-        NSLog(@"%@",[error description]);
+        DDLogError(@"ManagedObjectContext save failed");
+        DDLogError(@"%@",[error description]);
     }
     
     

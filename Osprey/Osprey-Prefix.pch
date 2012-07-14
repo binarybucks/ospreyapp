@@ -26,7 +26,7 @@
     #define STDUSRDEF_ACCOUNTONLINEPRIORITY @"Account.OnlinePriority"
     #define STDUSRDEF_ACCOUNTAWAYPRIORITY @"Account.AwayPriority"
     #define STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS @"General.DisplaysGrowlNotifications"
-
+    #define STDUSRDEF_GENERALCONNECTONSTARTUP @"General.ConnectOnStartup"
 
 #endif
 

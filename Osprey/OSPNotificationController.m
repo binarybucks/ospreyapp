@@ -24,19 +24,16 @@
             path = [path stringByAppendingPathComponent:@"1.2.3"];
         
         path = [path stringByAppendingPathComponent:@"Growl.framework"];
-        NSLog(@"path: %@", path);
         NSBundle *growlFramework = [NSBundle bundleWithPath:path];
         if([growlFramework load])
         {
-            NSDictionary *infoDictionary = [growlFramework infoDictionary];
-            NSLog(@"Using Growl.framework %@ (%@)",
-                  [infoDictionary objectForKey:@"CFBundleShortVersionString"],
-                  [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
+            //NSDictionary *infoDictionary = [growlFramework infoDictionary];
             
             Class GAB = NSClassFromString(@"GrowlApplicationBridge");
             if([GAB respondsToSelector:@selector(setGrowlDelegate:)])
                 [GAB performSelector:@selector(setGrowlDelegate:) withObject:self];
-        }    }
+        }    
+    }
     return self;
 }
 
@@ -56,7 +53,6 @@
 							 allNotifications,	GROWL_NOTIFICATIONS_DEFAULT,
 							 notificationsWithDescriptions,	GROWL_NOTIFICATIONS_HUMAN_READABLE_NAMES,
 							 nil];	
-    NSLog(@"growl registration: %@", regDict);
 	return regDict;
 }
 
@@ -98,7 +94,6 @@
     }
     
     Class GAB = NSClassFromString(@"GrowlApplicationBridge");
-    NSLog(@"gab %@", GAB);
 	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)]) {
         [GAB notifyWithTitle:title
                  description:description
