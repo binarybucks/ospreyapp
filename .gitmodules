@@ -1,4 +1,0 @@
-[submodule "Osprey/XMPPFramework"]
-	path = Osprey/XMPPFramework
-	url = git://github.com/robbiehanson/XMPPFramework.git
-	ignore = dirty 
