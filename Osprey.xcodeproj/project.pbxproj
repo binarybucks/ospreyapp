@@ -593,8 +593,8 @@
 		1191634115A9AECC0021C203 /* Osprey */ = {
 			isa = PBXGroup;
 			children = (
-				110C2F8A15B2E06800CAD63A /* XMPPFrameworkCustom */,
 				11EA736C15B23C3A00EF1DC6 /* XMPPFramework */,
+				110C2F8A15B2E06800CAD63A /* XMPPFrameworkCustom */,
 				1191654715A9AFFC0021C203 /* Categories */,
 				1191654515A9AFCF0021C203 /* Subclasses */,
 				1191654415A9AFC80021C203 /* Transformer */,

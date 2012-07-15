@@ -74,7 +74,7 @@
         assert(coordinator);        
         managedObjectContext = [[NSManagedObjectContext alloc] init];
         [managedObjectContext setPersistentStoreCoordinator:coordinator];
-        [managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy    ];
+        [managedObjectContext setMergePolicy:NSRollbackMergePolicy]; // 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_mocDidChange:) name:NSManagedObjectContextDidSaveNotification object:nil];
 
     
@@ -122,11 +122,13 @@
 }
 
 - (void)_mocDidChange:(NSNotification *)notification {
+    
     NSManagedObjectContext *sender = (NSManagedObjectContext *)[notification object];
     
     if (sender != managedObjectContext &&
         [sender persistentStoreCoordinator] == [managedObjectContext persistentStoreCoordinator])
     {
+        LOGFUNCTIONCALL
         [managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:)
                                                withObject:notification
                                             waitUntilDone:YES];        
