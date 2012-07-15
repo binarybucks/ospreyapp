@@ -1,0 +1,3 @@
+[submodule "Osprey/XMPPFramework"]
+	path = Osprey/XMPPFramework
+	url = git://github.com/binarybucks/XMPPFramework.git
