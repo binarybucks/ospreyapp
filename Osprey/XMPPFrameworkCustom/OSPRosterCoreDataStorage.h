@@ -8,5 +8,6 @@
 @interface OSPRosterCoreDataStorage : XMPPRosterCoreDataStorage <XMPPRosterStorage> {
     
 }
+- (void)setValue:(id)value forKeyPath:(NSString *)keyPath forUserWithJid:(XMPPJID*)jid onStream:(XMPPStream*)stream;
 
 @end

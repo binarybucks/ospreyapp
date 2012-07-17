@@ -69,15 +69,8 @@
         // Set up delegates        
         [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];
         
-        // Create threadsave managed object context for gui
-        NSPersistentStoreCoordinator *coordinator = [xmppRosterStorage persistentStoreCoordinator];
-        assert(coordinator);        
-        managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [managedObjectContext setPersistentStoreCoordinator:coordinator];
-        [managedObjectContext setMergePolicy:NSRollbackMergePolicy]; // 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_mocDidChange:) name:NSManagedObjectContextDidSaveNotification object:nil];
+        managedObjectContext = [xmppRosterStorage mainThreadManagedObjectContext];
 
-    
         // Set register preferences defaults 
         NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
                                               @"Osprey", STDUSRDEF_ACCOUNTRESOURCE,
