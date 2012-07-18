@@ -9,5 +9,6 @@
     
 }
 - (void)setValue:(id)value forKeyPath:(NSString *)keyPath forUserWithJid:(XMPPJID*)jid onStream:(XMPPStream*)stream;
+- (void)mergeChangesFromContextDidSaveNotificationOnStorageThread:(NSNotification *)notification;
 
 @end

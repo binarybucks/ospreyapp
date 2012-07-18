@@ -82,8 +82,7 @@
         summedUnreadCount = 0;
         initialAwakeFromNibCallFinished = YES; 
     }
-
-    }
+}
 
 - (id)init {
     self = [super init];
@@ -107,22 +106,22 @@
     if (cvc == nil) {
         DDLogVerbose(@"Allocating new ChatViewController for %@", user.jidStr);
         
-        
         cvc = [[OSPChatViewController alloc] initWithRemoteJid:[user jid]];
         [openChatViewControllers setValue:cvc forKey:jid];
         [openChatsArrayController fetchWithRequest:nil merge:NO error:nil];
         [openChatsArrayController rearrangeObjects];
         
-        
+        [self _clearUnreadCounterForUser:user];
+
     }
     if ([user valueForKey:@"chatOpened"] == nil) {
-//        [((OSPUserStorageObject*)user) setValue:[[NSDate alloc] init] forKey:@"chatOpened"];
-//        NSError *error = nil;
-//        if (![self.managedObjectContext save:&error]) {
-//            DDLogError(@"save failed");
-//            DDLogError(@"%@",[error description]);
-//        }
-        [[self xmppRosterStorage] setValue:[NSDate date] forKeyPath:@"chatOpened" forUserWithJid:user.jid onStream:[self xmppStream]];
+        [((OSPUserStorageObject*)user) setValue:[[NSDate alloc] init] forKey:@"chatOpened"];
+        NSError *error = nil;
+        if (![self.managedObjectContext save:&error]) {
+            DDLogError(@"save failed");
+            DDLogError(@"%@",[error description]);
+        }
+//        [[self xmppRosterStorage] setValue:[NSDate date] forKeyPath:@"chatOpened" forUserWithJid:user.jid onStream:[self xmppStream]];
 
     }    
     return cvc;
@@ -160,14 +159,13 @@
     NSInteger numberOfRows = [openChatsTable numberOfRows]; // starts at 1
 
     [openChatViewControllers removeObjectForKey:user.jid.bare];
-//    [((OSPUserStorageObject*)user) setValue:nil forKey:@"chatOpened"];
-//    NSError *error = nil;
-//    if (![self.managedObjectContext save:&error]) {
-//        DDLogError(@"ManagedObjectContext save failed");
-//        DDLogError(@"%@",[error description]);
-//    }
-    
-    [[self xmppRosterStorage] setValue:nil forKeyPath:@"chatOpened" forUserWithJid:user.jid onStream:[self xmppStream]];
+    [((OSPUserStorageObject*)user) setValue:nil forKey:@"chatOpened"];
+    NSError *error = nil;
+    if (![self.managedObjectContext save:&error]) {
+        DDLogError(@"ManagedObjectContext save failed");
+        DDLogError(@"%@",[error description]);
+    }    
+    //[[self xmppRosterStorage] setValue:nil forKeyPath:@"chatOpened" forUserWithJid:user.jid onStream:[self xmppStream]];
     
     
     [openChatsArrayController fetchWithRequest:nil merge:NO error:nil];
@@ -248,9 +246,13 @@
     BOOL windowsIsKeyWindow = [[[NSApp delegate] window] isKeyWindow];
     
     if (!userIsSelected || !windowsIsKeyWindow) {
-//        [user setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKey:@"unreadMessages"];
-        [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
-        
+        [user setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKey:@"unreadMessages"];
+        // [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
+        NSError *error = nil;
+        if (![self.managedObjectContext save:&error]) {
+            DDLogError(@"ManagedObjectContext save failed");
+            DDLogError(@"%@",[error description]);
+        }    
         summedUnreadCount++;
         [self _setBadgeLabelToCurrentSummedUnreadCount];
     }
@@ -263,15 +265,16 @@
     
     NSNumber *userUnreadCount = user.unreadMessages;
     summedUnreadCount -= [userUnreadCount intValue];
-//    [user setValue:[NSNumber numberWithInt:0] forKey:@"unreadMessages"];
-    [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:0] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
+    [user setValue:[NSNumber numberWithInt:0] forKey:@"unreadMessages"];
+//    [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:0] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
     
     [self _setBadgeLabelToCurrentSummedUnreadCount];
 }
 
 - (void)_setBadgeLabelToCurrentSummedUnreadCount {
-    if (summedUnreadCount == 0) {
+    if (summedUnreadCount <= 0) {
         [[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
+        summedUnreadCount = 0; // set to 0 in case we hit a negative number
     } else {
         [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%d", summedUnreadCount]];
     }

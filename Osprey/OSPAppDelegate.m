@@ -70,10 +70,14 @@
         [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];
         
         managedObjectContext = [xmppRosterStorage mainThreadManagedObjectContext];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_mocDidChange:)
+                                                     name:NSManagedObjectContextDidSaveNotification
+                                                   object:managedObjectContext];
 
         // Set register preferences defaults 
         NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-                                              @"Osprey", STDUSRDEF_ACCOUNTRESOURCE,
+                                              APP_NAME, STDUSRDEF_ACCOUNTRESOURCE,
                                               [NSNumber numberWithInt:5222], STDUSRDEF_ACCOUNTPORT,
                                               [NSNumber numberWithBool:NO], STDUSRDEF_ACCOUNTOLDSSL,
                                               [NSNumber numberWithInt:online], STDUSRDEF_ACCOUNTSTATUSAFTERCONNECT,
@@ -111,20 +115,18 @@
     popoverController.closesWhenPopoverResignsKey = YES;
     popoverController.closesWhenApplicationBecomesInactive = NO;
     [popoverController setDelegate:self];
-
+    
 }
 
 - (void)_mocDidChange:(NSNotification *)notification {
     
     NSManagedObjectContext *sender = (NSManagedObjectContext *)[notification object];
-    
-    if (sender != managedObjectContext &&
-        [sender persistentStoreCoordinator] == [managedObjectContext persistentStoreCoordinator])
+    DDLogVerbose(@"sender: ", sender);
+    //  if (sender != managedObjectContext && [sender persistentStoreCoordinator] == [managedObjectContext persistentStoreCoordinator])
+    if (sender == managedObjectContext)
     {
         LOGFUNCTIONCALL
-        [managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:)
-                                               withObject:notification
-                                            waitUntilDone:YES];        
+        [xmppRosterStorage mergeChangesFromContextDidSaveNotificationOnStorageThread:notification];        
     }
 }
 
