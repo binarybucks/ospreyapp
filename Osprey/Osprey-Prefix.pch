@@ -11,7 +11,7 @@
     #ifdef DEBUG
         static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     #else
-        static const int ddLogLevel = LOG_LEVEL_ERROR;
+        static const int ddLogLevel = LOG_LEVEL_INFO;
     #endif
 
     #define APP_NAME @"Osprey"
@@ -22,6 +22,8 @@
     #define STDUSRDEF_ACCOUNTSERVER @"Account.Server"
     #define STDUSRDEF_ACCOUNTPORT @"Account.Port"
     #define STDUSRDEF_ACCOUNTOLDSSL @"Account.UseOldSecureConnect"
+    #define STDUSRDEF_ACCOUNTALLOWSELFSIGNEDCERTIFICATES @"Account.AllowSelfSignedCertificates"
+    #define STDUSRDEF_ACCOUNTALLOWHOSTNAMEMISMATCH @"Account.AllowSSLHostnameMismatch"
     #define STDUSRDEF_ACCOUNTSTATUSAFTERCONNECT @"Account.StatusAfterConnect"
     #define STDUSRDEF_ACCOUNTONLINEPRIORITY @"Account.OnlinePriority"
     #define STDUSRDEF_ACCOUNTAWAYPRIORITY @"Account.AwayPriority"

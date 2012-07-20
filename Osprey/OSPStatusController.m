@@ -95,17 +95,29 @@
     [self clearError];
     BOOL success;
     
+    
+    // Do some checks for common mistakes 
+    if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTJID]] == nil ) {        
+        [self anErrorOccured:connectionError withErrorString:@"JID was not set in preferences"];
+        return;
+    }
+    if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTSERVER]] == nil ) {        
+        [self anErrorOccured:connectionError withErrorString:@"Server was not set in preferences"];
+        return;
+    }
+
+    
+    
+    
     if(![[self xmppStream] isConnected])
     {
         [self addValToConnectionState:connecting];
-        [NSNotificationCenter didChangeValueForKey:@"connectionState"];
         
         NSString *myResource = [[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTRESOURCE];
         XMPPJID *myJid = [XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTJID] resource:myResource];
         [[self xmppStream] setMyJID:myJid];
         [[self xmppStream] setHostName:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTSERVER]];    
         [[self xmppStream] setHostPort:[[NSUserDefaults standardUserDefaults] integerForKey:STDUSRDEF_ACCOUNTPORT]];
-        
         
 		if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_ACCOUNTOLDSSL])
         {    
@@ -121,14 +133,21 @@
     
     // Actions after successfull connetions should be handled by notifications
 	if (!success)
-    {        
-        DDLogError(@"%@", [error localizedDescription]);
+    {   
+        // Very early error, before even connecting (e.g forgot to enter jid), abandon ship. 
+        [self anErrorOccured:connectionError withErrorString:[error localizedDescription]];
+        [[self xmppStream] disconnect];
+        [self removeValFromConnectionState:connecting];
     }
     
 }
 - (IBAction)disconnect:(id)sender {
-    [self goOffline:nil];
-    [[self xmppStream] disconnect];
+    if (connectionState & authenticated) {
+        [self goOffline:nil];        
+        [[self xmppStream] disconnectAfterSending];
+    } else {
+        [[self xmppStream] disconnect];        
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,12 +212,12 @@
 {
     LOGFUNCTIONCALL
     
-	if (allowSelfSignedCertificates)
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_ACCOUNTALLOWSELFSIGNEDCERTIFICATES])
 	{
 		[settings setObject:[NSNumber numberWithBool:YES] forKey:(NSString *)kCFStreamSSLAllowsAnyRoot];
 	}
-	
-	if (allowSSLHostNameMismatch)
+
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_ACCOUNTALLOWHOSTNAMEMISMATCH])
 	{
 		[settings setObject:[NSNull null] forKey:(NSString *)kCFStreamSSLPeerName];
 	}

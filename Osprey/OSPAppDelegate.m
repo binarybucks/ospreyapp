@@ -28,8 +28,27 @@
 {
 	if ((self = [super init]))
 	{
+        
+        
 		// Configure logging framework
 		[DDLog addLogger:[DDTTYLogger sharedInstance]];
+        NSLog(@"Starting %@ build %@", APP_NAME, [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"]);
+        NSLog(@"This release was compiled with log-level %d", ddLogLevel);
+        NSLog(@"This is an very early release. Please fill bugs, crashes and other rants at http://github.com/binarybucks/ospreyapp/issues");
+        
+        // Set register preferences defaults 
+        NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              APP_NAME, STDUSRDEF_ACCOUNTRESOURCE,
+                                              [NSNumber numberWithInt:5222], STDUSRDEF_ACCOUNTPORT,
+                                              [NSNumber numberWithBool:NO], STDUSRDEF_ACCOUNTOLDSSL,
+                                              [NSNumber numberWithInt:online], STDUSRDEF_ACCOUNTSTATUSAFTERCONNECT,
+                                              [NSNumber numberWithInt:24], STDUSRDEF_ACCOUNTONLINEPRIORITY,
+                                              [NSNumber numberWithInt:0], STDUSRDEF_ACCOUNTAWAYPRIORITY,
+                                              [NSNumber numberWithBool:YES], STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS,
+                                              [NSNumber numberWithBool:NO], STDUSRDEF_GENERALCONNECTONSTARTUP,
+                                              nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
+
         
         // Intialize controllers that are not loaded from NIB
         rosterController =          [[OSPRosterController alloc] initWithNibName:@"rosterView" bundle:nil];
@@ -75,18 +94,6 @@
                                                      name:NSManagedObjectContextDidSaveNotification
                                                    object:managedObjectContext];
 
-        // Set register preferences defaults 
-        NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-                                              APP_NAME, STDUSRDEF_ACCOUNTRESOURCE,
-                                              [NSNumber numberWithInt:5222], STDUSRDEF_ACCOUNTPORT,
-                                              [NSNumber numberWithBool:NO], STDUSRDEF_ACCOUNTOLDSSL,
-                                              [NSNumber numberWithInt:online], STDUSRDEF_ACCOUNTSTATUSAFTERCONNECT,
-                                              [NSNumber numberWithInt:24], STDUSRDEF_ACCOUNTONLINEPRIORITY,
-                                              [NSNumber numberWithInt:0], STDUSRDEF_ACCOUNTAWAYPRIORITY,
-                                              [NSNumber numberWithBool:YES], STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS,
-                                              [NSNumber numberWithBool:NO], STDUSRDEF_GENERALCONNECTONSTARTUP,
-                                              nil];
-        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
 
     }
     
