@@ -128,7 +128,6 @@
 - (void)_mocDidChange:(NSNotification *)notification {
     
     NSManagedObjectContext *sender = (NSManagedObjectContext *)[notification object];
-    DDLogVerbose(@"sender: ", sender);
     //  if (sender != managedObjectContext && [sender persistentStoreCoordinator] == [managedObjectContext persistentStoreCoordinator])
     if (sender == managedObjectContext)
     {

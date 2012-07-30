@@ -1359,7 +1359,7 @@
 		1191632E15A9AECC0021C203 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "IBM Deutschland GmbH";
 			};
 			buildConfigurationList = 1191633115A9AECC0021C203 /* Build configuration list for PBXProject "Osprey" */;
@@ -1597,6 +1597,7 @@
 		1191635915A9AECC0021C203 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1619,6 +1620,7 @@
 		1191635A15A9AECC0021C203 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
