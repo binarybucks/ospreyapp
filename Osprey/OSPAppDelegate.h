@@ -4,6 +4,8 @@
 #import "OSPStatusController.h"
 #import "INAppStoreWindow.h"
 
+
+#import "XMPPFramework.h"
 #import "XMPP.h"
 #import "XMPPReconnect.h"
 #import "XMPPResourceCoreDataStorageObject.h"
@@ -14,7 +16,7 @@
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardAvatarModule.h"
 #import "XMPPRoster.h"
-#import "OSPRosterCoreDataStorage.h"
+#import "XMPPRosterCoreDataStorage.h"
 #import "XMPPAttentionModule.h"
 #import "XMPPvCardCoreDataStorage.h"
 #import "DDTTYLogger.h"
@@ -26,7 +28,7 @@
     XMPPStream                          *xmppStream;
 	XMPPReconnect                       *xmppReconnect;
     XMPPRoster                          *xmppRoster;
-    OSPRosterCoreDataStorage           *xmppRosterStorage;
+    OSPRosterStorage                    *xmppRosterStorage;
     NSManagedObjectContext              *managedObjectContext;
     XMPPPing                            *xmppPing;
 	XMPPTime                            *xmppTime;

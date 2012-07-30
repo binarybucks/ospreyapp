@@ -6,17 +6,25 @@
 #import "OSPTableView.h"
 #import "Types.h"
 #import "XMPPAttentionModule.h"
+#import "OSPChatCoreDataStorage.h"
 
 @interface OSPChatController : NSObject <NSTableViewDelegate, NSWindowDelegate, XMPPAttentionDelegate>{
+    IBOutlet OSPTableView       * openChatsTable;
+    IBOutlet NSView             *chatView;
+
     NSMutableDictionary         *openChatViewControllers;
-    IBOutlet NSArrayController *openChatsArrayController;
-    IBOutlet OSPTableView      * openChatsTable;
-    IBOutlet NSView *chatView;
+    NSArray                     *openChats;
+    
+    OSPChatCoreDataStorage      *openChatsStorage;
+    NSManagedObjectContext      *openChatsMoc;
+    
+    
     
     bool initialAwakeFromNibCallFinished;
     int summedUnreadCount;
 }
 @property (strong) NSMutableArray *openChatUsers;
+@property (strong, readonly) NSManagedObjectContext *openChatsMoc;
 
 
 - (void)openChatWithUser:(OSPUserStorageObject*)user;
