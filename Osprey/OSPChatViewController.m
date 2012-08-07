@@ -70,8 +70,6 @@ typedef enum {
 
 - (void) dealloc {
     dispatch_release(processingQueue);
-
-
 }
 
 - (void) awakeFromNib {

@@ -14,10 +14,9 @@
 
     NSMutableDictionary         *openChatViewControllers;
     NSArray                     *openChats;
-    
+    IBOutlet NSArrayController           *openChatsArrayController;
     OSPChatCoreDataStorage      *openChatsStorage;
     NSManagedObjectContext      *openChatsMoc;
-    
     
     
     bool initialAwakeFromNibCallFinished;

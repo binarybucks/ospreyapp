@@ -1,10 +1,11 @@
 //
-// Prefix header for all source files of the 'Say' target in the 'Say' project
+// Prefix header for all source files
 //
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
-    #import "DDLog.h"
+#import "DDTTYLogger.h"
+
     #import "OSPAppDelegate.h"
 
     #define LOGFUNCTIONCALL DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);

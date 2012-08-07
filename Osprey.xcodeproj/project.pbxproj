@@ -168,6 +168,7 @@
 		11D1CCC215C3DF3C00FEEF34 /* OSPChat.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */; };
 		11EA735815B230BF00EF1DC6 /* rosterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EA735715B230BF00EF1DC6 /* rosterView.xib */; };
 		11ED0C5C15ADE20600F0930E /* sparklePublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */; };
+		11EE996615C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EE996515C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -511,6 +512,9 @@
 		11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = OSPChat.xcdatamodel; path = XMPPFrameworkCustom/OSPChat.xcdatamodel; sourceTree = "<group>"; };
 		11EA735715B230BF00EF1DC6 /* rosterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rosterView.xib; sourceTree = "<group>"; };
 		11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sparklePublicDSAKey.pem; sourceTree = "<group>"; };
+		11EE996415C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPXFacebookPlatformAuthentication.h; sourceTree = "<group>"; };
+		11EE996515C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPXFacebookPlatformAuthentication.m; sourceTree = "<group>"; };
+		11EE996A15C7E68500B200EB /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -537,6 +541,7 @@
 		110C2F8A15B2E06800CAD63A /* XMPPFrameworkCustom */ = {
 			isa = PBXGroup;
 			children = (
+				11EE996A15C7E68500B200EB /* XMPPFramework.h */,
 				11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */,
 				110C2F9015B2E08400CAD63A /* XMPPAttentionModule.h */,
 				110C2F9115B2E08400CAD63A /* XMPPAttentionModule.m */,
@@ -557,6 +562,7 @@
 		11704C2E15B73B9B0018B351 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				11EE996315C7E5B600B200EB /* X-Facebook-Platform */,
 				11704C2F15B73B9B0018B351 /* Anonymous */,
 				11704C3215B73B9B0018B351 /* Deprecated-Digest */,
 				11704C3515B73B9B0018B351 /* Deprecated-Plain */,
@@ -1341,6 +1347,15 @@
 			name = XMPPFramework;
 			sourceTree = "<group>";
 		};
+		11EE996315C7E5B600B200EB /* X-Facebook-Platform */ = {
+			isa = PBXGroup;
+			children = (
+				11EE996415C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.h */,
+				11EE996515C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.m */,
+			);
+			path = "X-Facebook-Platform";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1553,6 +1568,7 @@
 				110D47F115B9D979003F0CC1 /* OSPRosterCoreDataStorage.m in Sources */,
 				110D47F515BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m in Sources */,
 				11D1CCC215C3DF3C00FEEF34 /* OSPChat.xcdatamodel in Sources */,
+				11EE996615C7E5B600B200EB /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1609,6 +1625,7 @@
 		1191635915A9AECC0021C203 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1632,6 +1649,7 @@
 		1191635A15A9AECC0021C203 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
