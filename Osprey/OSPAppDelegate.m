@@ -58,7 +58,7 @@
 		// Initialize XMPP modules
 		xmppStream =                [[XMPPStream alloc] init];
         xmppReconnect =             [[XMPPReconnect alloc] init];
-        xmppRosterStorage =         [[OSPRosterStorage alloc] init]; // This uses the OSPRoster.xcdatamodel in XMPPFrameworkPrivate
+        xmppRosterStorage =         [[OSPRosterStorage alloc] initWithDatabaseFilename:@"XMPPRoster.sqlite"];
         xmppRoster =                [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
         xmppCapabilitiesStorage =   [XMPPCapabilitiesCoreDataStorage sharedInstance];
         xmppCapabilities =          [[XMPPCapabilities alloc] initWithCapabilitiesStorage:xmppCapabilitiesStorage];
@@ -89,10 +89,6 @@
         [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];
         
         managedObjectContext = [xmppRosterStorage mainThreadManagedObjectContext];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(_mocDidChange:)
-                                                     name:NSManagedObjectContextDidSaveNotification
-                                                   object:managedObjectContext];
 
 
     }
@@ -123,17 +119,6 @@
     popoverController.closesWhenApplicationBecomesInactive = NO;
     [popoverController setDelegate:self];
     
-}
-
-- (void)_mocDidChange:(NSNotification *)notification {
-    
-    NSManagedObjectContext *sender = (NSManagedObjectContext *)[notification object];
-    //  if (sender != managedObjectContext && [sender persistentStoreCoordinator] == [managedObjectContext persistentStoreCoordinator])
-    if (sender == managedObjectContext)
-    {
-        LOGFUNCTIONCALL
-        [xmppRosterStorage mergeChangesFromContextDidSaveNotificationOnStorageThread:notification];        
-    }
 }
 
 // popover should probably be hanled by the rosterController

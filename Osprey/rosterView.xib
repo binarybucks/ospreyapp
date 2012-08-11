@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<int key="IBDocument.SystemTarget">1080</int>
+		<string key="IBDocument.SystemVersion">12A269</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
+		<string key="IBDocument.AppKitVersion">1187</string>
+		<string key="IBDocument.HIToolboxVersion">624.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">2549</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSScroller</string>
 			<string>NSArrayController</string>
-			<string>NSTextFieldCell</string>
-			<string>NSScrollView</string>
-			<string>NSTableView</string>
-			<string>NSTableCellView</string>
-			<string>NSSearchField</string>
-			<string>NSSearchFieldCell</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
+			<string>NSScrollView</string>
+			<string>NSScroller</string>
+			<string>NSSearchField</string>
+			<string>NSSearchFieldCell</string>
+			<string>NSTableCellView</string>
 			<string>NSTableColumn</string>
-			<string>NSUserDefaultsController</string>
+			<string>NSTableView</string>
 			<string>NSTextField</string>
+			<string>NSTextFieldCell</string>
+			<string>NSUserDefaultsController</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -57,13 +57,15 @@
 									<object class="NSTableView" id="373123892">
 										<reference key="NSNextResponder" ref="888580175"/>
 										<int key="NSvFlags">256</int>
+										<array class="NSMutableArray" key="NSSubviews"/>
 										<string key="NSFrameSize">{289, 323}</string>
 										<reference key="NSSuperview" ref="888580175"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="841775203"/>
-										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 										<string key="NSReuseIdentifierKey">_NS:1828</string>
 										<bool key="NSEnabled">YES</bool>
+										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+										<bool key="NSControlAllowsExpansionToolTips">YES</bool>
 										<object class="_NSCornerView" key="NSCornerView">
 											<nil key="NSNextResponder"/>
 											<int key="NSvFlags">-2147483392</int>
@@ -76,7 +78,7 @@
 												<double key="NSMinWidth">40</double>
 												<double key="NSMaxWidth">1000</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
-													<int key="NSCellFlags">75628096</int>
+													<int key="NSCellFlags">75497536</int>
 													<int key="NSCellFlags2">2048</int>
 													<string key="NSContents"/>
 													<object class="NSFont" key="NSSupport">
@@ -99,7 +101,7 @@
 													</object>
 												</object>
 												<object class="NSTextFieldCell" key="NSDataCell" id="983007893">
-													<int key="NSCellFlags">337772096</int>
+													<int key="NSCellFlags">337641536</int>
 													<int key="NSCellFlags2">2048</int>
 													<string key="NSContents">Text Cell</string>
 													<object class="NSFont" key="NSSupport" id="7578820">
@@ -162,7 +164,6 @@
 								<reference key="NSSuperview" ref="104653040"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="373123892"/>
-								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<string key="NSReuseIdentifierKey">_NS:1826</string>
 								<reference key="NSDocView" ref="373123892"/>
 								<object class="NSColor" key="NSBGColor">
@@ -179,6 +180,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="149703750"/>
 								<string key="NSReuseIdentifierKey">_NS:1845</string>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<reference key="NSTarget" ref="104653040"/>
 								<string key="NSAction">_doScroller:</string>
 								<double key="NSPercent">0.99288256227758009</double>
@@ -189,7 +191,9 @@
 								<string key="NSFrame">{{0, 120}, {172, 15}}</string>
 								<reference key="NSSuperview" ref="104653040"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:1847</string>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="104653040"/>
 								<string key="NSAction">_doScroller:</string>
@@ -200,13 +204,15 @@
 						<reference key="NSSuperview" ref="96757991"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="888580175"/>
-						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:1824</string>
 						<int key="NSsFlags">133680</int>
 						<reference key="NSVScroller" ref="443383429"/>
 						<reference key="NSHScroller" ref="149703750"/>
 						<reference key="NSContentView" ref="888580175"/>
 						<bytes key="NSScrollAmts">QSAAAEEgAABCKAAAQigAAA</bytes>
+						<double key="NSMinMagnification">0.25</double>
+						<double key="NSMaxMagnification">4</double>
+						<double key="NSMagnification">1</double>
 					</object>
 					<object class="NSSearchField" id="285302677">
 						<reference key="NSNextResponder" ref="96757991"/>
@@ -215,11 +221,10 @@
 						<reference key="NSSuperview" ref="96757991"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="104653040"/>
-						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSReuseIdentifierKey">_NS:918</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSSearchFieldCell" key="NSCell" id="197344177">
-							<int key="NSCellFlags">343014976</int>
+							<int key="NSCellFlags">342884416</int>
 							<int key="NSCellFlags2">272663616</int>
 							<string key="NSContents"/>
 							<reference key="NSSupport" ref="7578820"/>
@@ -239,20 +244,20 @@
 							</object>
 							<reference key="NSTextColor" ref="624479555"/>
 							<object class="NSButtonCell" key="NSSearchButtonCell">
-								<int key="NSCellFlags">130560</int>
+								<int key="NSCellFlags">0</int>
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents">search</string>
 								<reference key="NSControlView" ref="285302677"/>
 								<string key="NSAction">_searchFieldSearch:</string>
 								<reference key="NSTarget" ref="197344177"/>
-								<int key="NSButtonFlags">138690815</int>
+								<int key="NSButtonFlags">138690560</int>
 								<int key="NSButtonFlags2">0</int>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
 								<int key="NSPeriodicInterval">75</int>
 							</object>
 							<object class="NSButtonCell" key="NSCancelButtonCell">
-								<int key="NSCellFlags">130560</int>
+								<int key="NSCellFlags">0</int>
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents">clear</string>
 								<array class="NSMutableArray" key="NSAccessibilityOverriddenAttributes">
@@ -264,7 +269,7 @@
 								<reference key="NSControlView" ref="285302677"/>
 								<string key="NSAction">_searchFieldCancel:</string>
 								<reference key="NSTarget" ref="197344177"/>
-								<int key="NSButtonFlags">138690815</int>
+								<int key="NSButtonFlags">138690560</int>
 								<int key="NSButtonFlags2">0</int>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -272,13 +277,13 @@
 							</object>
 							<int key="NSMaximumRecents">255</int>
 						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
 				</array>
 				<string key="NSFrameSize">{286, 364}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="285302677"/>
-				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSReuseIdentifierKey">_NS:1192</string>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -418,10 +423,9 @@
 									<string key="NSFrame">{{17, 20}, {252, 17}}</string>
 									<reference key="NSSuperview" ref="841775203"/>
 									<reference key="NSNextKeyView" ref="82107169"/>
-									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="654891386">
-										<int key="NSCellFlags">67239488</int>
+										<int key="NSCellFlags">67108928</int>
 										<int key="NSCellFlags2">272631808</int>
 										<string key="NSContents">Username</string>
 										<object class="NSFont" key="NSSupport">
@@ -438,6 +442,7 @@
 										</object>
 										<reference key="NSTextColor" ref="624479555"/>
 									</object>
+									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								</object>
 								<object class="NSTextField" id="82107169">
 									<reference key="NSNextResponder" ref="841775203"/>
@@ -445,11 +450,10 @@
 									<string key="NSFrame">{{17, 6}, {305.5, 14}}</string>
 									<reference key="NSSuperview" ref="841775203"/>
 									<reference key="NSNextKeyView" ref="482620131"/>
-									<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									<string key="NSReuseIdentifierKey">_NS:3944</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="877797956">
-										<int key="NSCellFlags">68288064</int>
+										<int key="NSCellFlags">68157504</int>
 										<int key="NSCellFlags2">272667648</int>
 										<string key="NSContents">Status</string>
 										<object class="NSFont" key="NSSupport">
@@ -462,11 +466,11 @@
 										<reference key="NSBackgroundColor" ref="475047998"/>
 										<reference key="NSTextColor" ref="624479555"/>
 									</object>
+									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								</object>
 							</array>
 							<string key="NSFrame">{{1, 1}, {286, 40}}</string>
 							<reference key="NSNextKeyView" ref="790057963"/>
-							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						</object>
 						<reference key="destination" ref="82107169"/>
 					</object>
@@ -597,7 +601,6 @@
 								<int key="NSvFlags">266</int>
 								<string key="NSFrame">{{1, 43}, {286, 37}}</string>
 								<reference key="NSNextKeyView" ref="443383429"/>
-								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 								<string key="NSReuseIdentifierKey">_NS:1192</string>
 								<string key="NSClassName">OSPTableRowView</string>
 							</object>
@@ -711,7 +714,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">53</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -721,6 +724,52 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/NSTableRowView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">OSPRosterController</string>
+					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="chat:">id</string>
+						<string key="filterRoster:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="chat:">
+							<string key="name">chat:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="filterRoster:">
+							<string key="name">filterRoster:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="arrayController">NSArrayController</string>
+						<string key="rosterTable">NSTableView</string>
+						<string key="scrollView">NSScrollView</string>
+						<string key="searchField">NSSearchField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="arrayController">
+							<string key="name">arrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rosterTable">
+							<string key="name">rosterTable</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">NSScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchField">
+							<string key="name">searchField</string>
+							<string key="candidateClassName">NSSearchField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OSPRosterController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -756,14 +805,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/OSPTableView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">OSPRosterController</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/OSPRosterController.h</string>
 					</object>
 				</object>
 			</array>

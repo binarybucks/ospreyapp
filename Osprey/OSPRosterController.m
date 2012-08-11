@@ -99,7 +99,9 @@
 - (IBAction)chat:(id)sender
 {
 	if ([rosterTable selectedRow] >= 0) {
-        [[self chatController] openChatWithUser:[[arrayController selectedObjects] objectAtIndex:0]];
+     //   NSLog(@"selected: %@ ", [[arrayController selectedObjects] lastObject]);
+        [[self chatController] openChatWithUser:[[arrayController selectedObjects] lastObject]
+                                  andMakeActive:YES];
         [[NSApp delegate] closeRosterPopover];
     }
 }

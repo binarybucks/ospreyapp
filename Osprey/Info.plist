@@ -36,6 +36,8 @@
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
 	<string>http://ospreyapp.org/downloads/appcast.xml</string>
+	<key>SUShowReleaseNotes</key>
+	<false/>
 	<key>SUPublicDSAKeyFile</key>
 	<string>sparklePublicDSAKey.pem</string>
 </dict>

@@ -10,6 +10,10 @@
     
     return self;
 }
++ (BOOL)allowsReverseTransformation {
+    return NO;
+}
+
 + (Class)transformedValueClass
 
 {
@@ -18,7 +22,7 @@
 - (id)transformedValue:(id)value
 
 {
-    if (value == nil) {
+    if (value == nil || ![[[NSApp delegate] xmppStream] isAuthenticated]) {
         return @"Offline";
     }
     switch ([value intValue]) {

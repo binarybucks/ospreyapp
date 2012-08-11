@@ -69,9 +69,10 @@ typedef enum {
 }
 
 - (void) dealloc {
+    // Dispatch release is not needed when compiling for Mac OS X >= 10.8
+    #if MAC_OS_X_VERSION_MIN_REQUIRED < 1080
     dispatch_release(processingQueue);
-
-
+    #endif
 }
 
 - (void) awakeFromNib {

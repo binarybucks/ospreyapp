@@ -2,10 +2,16 @@
 #define Osprey_Types_h
 
 #import <CoreData/CoreData.h>
-#import "OSPUserCoreDataStorageObject.h"
+#import "XMPPUserCoreDataStorageObject.h"
+#import "XMPPRosterCoreDataStorage.h"
 #import "OSPRosterCoreDataStorage.h"
-typedef OSPRosterCoreDataStorage       OSPRosterStorage;
-typedef OSPUserCoreDataStorageObject    OSPUserStorageObject;
+
+typedef OSPRosterCoreDataStorage        OSPRosterStorage;
+typedef XMPPUserCoreDataStorageObject    OSPUserStorageObject;
+
+
+@class OSPChatCoreDataStorageObject;
+typedef OSPChatCoreDataStorageObject OSPChatStorageObject;
 
 typedef enum{
     noError,
