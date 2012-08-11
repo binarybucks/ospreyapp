@@ -1,6 +1,5 @@
 #import "OSPPreferencesController.h"
 #import "INKeychainAccess.h"
-
 #define WINDOW_TOOLBAR_HEIGHT 78
 
 NSString * const View1ItemIdentifier =  @"General";
@@ -224,6 +223,65 @@ NSString * const View3IconImageName =   @"Developer";
         [passwordTextField setStringValue:@""];
     } else {
         [passwordTextField setStringValue:password];
+    }
+}
+
+
+# pragma mark - Resets
+- (IBAction)resetStores:(id)sender {
+    NSBeep();
+    NSBeginAlertSheet(@"Danger Will Robinson!", @"Cancel", @"Delete", nil, window, self, @selector(resetStoresAlertSheetDidEnd:returnCode:contextInfo:), nil, nil, @"This operation might be potentially harmfull to your computer. By clicking Delete you acknowledge that you use this function at your own risk and hold only yourself responsible for any data-loss you might encounter.\n\nThis deletes ALL files in ~/Library/Application Support/Osprey.");
+}
+
+
+- (void)resetStoresAlertSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertAlternateReturn) {
+        DDLogInfo(@"User agreed to remove all files in ~/Library/Application Support/Osprey is on his own risk. Proceeding");
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask,   YES);
+        NSString *appsApplicationSupportFolderPath = [[paths lastObject] stringByAppendingPathComponent:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"]];
+        
+        NSFileManager* fm = [[NSFileManager alloc] init];
+        NSDirectoryEnumerator* en = [fm enumeratorAtPath:appsApplicationSupportFolderPath];
+        NSError* err = nil;
+        BOOL res;
+        
+        NSString* file;
+        while (file = [en nextObject]) {
+            DDLogInfo(@"REMOVING : %@", [appsApplicationSupportFolderPath stringByAppendingPathComponent:file]);
+            res = [fm removeItemAtPath:[appsApplicationSupportFolderPath stringByAppendingPathComponent:file] error:&err];
+            if (!res && err) {
+                DDLogError(@"oops: %@", err);
+            }
+        }
+    } else {
+        DDLogInfo(@"Reset stores was canceled by the user");
+    }
+}
+
+- (IBAction)resetPreferences:(id)sender {
+    NSBeginAlertSheet(@"Danger Will Robinson!", @"Cancel", @"Delete", nil, window, self, @selector(resetPreferencesAlertSheetDidEnd:returnCode:contextInfo:), nil, nil, @"This operation might be potentially harmfull to your computer. By clicking Delete you acknowledge that you use this function at your own risk and hold only yourself responsible for any data-loss you might encounter.\n\nThis deletes the file  ~/Library/Preferences/org.ospreyapp.Osprey.plist.");
+    
+}
+- (void)resetPreferencesAlertSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode == NSAlertAlternateReturn) {
+
+        DDLogInfo(@"User agreed to remove ~/Library/Preferences/org.ospreyapp.Osprey.plist is on his own risk. Proceeding");
+
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask,   YES);
+        NSString *appsPreferencesFilePath = [[paths lastObject] stringByAppendingPathComponent:@"Preferences/org.ospreyapp.Osprey.plist"];
+        NSFileManager* fm = [[NSFileManager alloc] init];
+        NSError* err = nil;
+        BOOL res;
+        DDLogInfo(@"REMOVING : %@", appsPreferencesFilePath);
+
+        res = [fm removeItemAtPath:appsPreferencesFilePath error:&err];
+        if (!res && err) {
+            DDLogError(@"oops: %@", err);
+        }
+    } else {
+        DDLogInfo(@"Reset preferences was canceled by the user");
     }
 }
 @end

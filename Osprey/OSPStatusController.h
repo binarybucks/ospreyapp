@@ -37,6 +37,4 @@
 - (IBAction)goOffline:(id)sender;
 - (IBAction)displayErrorSheet:(id)sender;
 
-
-
 @end

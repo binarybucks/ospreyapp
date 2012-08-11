@@ -18,4 +18,8 @@
 -(IBAction)changeJid:(id)sender;
 -(IBAction)changePassword:(id)sender;
 -(void)setPasswordForJid:(NSString*)jid;
+
+- (IBAction)resetStores:(id)sender;
+- (IBAction)resetPreferences:(id)sender;
+
 @end

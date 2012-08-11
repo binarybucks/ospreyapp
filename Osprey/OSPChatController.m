@@ -10,19 +10,25 @@
 - (void)_incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user;
 - (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user;
 - (void)_setBadgeLabelToCurrentSummedUnreadCount;
+- (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream;
 
-- (NSArray *)fetchEntity:(NSString*)entityName managedObjectContext:(NSManagedObjectContext*)moc sortDescriptor:(NSSortDescriptor*)sortDescriptor fetchLimit:(NSInteger)fetchLimit predicate:(id)stringOrPredicate, ...;
+- (NSArray *)fetchEntity:(NSString*)entityName managedObjectContext:(NSManagedObjectContext*)moc sortDescriptor:(NSSortDescriptor*)sortDescriptor fetchLimit:(NSInteger)fetchLimit predicate:(NSPredicate*)predicate;
 - (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream;
 - (OSPChatCoreDataStorageObject*) chatStorageObjectForXmppStream:(XMPPStream*)stream jid:(XMPPJID *)jid;
 - (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges;
-- (void)createOrUpdateStoredChatForJidStr:(NSString*)jidStr;
-
+- (OSPChatCoreDataStorageObject*)persistOpenChatWithJid:(NSString*)jidStr;
+-(void)makeChatViewControllerActive:(OSPChatViewController*)cvc ;
+- (void) _setArrayControllerFetchPredicate;
 @end
 
-
+/*!
+ * @class OSPChatController
+ * @brief Handles opening, closing and messaging of active chats
+ *
+ * This class controlls handling of open chats, allocation of chatViewControllers and routing of incomming messages
+ * to their corresponding chatViewController where they will be displayed.
+ */
 @implementation OSPChatController
-
-@synthesize openChatUsers;
 @synthesize openChatsMoc;
 
 #pragma mark - Convenience accessors
@@ -49,290 +55,349 @@
 	return [[NSApp delegate] managedObjectContext];
 }
 
-- (OSPUserStorageObject*)selectedChat {
-    return [[openChatsArrayController selectedObjects] objectAtIndex:0];
-   // return nil;
+- (OSPChatStorageObject*)selectedChat {
+	return [[openChatsArrayController selectedObjects] objectAtIndex:0];
+}
+
+#pragma mark - Initialization
+- (id)init {
+	self = [super init];
+	if (self) {
+		initialAwakeFromNibCallFinished = NO;
+		openChatViewControllers = [[NSMutableDictionary alloc] init];
+		openChatsStorage = [[OSPChatCoreDataStorage alloc] init];
+		openChatsMoc = [openChatsStorage mainThreadManagedObjectContext];
+        
+	}
+	return self;
+}
+
+- (void) awakeFromNib {
+	if (!initialAwakeFromNibCallFinished) {
+        
+		[[self xmppRoster] addDelegate:self delegateQueue:dispatch_get_main_queue()];
+		[[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
+		[[[NSApp delegate] xmppAttentionModule] addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        
+        [self _setArrayControllerFetchPredicate];
+		[self _setArrayControllerFilterPredicate];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(rosterStorageMainThreadManagedObjectContextDidMergeChanges)
+                                                     name:@"rosterStorageMainThreadManagedObjectContextDidMergeChanges"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(chatStorageMainThreadManagedObjectContextDidMergeChanges:)
+                                                     name:@"chatStorageMainThreadManagedObjectContextDidMergeChanges"
+                                                   object:nil];
+        
+		summedUnreadCount = 0;
+		initialAwakeFromNibCallFinished = YES;
+	}
 }
 
 
 
+- (void) _setArrayControllerFetchPredicate {
+//    // No need to fetch more than neccessary. TODO: Call when jid changes
+//    NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
+//    DDLogVerbose(@"FETCHING ROSTER WITH %@", jid); 
+//    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@", jid];
+//    
+//    [openChatsArrayController setFetchPredicate:fetchPredicate];
+}
 
-#pragma mark - Initialization
 
-//
 - (void) _setArrayControllerFilterPredicate {
-
+    /*
+     * Uppon disconnect the RosterStorage urges it's storage to start clean on future connects (not really sure why)
+     * Thus, uppon disconnect we might have ChatStorageObjects without UserStorageObjects shown in the GUI. 
+     * We filter them out until there is an UserStorageObject associated with them, hence the userStorageObject != nil
+     * TODO: Call when jid changes
+     */
     NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
     DDLogVerbose(@"Fetching open chats for jid %@", jid);
     NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@ AND userStorageObject != nil", jid];
-    
+
     [openChatsArrayController setFilterPredicate:fetchPredicate];
-}
+    
+    NSLog(@"filter predicate : %@", [openChatsArrayController filterPredicate]);
+
+    }
 
 
-
-
-- (void) awakeFromNib {
-    if (!initialAwakeFromNibCallFinished) {
-
-        [[self xmppRoster] addDelegate:self delegateQueue:dispatch_get_main_queue()];
-        [[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
-        [[[NSApp delegate] xmppAttentionModule] addDelegate:self delegateQueue:dispatch_get_main_queue()];
-//
-//        [[NSNotificationCenter defaultCenter] addObserver:self 
-//                                                 selector:@selector(chatStorageMainThreadManagedObjectContextDidMergeChanges:)
-//                                                     name:@"chatStorageMainThreadManagedObjectContextDidMergeChanges"
-//                                                   object:nil];
-//        
-//        [[NSNotificationCenter defaultCenter] addObserver:self 
-//                                                 selector:@selector(rosterStorageMainThreadManagedObjectContextDidMergeChanges:)
-//                                                     name:@"rosterStorageMainThreadManagedObjectContextDidMergeChanges"
-//                                                   object:nil];
-        [self _setArrayControllerFilterPredicate];
-
-        summedUnreadCount = 0;
-        initialAwakeFromNibCallFinished = YES;
-//        [self chatStorageMainThreadManagedObjectContextDidMergeChanges]; // fetch chats
+/*!
+ * Brief: Tells every ChatStorageObject for the current XMPPStream to refetch its UserStorageObject
+ */
+- (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges {
+    for (OSPChatStorageObject *chatStorageObject in [self allChatStorageObjectsForXmppStream:[self xmppStream]]) {
+        [chatStorageObject refetchUserStorageObject];
     }
 }
 
-
-
-//- (void)chatStorageMainThreadManagedObjectContextDidMergeChanges {
-//    openChats = [self allChatStorageObjectsForXmppStream:[self xmppStream]];
-//    [openChatsTable reloadData];
-//}
-
-
-- (id)init {
-    self = [super init];
-    if (self) {
-        initialAwakeFromNibCallFinished = NO;
-        self.openChatUsers = [[NSMutableArray alloc] init];
-        openChatViewControllers = [[NSMutableDictionary alloc] init];
-        openChats = [[NSArray alloc] init];
-        openChatsStorage = [[OSPChatCoreDataStorage alloc] init]; 
-        openChatsMoc = [openChatsStorage mainThreadManagedObjectContext];
-
-    }
-    return self;
+- (void)chatStorageMainThreadManagedObjectContextDidMergeChanges {
+    // Nothing to be done here and not notification not send yet
 }
 
 
-// Lazyloads chatViewController
+# pragma mark - Chat Opening
+/*!
+ * @brief Used to open new chats from a UserStorageObject from the roster
+ */
+- (void)openChatWithUser:(OSPUserStorageObject*)user andMakeActive:(BOOL)makeActive{
+	// Save that we have an open chat with that user
+	OSPChatStorageObject *chatStorageObject = [self persistOpenChatWithJid:user.jidStr];
+    
+	// Get ChatViewController
+	OSPChatViewController *cvc = [self chatViewControllerForJidStr:user.jidStr];
+    
+	if (makeActive) {
+		[self makeChatViewControllerActive:cvc];
+        NSLog(@"arraycontroller objects: %@" , [openChatsArrayController arrangedObjects]);
+		[openChatsArrayController setSelectedObjects:@[chatStorageObject]];
+	}
+}
+
+/*!
+ * @brief Used to open chats from a jidStr.
+ */
+- (void)openChatWithJidStr:(NSString*)jidStr andMakeActive:(BOOL)makeActive{
+	// Save that we have an open chat with that jid
+	OSPChatStorageObject *chatStorageObject = [self persistOpenChatWithJid:jidStr];
+    
+	// Get ChatViewController
+	OSPChatViewController *cvc = [self chatViewControllerForJidStr:jidStr];
+	if (makeActive) {
+		[self makeChatViewControllerActive:cvc];
+        [openChatsArrayController setSelectedObjects:@[chatStorageObject]];
+	}
+}
+
+/*!
+ * @brief Used to open existing chats from a ChatStorageObject
+ */
+- (void)openChatWithStoredChat:(OSPChatCoreDataStorageObject*)storedChat andMakeActive:(BOOL)makeActive{
+	// There is no need to persist the opened chat here, as we already have a ChatStorageObject
+    
+	// Get ChatViewController
+	OSPChatViewController *cvc = [self chatViewControllerForJidStr:storedChat.jidStr];
+	if (makeActive) {
+		[self makeChatViewControllerActive:cvc];
+        [openChatsArrayController setSelectedObjects:@[storedChat]];
+    }
+}
+
+/*!
+ * @brief Fetches or creates a ChatStorageObject from JidStr to save an open chat
+ */
+- (OSPChatCoreDataStorageObject*)persistOpenChatWithJid:(NSString*)jidStr {
+	DDLogVerbose(@"Persisting open chat with jidStr %@", jidStr);
+    
+	OSPChatCoreDataStorageObject *storedChat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:jidStr];
+    
+	if (storedChat == nil) {
+		DDLogVerbose(@"No previous ChatStorageObject found, saving a new one for jidStr %@", jidStr);
+		OSPChatCoreDataStorageObject *chatObject = [NSEntityDescription insertNewObjectForEntityForName:@"OSPChatCoreDataStorageObject" inManagedObjectContext:openChatsMoc];
+        
+        
+		chatObject.jidStr = jidStr;
+		chatObject.streamBareJidStr = [[[self xmppStream] myJID] bare];
+		NSError *error = nil;
+		[openChatsMoc save:&error];
+		if (error != nil) {
+			NSLog(@"Error saving ChatStorageObject for %@. Error was: %@", jidStr, [error description]);
+			storedChat = nil;
+		}
+        // Without this, the arrayController takes ages to show the objecs
+        [openChatsMoc processPendingChanges]; 
+        [openChatsArrayController rearrangeObjects];
+        
+        storedChat = chatObject;
+	}
+    
+	return storedChat;
+}
+
+/*!
+ * Brief: Lazyloads ChatViewController for a JidStr
+ */
 - (OSPChatViewController*) chatViewControllerForJidStr:(NSString*)jidStr {
-
-//- (OSPChatViewController*) chatViewControllerForUser:(OSPUserStorageObject*)user {
     LOGFUNCTIONCALL
-    if (jidStr == nil) {
-        DDLogError(@"Error, trying to open chat with empty jid");
-        return nil;
-    }
-
-    DDLogVerbose(@"ChatViewController for %@ was requested", jidStr);
+	if (jidStr == nil) {
+		DDLogError(@"Error, trying to open chat with empty jid");
+		return nil;
+	}
     
-    OSPChatViewController *cvc = [openChatViewControllers valueForKey:jidStr];
-    if (cvc == nil) {
-        DDLogVerbose(@"Allocating new ChatViewController for %@", jidStr);
-        cvc = [[OSPChatViewController alloc] initWithRemoteJid:[XMPPJID jidWithString:jidStr]];
-        [openChatViewControllers setValue:cvc forKey:jidStr];
-    }
+	DDLogVerbose(@"ChatViewController for %@ was requested", jidStr);
     
-    return cvc;
+	OSPChatViewController *cvc = [openChatViewControllers valueForKey:jidStr];
+	if (cvc == nil) {
+		DDLogVerbose(@"Allocating new ChatViewController for %@", jidStr);
+		cvc = [[OSPChatViewController alloc] initWithRemoteJid:[XMPPJID jidWithString:jidStr]];
+		[openChatViewControllers setValue:cvc forKey:jidStr];
+	}
+    
+	return cvc;
 }
 
-
-
-# pragma mark - Chat Opening/Closing
-- (void)openChatWithUser:(OSPUserStorageObject*)user {
-    [self openChatWithJidStr:user.jidStr];
-}
-
-- (void)openChatWithStoredChat:(OSPChatCoreDataStorageObject*)storedChat {
-    [self openChatWithJidStr:storedChat.jidStr];
-}
-
-- (OSPChatCoreDataStorageObject*)createOrUpdateStoredChatForJidStr:(NSString*)jidStr {
-    DDLogVerbose(@"Fetching stored chat for jid %@", jidStr);
-
-    OSPChatCoreDataStorageObject *storedChat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:jidStr];
+/*!
+ * @brief Shows the view of a ChatViewController in the ChatView and focuses it's input field
+ */
+-(void)makeChatViewControllerActive:(OSPChatViewController*)cvc {
+	NSView * targetView = [cvc view];
+	[targetView setFrame:[chatView bounds]];
+	[targetView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
     
-    if (storedChat == nil) {
-        DDLogVerbose(@"None found. Saving new stored chat for jid %@", jidStr);
-        OSPChatCoreDataStorageObject *chatObject = [NSEntityDescription insertNewObjectForEntityForName:@"OSPChatCoreDataStorageObject" inManagedObjectContext:openChatsMoc];
-        
-        
-        chatObject.jidStr = jidStr;
-        chatObject.streamBareJidStr = [[[self xmppStream] myJID] bare];
-        NSError *error;
-        [openChatsMoc save:&error];
-        if (error != nil) {
-            NSLog(@"Error saving: %@", [error description]);
-            return nil;
-        }
-    }
-    
-    return storedChat;
-}
-
-- (void)openChatWithJidStr:(NSString*)jidStr {
-    LOGFUNCTIONCALL
-    
-    // Save state of open chat
-    [self createOrUpdateStoredChatForJidStr:jidStr];
-    
-    
-    // Get ChatViewController 
-    OSPChatViewController *cvc = [self chatViewControllerForJidStr:jidStr];
-    
-    // Show chat view
-    NSView * targetView = [cvc view];
-    [targetView setFrame:[chatView bounds]];
-    [targetView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
-
-    if ([[chatView subviews] count] != 0)
+	if ([[chatView subviews] count] != 0)
 		[[[chatView subviews] objectAtIndex:0] removeFromSuperview];
-
+    
 	[chatView setFrame:[targetView frame]];
-	[chatView addSubview:targetView];	
+	[chatView addSubview:targetView];
     
-    // Focus input field
-    [cvc focusInputField];
-
-
+	[cvc focusInputField];
 }
 
-
-
+/*!
+ * @brief Closes an open chat and selects the next one in the list of open chats
+ */
 - (void)closeChat:(OSPChatCoreDataStorageObject*)chat {
-    LOGFUNCTIONCALL
-    NSInteger selectedRow = [openChatsTable selectedRow]+1; //starts at 0
-    NSInteger numberOfRows = [openChatsTable numberOfRows]; // starts at 1
+	LOGFUNCTIONCALL
+	NSInteger selectedRow = [openChatsTable selectedRow]+1; //starts at 0
+	NSInteger numberOfRows = [openChatsTable numberOfRows]; // starts at 1
+    
+	[openChatViewControllers removeObjectForKey:chat.jidStr];
+    
 
-    [openChatViewControllers removeObjectForKey:chat.jidStr];
-    [openChatsArrayController removeObject:chat];
+	[openChatsArrayController removeObject:chat];
+    // Without this, the arrayController takes ages to show the objecs
+    [openChatsMoc deleteObject:chat];
+    NSError *error = nil;
+    [openChatsMoc save:&error];
+    if (error != nil) {
+        NSLog(@"Error saving removal of ChatStorageObject. Error was: %@", [error description]);
+    }
+    [openChatsMoc processPendingChanges];
+    [openChatsArrayController rearrangeObjects];
     
-    
-    if ([[chatView subviews] count] != 0)
+	if ([[chatView subviews] count] != 0)
 		[[[chatView subviews] objectAtIndex:0] removeFromSuperview];
     
-    // select next chat after closing if there are any open chats left
-    if (((numberOfRows-1) > 0) && (selectedRow != numberOfRows)) { 
-        [openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
-    } else if ((numberOfRows-1 > 0) && (selectedRow == numberOfRows)) { 
-        [openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-2] byExtendingSelection:NO];
-    }
+	// select next chat after closing if there are any open chats left
+	if (((numberOfRows-1) > 0) && (selectedRow != numberOfRows)) {
+		[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
+	} else if ((numberOfRows-1 > 0) && (selectedRow == numberOfRows)) {
+		[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-2] byExtendingSelection:NO];
+	}
 }
 
+/*!
+ * @brief Triggered when the user clicks on row other than the currently selected one to change chats (CAUTION: also when table is reloaded)
+ */
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
-    if ([openChatsTable numberOfSelectedRows] > 0 && [NSApp isActive]) {
-        [self openChatWithUser:[self selectedChat]];
-    }
+	if ([openChatsTable numberOfSelectedRows] > 0 && [NSApp isActive]) {
+		[self openChatWithStoredChat:openChatsArrayController.selectedObjects.lastObject
+					   andMakeActive:YES];
+	}
 }
-
-
 
 #pragma mark - Message handling
-
-
-
-// States
 - (void) handlePresence:(XMPPPresence*)presence {
-    OSPChatViewController *cvc = [openChatViewControllers valueForKey:[[XMPPJID jidWithString:[presence attributeStringValueForName:@"from"]] bare]];    
-    if (cvc == nil) {
-        return;
-    } else {
-        [cvc displayPresenceMessage:presence];
-    }
+	OSPChatViewController *cvc = [openChatViewControllers valueForKey:[[XMPPJID jidWithString:[presence attributeStringValueForName:@"from"]] bare]];
+	if (cvc == nil) {
+		return;
+	} else {
+		[cvc displayPresenceMessage:presence];
+	}
 }
 
 // Chat messages
 - (void) handleChatMessage:(XMPPMessage*)message {
-//    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];
-    OSPChatViewController *cvc = [self chatViewControllerForJidStr:message.from.bare];
-    [cvc displayChatMessage:message];
-
-//    [self _incrementUnreadCounterForUserIfNeccessary:user];
-//    [OSPNotificationController growlNotificationForIncommingMessage:message fromUser:user];
+    //    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];
+	OSPChatViewController *cvc = [self chatViewControllerForJidStr:message.from.bare];
+	[cvc displayChatMessage:message];
+    
+    //    [self _incrementUnreadCounterForUserIfNeccessary:user];
+    //    [OSPNotificationController growlNotificationForIncommingMessage:message fromUser:user];
 }
 
 // Attention messages
 //- (void) handleAttentionMessage:(XMPPMessage*)message {
-//    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];        
-//    OSPChatViewController *cvc = [self _chatViewControllerForUser:user];    
+//    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];
+//    OSPChatViewController *cvc = [self _chatViewControllerForUser:user];
 //
 //    [cvc displayAttentionMessage:message];
-//    
+//
 //    [self _incrementUnreadCounterForUserIfNeccessary:user];
 //    [OSPNotificationController growlNotificationForIncommingAttentionRequest:message fromUser:user];
 //}
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
-    if ([message isChatMessageWithBody]) 
-    {
-        [self handleChatMessage:message];
-    } 
+	if ([message isChatMessageWithBody])
+	{
+		[self handleChatMessage:message];
+	}
 }
 
 - (void)xmppAttention:(XMPPAttentionModule *)sender didReceiveAttentionHeadlineMessage:(XMPPMessage *)message {
-    if (![message isAttentionMessageWithBody]) {
-        [message addChild:[NSXMLElement elementWithName:@"body" stringValue:@"wants your attention!"]];
-    }
+	if (![message isAttentionMessageWithBody]) {
+		[message addChild:[NSXMLElement elementWithName:@"body" stringValue:@"wants your attention!"]];
+	}
     
-//    [self handleAttentionMessage:message];
+    //    [self handleAttentionMessage:message];
 }
 
 - (void)_incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user {
-//    BOOL userIsSelected = openChatsArrayController.selectedObjects.lastObject == user;
-    BOOL userIsSelected = YES;
-
-    BOOL windowsIsKeyWindow = [[[NSApp delegate] window] isKeyWindow];
+    //    BOOL userIsSelected = openChatsArrayController.selectedObjects.lastObject == user;
+	BOOL userIsSelected = YES;
     
-    if (!userIsSelected || !windowsIsKeyWindow) {
-//        [user setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKey:@"unreadMessages"];
-//         [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
-//        NSError *error = nil;
-//        if (![self.rosterManagedObjectContext save:&error]) {
-//            DDLogError(@"ManagedObjectContext save failed");
-//            DDLogError(@"%@",[error description]);
-//        }    
-        summedUnreadCount++;
-        [self _setBadgeLabelToCurrentSummedUnreadCount];
-    }
+	BOOL windowsIsKeyWindow = [[[NSApp delegate] window] isKeyWindow];
+    
+	if (!userIsSelected || !windowsIsKeyWindow) {
+        //        [user setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKey:@"unreadMessages"];
+        //         [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
+        //        NSError *error = nil;
+        //        if (![self.rosterManagedObjectContext save:&error]) {
+        //            DDLogError(@"ManagedObjectContext save failed");
+        //            DDLogError(@"%@",[error description]);
+        //        }
+		summedUnreadCount++;
+		[self _setBadgeLabelToCurrentSummedUnreadCount];
+	}
 }
 
 - (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user {
-    if (!user.unreadMessages) {
-        return;
-    }
+	if (!user.unreadMessages) {
+		return;
+	}
     
-    NSNumber *userUnreadCount = user.unreadMessages;
-    summedUnreadCount -= [userUnreadCount intValue];
-//    [user setValue:[NSNumber numberWithInt:0] forKey:@"unreadMessages"];
-//    [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:0] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
+	NSNumber *userUnreadCount = user.unreadMessages;
+	summedUnreadCount -= [userUnreadCount intValue];
+    //    [user setValue:[NSNumber numberWithInt:0] forKey:@"unreadMessages"];
+    //    [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:0] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
     
-    [self _setBadgeLabelToCurrentSummedUnreadCount];
+	[self _setBadgeLabelToCurrentSummedUnreadCount];
 }
 
 - (void)_setBadgeLabelToCurrentSummedUnreadCount {
-    if (summedUnreadCount <= 0) {
-        [[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
-        summedUnreadCount = 0; // set to 0 in case we hit a negative number
-    } else {
-        [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%d", summedUnreadCount]];
-    }
+	if (summedUnreadCount <= 0) {
+		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
+		summedUnreadCount = 0; // set to 0 in case we hit a negative number
+	} else {
+		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%d", summedUnreadCount]];
+	}
 }
 
 - (void)windowDidBecomeKey:(NSNotification *)notification {
-//    [self _clearUnreadCounterForUser:openChatsArrayController.selectedObjects.lastObject];
+    //    [self _clearUnreadCounterForUser:openChatsArrayController.selectedObjects.lastObject];
 }
 
 # pragma mark - Navigation
 - (IBAction)closeSelectedChat:(id)sender{
-    if ([openChatsTable selectedRow] >= 0) {        
-        [self closeChat:[self selectedChat]];
-    }
+	if ([openChatsTable selectedRow] >= 0) {
+		[self closeChat:[self selectedChat]];
+	}
 }
 
 
@@ -358,63 +423,51 @@
 
 # pragma mark - Storage accessors
 - (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream {
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(streamBareJidStr = %@)", [self xmppStream].myJID.bare] ;
-
-    NSArray *array = [self fetchEntity:@"OSPChatCoreDataStorageObject"
-                                        managedObjectContext:openChatsMoc 
-                                              sortDescriptor:nil
-                                                  fetchLimit:nil
-                                                   predicate:predicate];
-    return array;
+    
+	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(streamBareJidStr = %@)", [self xmppStream].myJID.bare] ;
+    
+	NSArray *array = [self fetchEntity:@"OSPChatCoreDataStorageObject"
+                  managedObjectContext:openChatsMoc
+                        sortDescriptor:nil
+                            fetchLimit:0
+                             predicate:predicate];
+	return array;
 }
 
 - (OSPChatCoreDataStorageObject*) chatStorageObjectForXmppStream:(XMPPStream*)stream jidStr:(NSString *)jidStr{
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(streamBareJidStr = %@) AND (jidStr = %@)", [self xmppStream].myJID.bare, jidStr];
-
-    NSArray *array = [self fetchEntity:@"OSPChatCoreDataStorageObject"
-                                        managedObjectContext:openChatsMoc 
-                                              sortDescriptor:nil
-                                                  fetchLimit:1
-                                                   predicate:predicate];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(streamBareJidStr = %@) AND (jidStr = %@)", [self xmppStream].myJID.bare, jidStr];
     
-    return (OSPChatCoreDataStorageObject*)[array lastObject];
+	NSArray *array = [self fetchEntity:@"OSPChatCoreDataStorageObject"
+                  managedObjectContext:openChatsMoc
+                        sortDescriptor:nil
+                            fetchLimit:1
+                             predicate:predicate];
+    OSPChatCoreDataStorageObject* result = [array lastObject];
+    return result;
 }
 
-- (NSArray *)fetchEntity:(NSString*)entityName managedObjectContext:(NSManagedObjectContext*)moc sortDescriptor:(NSSortDescriptor*)sortDescriptor fetchLimit:(NSInteger)fetchLimit predicate:(id)stringOrPredicate, ...
+- (NSArray *)fetchEntity:(NSString*)entityName managedObjectContext:(NSManagedObjectContext*)moc sortDescriptor:(NSSortDescriptor*)sortDescriptor fetchLimit:(NSInteger)fetchLimit predicate:(NSPredicate*)predicate
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:moc];
-
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entity];
-    
-    if (stringOrPredicate) {
-        NSPredicate *predicate;
-        if ([stringOrPredicate isKindOfClass:[NSString class]]) {
-            va_list variadicArguments;
-            va_start(variadicArguments, stringOrPredicate);
-            predicate = [NSPredicate predicateWithFormat:stringOrPredicate arguments:variadicArguments];
-            va_end(variadicArguments);
-        } else {
-            NSAssert2([stringOrPredicate isKindOfClass:[NSPredicate class]], @"Second parameter passed to %s is of unexpected class %@", sel_getName(_cmd), [stringOrPredicate className]);
-            predicate = (NSPredicate *)stringOrPredicate;
-        }
-        [request setPredicate:predicate];
-    }
-    if (sortDescriptor != nil) {
-        [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    }
-    if (sortDescriptor != nil) {
-        [request setFetchLimit:fetchLimit];
-    }
+	NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:moc];
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSError *error = nil;
-    NSArray *results = [openChatsMoc executeFetchRequest:request error:&error];
-    if (error != nil) {
-        [NSException raise:NSGenericException format:[error description]];
-    }
+    NSArray *results = nil;
     
-    return results;
+	[request setEntity:entity];
+    [request setPredicate:predicate];
+    [request setFetchLimit:fetchLimit];
+
+	if (sortDescriptor != nil) {
+		[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	}
+    
+	results = [openChatsMoc executeFetchRequest:request error:&error];
+	if (error != nil) {
+		[NSException raise:NSGenericException format:@"%@", [error description]];
+	}
+    
+	return results;
 }
 
 

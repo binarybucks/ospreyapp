@@ -100,7 +100,8 @@
 {
 	if ([rosterTable selectedRow] >= 0) {
      //   NSLog(@"selected: %@ ", [[arrayController selectedObjects] lastObject]);
-        [[self chatController] openChatWithUser:[[arrayController selectedObjects] lastObject]];
+        [[self chatController] openChatWithUser:[[arrayController selectedObjects] lastObject]
+                                  andMakeActive:YES];
         [[NSApp delegate] closeRosterPopover];
     }
 }

@@ -89,24 +89,7 @@
                          isSticky:(BOOL)isSticky
                      clickContext:(id)clickContext {
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_GENERALDISPLAYGROWLNOTIFICATIONS]) {
-        return;
-    }
-    
-    Class GAB = NSClassFromString(@"GrowlApplicationBridge");
-	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)]) {
-        [GAB notifyWithTitle:title
-                 description:description
-            notificationName:notifName
-                    iconData:iconData
-                    priority:priority
-                    isSticky:isSticky
-                clickContext:clickContext];
-    }
-}
-
-- (void) growlNotificationWasClicked:(id)clickContext {
-    [[[NSApp delegate] chatController] openChatWithJid:[XMPPJID jidWithString:clickContext]];
+    DDLogError(@"GROWL SUPPORT IS DEPRECATED AND WILL BE REPLACED BY NOTIFICATION CENTER SUPPORT SOON. UNTIL THEN, THIS METHOD DOES NOTHING");
 }
 
 @end

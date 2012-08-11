@@ -4,8 +4,14 @@
 #import <CoreData/CoreData.h>
 #import "XMPPUserCoreDataStorageObject.h"
 #import "XMPPRosterCoreDataStorage.h"
-typedef XMPPRosterCoreDataStorage        OSPRosterStorage;
+#import "OSPRosterCoreDataStorage.h"
+
+typedef OSPRosterCoreDataStorage        OSPRosterStorage;
 typedef XMPPUserCoreDataStorageObject    OSPUserStorageObject;
+
+
+@class OSPChatCoreDataStorageObject;
+typedef OSPChatCoreDataStorageObject OSPChatStorageObject;
 
 typedef enum{
     noError,

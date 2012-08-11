@@ -9,27 +9,26 @@
 #import "OSPChatCoreDataStorage.h"
 
 @interface OSPChatController : NSObject <NSTableViewDelegate, NSWindowDelegate, XMPPAttentionDelegate>{
-    IBOutlet OSPTableView       * openChatsTable;
+    IBOutlet OSPTableView       *openChatsTable;
     IBOutlet NSView             *chatView;
+    IBOutlet NSArrayController  *openChatsArrayController;
 
     NSMutableDictionary         *openChatViewControllers;
-    NSArray                     *openChats;
-    IBOutlet NSArrayController           *openChatsArrayController;
     OSPChatCoreDataStorage      *openChatsStorage;
     NSManagedObjectContext      *openChatsMoc;
     
-    
+    OSPChatStorageObject *activeChat;
+
     bool initialAwakeFromNibCallFinished;
     int summedUnreadCount;
 }
-@property (strong) NSMutableArray *openChatUsers;
 @property (strong, readonly) NSManagedObjectContext *openChatsMoc;
 
+- (void)openChatWithUser:(OSPUserStorageObject*)user andMakeActive:(BOOL)makeActive;
+- (void)openChatWithJidStr:(NSString*)jidStr andMakeActive:(BOOL)makeActive;
+- (void)openChatWithStoredChat:(OSPChatCoreDataStorageObject*)storedChat andMakeActive:(BOOL)makeActive;
 
-- (void)openChatWithUser:(OSPUserStorageObject*)user;
-- (void)openChatWithJid:(XMPPJID*)jid;    
-
-- (void)closeChatWithUser:(id <XMPPUser>)user;
+- (void)closeChat:(OSPChatCoreDataStorageObject*)chat;
 - (IBAction)closeSelectedChat:(id)sender;
 
 @end
