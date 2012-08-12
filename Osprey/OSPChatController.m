@@ -307,12 +307,13 @@
 
 // Chat messages
 - (void) handleChatMessage:(XMPPMessage*)message {
-    //    OSPUserStorageObject *user = [self contactWithJid:[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]]];
-	OSPChatViewController *cvc = [self chatViewControllerForJidStr:message.from.bare];
-	[cvc displayChatMessage:message];
+    OSPUserStorageObject *user = [[self xmppRosterStorage] userForJID:[message from] xmppStream:[self xmppStream] managedObjectContext:[self rosterManagedObjectContext]];
+	
+    [self openChatWithUser:user andMakeActive:NO]; // lazyloads ChatViewController and 
+	[[openChatViewControllers valueForKey:user.jidStr] displayChatMessage:message];
     
-    //    [self _incrementUnreadCounterForUserIfNeccessary:user];
-    //    [OSPNotificationController growlNotificationForIncommingMessage:message fromUser:user];
+//[self _incrementUnreadCounterForUserIfNeccessary:user];
+    [OSPNotificationController notificationForIncommingMessage:message fromUser:user];
 }
 
 // Attention messages
