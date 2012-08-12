@@ -27,20 +27,14 @@
 - (void)refetchUserStorageObject {
     NSError *error = nil;
     NSArray *array = [moc executeFetchRequest:request error:&error];
-    
-    DDLogVerbose(@"Refetching userStorageObject %@", predicate);
-    DDLogVerbose(@"Chat user jid : %@", self.jidStr);
-    DDLogVerbose(@"Chat stream jid : %@", self.streamBareJidStr);
     if (error == nil) {
         
         [self willChangeValueForKey:@"userStorageObject"];
         userStorageObject = array.lastObject;
         [self didChangeValueForKey:@"userStorageObject"];
-        DDLogVerbose(@"Got user : %@", ((OSPUserStorageObject*)userStorageObject).displayName);
     } else {
         DDLogError(@"Error: %@", [error description]);
     }
-    
 }
 
 /*!

@@ -2,6 +2,7 @@
 #import "OSPRosterTableCellView.h"
 #import "XMPPPresence+NiceShow.h"
 #import "XMPPMessage+XEP_0224.h"
+#import "NSManagedObjectContext+EasyFetching.h"
 
 @interface OSPChatController (PrivateApi)
 - (void)_threadsaveXmppRosterDidChange:(NSNotification *)notification;
@@ -10,9 +11,7 @@
 - (void)_incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user;
 - (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user;
 - (void)_setBadgeLabelToCurrentSummedUnreadCount;
-- (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream;
 
-- (NSArray *)fetchEntity:(NSString*)entityName managedObjectContext:(NSManagedObjectContext*)moc sortDescriptor:(NSSortDescriptor*)sortDescriptor fetchLimit:(NSInteger)fetchLimit predicate:(NSPredicate*)predicate;
 - (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream;
 - (OSPChatCoreDataStorageObject*) chatStorageObjectForXmppStream:(XMPPStream*)stream jid:(XMPPJID *)jid;
 - (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges;
@@ -67,7 +66,6 @@
 		openChatViewControllers = [[NSMutableDictionary alloc] init];
 		openChatsStorage = [[OSPChatCoreDataStorage alloc] init];
 		openChatsMoc = [openChatsStorage mainThreadManagedObjectContext];
-        
 	}
 	return self;
 }
@@ -100,12 +98,12 @@
 
 
 - (void) _setArrayControllerFetchPredicate {
-//    // No need to fetch more than neccessary. TODO: Call when jid changes
-//    NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
-//    DDLogVerbose(@"FETCHING ROSTER WITH %@", jid); 
-//    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@", jid];
-//    
-//    [openChatsArrayController setFetchPredicate:fetchPredicate];
+    // No need to fetch more than neccessary. TODO: Call when jid changes
+    NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
+    DDLogVerbose(@"FETCHING ROSTER WITH %@", jid); 
+    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@", jid];
+    
+    [openChatsArrayController setFetchPredicate:fetchPredicate];
 }
 
 
@@ -116,13 +114,8 @@
      * We filter them out until there is an UserStorageObject associated with them, hence the userStorageObject != nil
      * TODO: Call when jid changes
      */
-    NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
-    DDLogVerbose(@"Fetching open chats for jid %@", jid);
-    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@ AND userStorageObject != nil", jid];
-
+    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"userStorageObject != nil"];
     [openChatsArrayController setFilterPredicate:fetchPredicate];
-    
-    NSLog(@"filter predicate : %@", [openChatsArrayController filterPredicate]);
 
     }
 
@@ -131,6 +124,8 @@
  * Brief: Tells every ChatStorageObject for the current XMPPStream to refetch its UserStorageObject
  */
 - (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges {
+    // TODO: Just refetch updated UserStorageObjects
+    
     for (OSPChatStorageObject *chatStorageObject in [self allChatStorageObjectsForXmppStream:[self xmppStream]]) {
         [chatStorageObject refetchUserStorageObject];
     }
@@ -267,10 +262,8 @@
 	NSInteger numberOfRows = [openChatsTable numberOfRows]; // starts at 1
     
 	[openChatViewControllers removeObjectForKey:chat.jidStr];
-    
 
 	[openChatsArrayController removeObject:chat];
-    // Without this, the arrayController takes ages to show the objecs
     [openChatsMoc deleteObject:chat];
     NSError *error = nil;
     [openChatsMoc save:&error];
@@ -282,12 +275,13 @@
     
 	if ([[chatView subviews] count] != 0)
 		[[[chatView subviews] objectAtIndex:0] removeFromSuperview];
-    
-	// select next chat after closing if there are any open chats left
-	if (((numberOfRows-1) > 0) && (selectedRow != numberOfRows)) {
-		[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
-	} else if ((numberOfRows-1 > 0) && (selectedRow == numberOfRows)) {
-		[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-2] byExtendingSelection:NO];
+ //Now handled correctly by OpenChatsArrayController
+	if (((numberOfRows-1) > 0) && (selectedRow != numberOfRows)) { // select previous if at end
+[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
+       // [openChatsArrayController selectPrevious:nil];
+	} else if ((numberOfRows-1 > 0) && (selectedRow == numberOfRows)) { // select next if not at end
+[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-2] byExtendingSelection:NO];
+        //[openChatsArrayController selectNext:nil];
 	}
 }
 
@@ -426,11 +420,10 @@
     
 	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(streamBareJidStr = %@)", [self xmppStream].myJID.bare] ;
     
-	NSArray *array = [self fetchEntity:@"OSPChatCoreDataStorageObject"
-                  managedObjectContext:openChatsMoc
-                        sortDescriptor:nil
-                            fetchLimit:0
-                             predicate:predicate];
+    NSArray *array = [openChatsMoc fetchEntity:@"OSPChatCoreDataStorageObject"
+                            withSortDescriptor:nil
+                                    fetchLimit:0
+                                     predicate:predicate];
 	return array;
 }
 
@@ -438,43 +431,12 @@
     
 	NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(streamBareJidStr = %@) AND (jidStr = %@)", [self xmppStream].myJID.bare, jidStr];
     
-	NSArray *array = [self fetchEntity:@"OSPChatCoreDataStorageObject"
-                  managedObjectContext:openChatsMoc
-                        sortDescriptor:nil
-                            fetchLimit:1
-                             predicate:predicate];
+    NSArray *array = [openChatsMoc fetchEntity:@"OSPChatCoreDataStorageObject"
+                            withSortDescriptor:nil
+                                    fetchLimit:1
+                                     predicate:predicate];
+    
     OSPChatCoreDataStorageObject* result = [array lastObject];
     return result;
 }
-
-- (NSArray *)fetchEntity:(NSString*)entityName managedObjectContext:(NSManagedObjectContext*)moc sortDescriptor:(NSSortDescriptor*)sortDescriptor fetchLimit:(NSInteger)fetchLimit predicate:(NSPredicate*)predicate
-{
-	NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:moc];
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSError *error = nil;
-    NSArray *results = nil;
-    
-	[request setEntity:entity];
-    [request setPredicate:predicate];
-    [request setFetchLimit:fetchLimit];
-
-	if (sortDescriptor != nil) {
-		[request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-	}
-    
-	results = [openChatsMoc executeFetchRequest:request error:&error];
-	if (error != nil) {
-		[NSException raise:NSGenericException format:@"%@", [error description]];
-	}
-    
-	return results;
-}
-
-
-
-
-
-
-
-
 @end

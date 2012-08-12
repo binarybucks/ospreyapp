@@ -36,7 +36,7 @@
         NSLog(@"This release was compiled with log-level %d", ddLogLevel);
         NSLog(@"This is an very early release. Please fill bugs, crashes and other rants at http://github.com/binarybucks/ospreyapp/issues");
         
-        // Set register preferences defaults 
+        // Register preferences defaults 
         NSDictionary *userDefaultsDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
                                               APP_NAME, STDUSRDEF_ACCOUNTRESOURCE,
                                               [NSNumber numberWithInt:5222], STDUSRDEF_ACCOUNTPORT,
@@ -84,7 +84,7 @@
         [xmppvCardTempModule   activate:xmppStream];
         [xmppvCardAvatarModule activate:xmppStream];
         [xmppAttentionModule activate:xmppStream];
-        
+        [xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:xmppStream]; // We start with a clean roster for now
         // Set up delegates        
         [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];
         
@@ -98,9 +98,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-
-    
-    
     //  Set height of titlebar and center traffic lights
     ((INAppStoreWindow*)self.window).centerFullScreenButton = YES;
     ((INAppStoreWindow*)self.window).titleBarHeight = 40;
@@ -118,7 +115,6 @@
     popoverController.closesWhenPopoverResignsKey = YES;
     popoverController.closesWhenApplicationBecomesInactive = NO;
     [popoverController setDelegate:self];
-    
 }
 
 // popover should probably be hanled by the rosterController
