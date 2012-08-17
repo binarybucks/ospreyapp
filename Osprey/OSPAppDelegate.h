@@ -4,35 +4,12 @@
 #import "OSPChatController.h"
 #import "OSPRosterController.h"
 #import "OSPNotificationController.h"
-#import "OSPStatusController.h"
+#import "OSPConnectionController.h"
+#import "OSPPreferencesController.h"
 
 #import "INAppStoreWindow.h"
 #import "INPopoverController.h"
 
-//#import <Cocoa/Cocoa.h>
-//#import "OSPChatController.h"
-//#import "OSPRosterController.h"
-//#import "OSPStatusController.h"
-//#import "INAppStoreWindow.h"
-//
-//#import "XMPP.h"
-//#import "XMPPFramework.h"
-//#import "XMPPReconnect.h"
-//#import "XMPPResourceCoreDataStorageObject.h"
-//#import "XMPPPing.h"
-//#import "XMPPTime.h"
-//#import "XMPPCapabilities.h"
-//#import "XMPPCapabilitiesCoreDataStorage.h"
-//#import "XMPPvCardTemp.h"
-//#import "XMPPvCardAvatarModule.h"
-//#import "XMPPRoster.h"
-//#import "OSPRosterCoreDataStorage.h"
-//#import "XMPPAttentionModule.h"
-//#import "XMPPvCardCoreDataStorage.h"
-//#import "DDTTYLogger.h"
-//#import "OSPNotificationController.h"
-//#import "OSPRosterController.h"
-//#import "INPopoverController.h"
 
 @interface OSPAppDelegate : NSObject <NSApplicationDelegate, NSSplitViewDelegate, INPopoverControllerDelegate> {
     XMPPStream                          *xmppStream;
@@ -50,7 +27,6 @@
 	NSMutableArray                      *turnSockets;
     
     OSPRosterController                 *rosterController;
-    OSPNotificationController           *notificationController;
     
     INPopoverController                 *popoverController;
     IBOutlet NSPopover                  *rosterPopover;
@@ -73,7 +49,9 @@
 
 @property (assign)  IBOutlet INAppStoreWindow           *window;
 @property (weak)    IBOutlet OSPChatController          *chatController;
-@property (weak)    IBOutlet OSPStatusController        *statusController;
+@property (weak)    IBOutlet OSPConnectionController        *connectionController;
+@property (weak)    IBOutlet OSPNotificationController *notificationController;
+@property (weak)    IBOutlet OSPPreferencesController *preferencesController;
 
 - (void)closeRosterPopover;
 - (IBAction)openRosterPopover:(id)sender;

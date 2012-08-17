@@ -21,7 +21,7 @@
     return self;
 }
 
-+ (void)notificationForIncommingMessage:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
+- (void)notificationForIncommingMessage:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
     userNotification.title = user.displayName;
     userNotification.informativeText = [[message elementForName:@"body"] stringValue];
@@ -35,7 +35,7 @@
     
 }
 
-+ (void)notificationForIncommingAttentionRequest:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
+- (void)notificationForIncommingAttentionRequest:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
     
     userNotification.title = user.displayName;
@@ -45,7 +45,7 @@
 }
 
 - (void) removeAllNotifications {
-    DDLogVerbose(@"Removing all notifications");
+//    DDLogVerbose(@"Removing all notifications");
     [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
 }
 
@@ -57,4 +57,31 @@
     }
 }
 
+- (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr {
+    SEL sel = @selector(connectionErrorSheetClosed:returnCode:contextInfo:);
+    NSBeginAlertSheet(@"Connection Error", @"Retry", @"Cancel", NULL, window, self, sel, NULL, nil, errorStr, nil);
+}
+
+- (void)connectionErrorSheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertDefaultReturn) {
+        [[[NSApp delegate] connectionController] connect:self];
+    } else if (returnCode == NSAlertAlternateReturn) {
+        [[[NSApp delegate] connectionController] disconnect:self];
+    }
+}
+
+- (void)notificationForAuthenticationErrorWithErrorString:(NSString*)errorStr {
+    SEL sel = @selector(connectionErrorSheetClosed:returnCode:contextInfo:);
+    NSBeginAlertSheet(@"Connection Error", @"Retry", @"Change account", @"Cancel", window, self, sel, NULL, nil, errorStr, nil);
+
+}
+
+- (void)authenticationErrorSheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertDefaultReturn) {
+        [[[NSApp delegate] connectionController] connect:self];
+    } else if (returnCode == NSAlertAlternateReturn) {
+        [[[NSApp delegate] preferencesController] changePanesProgramatically:1];
+        [[[[NSApp delegate] preferencesController] window] makeKeyAndOrderFront:nil];
+    }
+}
 @end

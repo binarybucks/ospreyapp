@@ -11,7 +11,7 @@
 - (void)_incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user;
 - (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user;
 - (void)_setBadgeLabelToCurrentSummedUnreadCount;
-
+- (void)chatStorageMainThreadManagedObjectContextDidMergeChanges;
 - (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream;
 - (OSPChatCoreDataStorageObject*) chatStorageObjectForXmppStream:(XMPPStream*)stream jid:(XMPPJID *)jid;
 - (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges;
@@ -54,6 +54,10 @@
 	return [[NSApp delegate] managedObjectContext];
 }
 
+- (OSPNotificationController*)notificationController {
+    return [[NSApp delegate] notificationController];
+}
+
 - (OSPChatStorageObject*)selectedChat {
 	return [[openChatsArrayController selectedObjects] objectAtIndex:0];
 }
@@ -86,7 +90,7 @@
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(chatStorageMainThreadManagedObjectContextDidMergeChanges:)
+                                                 selector:@selector(chatStorageMainThreadManagedObjectContextDidMergeChanges)
                                                      name:@"chatStorageMainThreadManagedObjectContextDidMergeChanges"
                                                    object:nil];
         
@@ -109,7 +113,7 @@
 
 - (void) _setArrayControllerFilterPredicate {
     /*
-     * Uppon disconnect the RosterStorage urges it's storage to start clean on future connects (not really sure why)
+     * Uppon disconnect the RosterStorage purges it's storage to start clean on future connects (not really sure why)
      * Thus, uppon disconnect we might have ChatStorageObjects without UserStorageObjects shown in the GUI. 
      * We filter them out until there is an UserStorageObject associated with them, hence the userStorageObject != nil
      * TODO: Call when jid changes
@@ -313,7 +317,7 @@
 	[[openChatViewControllers valueForKey:user.jidStr] displayChatMessage:message];
     
 //[self _incrementUnreadCounterForUserIfNeccessary:user];
-    [OSPNotificationController notificationForIncommingMessage:message fromUser:user];
+    [[self notificationController] notificationForIncommingMessage:message fromUser:user];
 }
 
 // Attention messages

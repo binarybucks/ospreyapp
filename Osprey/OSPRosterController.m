@@ -25,6 +25,7 @@
 	return [[NSApp delegate] xmppRosterStorage];
 }
 
+
 - (NSDictionary *)jidKeyedDictionaryFromArray:(NSArray*)array{
     NSUInteger arrayCount = [array count];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];

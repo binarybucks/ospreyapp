@@ -1,58 +1,30 @@
-#import "OSPStatusController.h"
+#import "OSPConnectionController.h"
 #import "XMPPJID.h"
 #import "XMPPStream.h"
 #import "XMPPPresence.h"
 #import "NSXMLElement+XMPP.h"
 #import "INKeychainAccess.h"
 
-@interface OSPStatusController (PrivateAPI)
-- (NSString*)_priorityForStatus:(EStatusState)status;
-@end
+#define ERROR_JID_NOT_SET @"JID was not set in preferences"
+#define ERROR_SERVER_NOT_SET @"Server was not set in preferences"
 
-@implementation OSPStatusController
+@implementation OSPConnectionController
 
-@synthesize isConnected;
-@synthesize connectionState;
-
-- (void)anErrorOccured:(EErrorState)state withErrorString:(NSString*)errorStr {
-    LOGFUNCTIONCALL
-    DDLogError(@"An error occured: %@", errorStr);
-    // Dont override exisiting error states
-    if (!errorState) {
-        [self setValue:[NSNumber numberWithBool: YES] forKey:@"hasError"];
-        errorState = state;
-        if (errorStr) {
-            errorDescription = errorStr;
-        } else {
-            errorDescription = @"No detailed description provided";
-        }
-    }
-}   
-
-- (void)clearError {
-    [self setValue:[NSNumber numberWithBool: NO] forKey:@"hasError"];
-    errorState = noError;
-    errorDescription = @"";
-}
 
 - (XMPPStream *)xmppStream
 {
 	return [[NSApp delegate] xmppStream];
 }
-- (id)init
-{   
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
+- (OSPNotificationController*)notificationController {
+    return [[NSApp delegate] notificationController];
 }
+
 
 - (void)awakeFromNib
 {
-    LOGFUNCTIONCALL    
-    [self clearError];
 	[[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [self clearError];
+
     [statusMenu setAutoenablesItems:NO];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_GENERALCONNECTONSTARTUP]) {
@@ -64,10 +36,8 @@
     
     // Just add if not already set
     if (connectionState & connectionStateValue) {
-        //DDLogVerbose(@"Not adding connectionState %d because it is already contained in %d", connectionStateValue, connectionState);
         return;
     }
-    
     [self setValue:[NSNumber numberWithInt:(connectionState+connectionStateValue)] forKey:@"connectionState"];
 }
 
@@ -75,18 +45,12 @@
     
     // Just remove if already set
     if (! (connectionState & connectionStateValue)) {
-        //DDLogVerbose(@"Not removing connectionState %d because it is not contained in %d", connectionStateValue, connectionState);
         return;
     }
-    
     [self setValue:[NSNumber numberWithInt:(connectionState-connectionStateValue)] forKey:@"connectionState"];
 }
 
-
-
-
-#pragma mark --
-#pragma mark Connection Management
+#pragma mark -- Connection Management
 - (IBAction)connect:(id)sender
 {	
     LOGFUNCTIONCALL     
@@ -98,17 +62,14 @@
     
     // Do some checks for common mistakes 
     if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTJID]] == nil ) {        
-        [self anErrorOccured:connectionError withErrorString:@"JID was not set in preferences"];
+        [self handleError:connectionError withErrorString:ERROR_JID_NOT_SET];
         return;
     }
     if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTSERVER]] == nil ) {        
-        [self anErrorOccured:connectionError withErrorString:@"Server was not set in preferences"];
+        [self handleError:connectionError withErrorString:ERROR_SERVER_NOT_SET];
         return;
     }
 
-    
-    
-    
     if(![[self xmppStream] isConnected])
     {
         [self addValToConnectionState:connecting];
@@ -126,34 +87,30 @@
             
         } else {
             DDLogVerbose(@"Connecting via normal connect");
-			success = [[self xmppStream] connect:&error];
+			success = [[self xmppStream] connect:&error]; 
             
         }
     }
     
-    // Actions after successfull connetions should be handled by notifications
 	if (!success)
     {   
-        // Very early error, before even connecting (e.g forgot to enter jid), abandon ship. 
-        [self anErrorOccured:connectionError withErrorString:[error localizedDescription]];
-        [[self xmppStream] disconnect];
-        [self removeValFromConnectionState:connecting];
+        // Very early error, before even connecting, abandon ship. 
+        [self handleError:connectionError withErrorString:[error localizedDescription]];
+        [[self xmppStream] disconnect]; // connecting state gets cleared by xmppStreamDidDisconnect method
     }
-    
+     // All following events after successfull connetions are be handled by xmppStream notifications
 }
+
 - (IBAction)disconnect:(id)sender {
     if (connectionState & authenticated) {
-        [self goOffline:nil];        
+        [self goOffline:nil];
         [[self xmppStream] disconnectAfterSending];
     } else {
-        [[self xmppStream] disconnect];        
+        [[self xmppStream] disconnect];
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark Presence Management
-//////////////////////////////////////////////////// ////////////////////////////////////////////////////////////////////
-
+#pragma mark - Presence Management
 - (NSString*)_priorityForStatus:(EStatusState)status {
     NSString *priority;
     
@@ -206,6 +163,9 @@
     XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
     [[self xmppStream] sendElement:presence];
 }
+
+
+
 
 #pragma mark XMPPStream Delegate Methods
 - (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings
@@ -262,7 +222,6 @@
 - (void)xmppStreamDidConnect:(XMPPStream *)sender
 {
     LOGFUNCTIONCALL
-    [self setValue:[NSNumber numberWithBool: YES] forKey:@"isConnected"];
     
     [self removeValFromConnectionState:connecting];
     [self addValToConnectionState:connected];
@@ -288,14 +247,16 @@
     
     //    + (NSString*)passwordForAccount:(NSString*)account serviceName:(NSString*)name error:(NSError**)error;
 
-    success = [[self xmppStream] authenticateWithPassword:[INKeychainAccess passwordForAccount:self.xmppStream.myJID.bare serviceName:APP_NAME error:&authError] error:&error];
+    success = [[self xmppStream] authenticateWithPassword:[INKeychainAccess passwordForAccount:self.xmppStream.myJID.bare
+                                                                                   serviceName:APP_NAME error:&authError]
+                                                    error:&error];
 
 //	}
 	
 	if (!success)
 	{
         DDLogError(@"%@: %@: %@", THIS_FILE, THIS_METHOD, [error localizedDescription]);
-        [self anErrorOccured:connectionError withErrorString:[error localizedDescription]];
+        [self handleError:connectionError withErrorString:[error localizedDescription]];
     }
 }
 - (void)xmppStreamDidRegister:(XMPPStream *)sender
@@ -309,7 +270,7 @@
 {
     LOGFUNCTIONCALL
     
-    [self anErrorOccured:registrationError withErrorString:[[error elementForName:@"failure"] stringValue]];
+    [self handleError:registrationError withErrorString:[[error elementForName:@"failure"] stringValue]];
     [self removeValFromConnectionState:registering];    
 	[[self xmppStream] disconnect];
 }
@@ -338,7 +299,7 @@
     [self removeValFromConnectionState:authenticating];
     [self removeValFromConnectionState:authenticated];
     
-    [self anErrorOccured:authenticationError withErrorString:[[error elementForName:@"failure"] stringValue]];
+    [self handleError:authenticationError withErrorString:[[error elementForName:@"failure"] stringValue]];
     [[self xmppStream] disconnect];
 }
 
@@ -352,46 +313,46 @@
     LOGFUNCTIONCALL
     
 	// Update tracking variables
-    [self removeValFromConnectionState:connecting];
-    [self removeValFromConnectionState:connected];
-    [self removeValFromConnectionState:registering];
-    [self removeValFromConnectionState:registered];
-    [self removeValFromConnectionState:authenticating];
-    [self removeValFromConnectionState:authenticated];
-    [self addValToConnectionState:disconnected];
-    
-    [self setValue:[NSNumber numberWithBool: NO] forKey:@"isConnected"];
-    [self setValue:[NSNumber numberWithBool: NO] forKey:@"isRegistering"];
-    [self setValue:[NSNumber numberWithBool: NO] forKey:@"isAuthenticating"];
-    [self setValue:[NSNumber numberWithBool: NO] forKey:@"isAuthenticated"];
-    
+    [self setValue:[NSNumber numberWithInt:disconnected] forKey:@"connectionState"];
+    //    Set disconnected is equal to:
+    //    [self removeValFromConnectionState:connected];
+    //    [self removeValFromConnectionState:registering];
+    //    [self removeValFromConnectionState:registered];
+    //    [self removeValFromConnectionState:authenticating];
+    //    [self removeValFromConnectionState:authenticated];
+        
     
     if (error) {
-        [self anErrorOccured:connectionError withErrorString:[error localizedDescription]];
+        [self handleError:connectionError withErrorString:[error localizedDescription]];
     }
 }
 
-- (IBAction)displayErrorSheet:(id)sender {
-    if (errorState) {
-        DDLogVerbose(@"state in errorsheet: %d", errorState);
-        SEL sel = @selector(sheetClosed:returnCode:contextInfo:);
-        NSString *title;
-        
-        switch (errorState) {
-            case 1  : title = @"Connection Error";  break;
-            case 2  : title = @"Authentication Error"; break;
-            case 3  : title = @"Registration Error"; break;
-            default : title = @""; break;
+#pragma mark - Error management
+- (void)handleError:(EErrorState)state withErrorString:(NSString*)errorStr {
+    DDLogError(@"An error occured: %@", errorStr);
+    
+    // Dont override exisiting error states
+    if (!errorState) {
+        errorState = state;
+        if (errorStr) {
+            errorDescription = errorStr;
+        } else {
+            errorDescription = @"No detailed description provided";
         }
-        NSBeginAlertSheet(@"Title", @"Ok", NULL, NULL, window, self, sel, NULL, nil, errorDescription, nil);        
-    } else {
-        DDLogError(@"Error sheet should be shown when there was no error");
+        
+        switch (state) {
+            case connectionError  : [[self notificationController] notificationForConnectionErrorWithErrorString:errorStr];  break;
+            case authenticationError  : [[self notificationController] notificationForAuthenticationErrorWithErrorString:errorStr];  break;
+            case registrationError  : break;
+            default: break;
+        }
     }
 }
 
-- (void)sheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    if (returnCode == NSAlertDefaultReturn) {
-        DDLogVerbose(@"Default return");
-    }
+- (void)clearError {
+    errorState = noError;
+    errorDescription = @"";
 }
+
+
 @end

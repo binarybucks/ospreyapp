@@ -1,18 +1,10 @@
 #import "OSPAppDelegate.h"
-#import "NSColor+HexAdditions.h"
-
-@interface OSPAppDelegate (PrivateApi)
--(void)_arrange:(NSView*)view accordingTo:(NSView*)splitViewView;
-- (void)_mocDidChange:(NSNotification *)notification;
-
-@end
 
 @implementation OSPAppDelegate
 
 @synthesize window = _window;
 
 @synthesize chatController;
-@synthesize statusController;
 @synthesize xmppvCardAvatarModule;
 @synthesize xmppvCardTempModule;
 @synthesize xmppStream;
@@ -24,6 +16,7 @@
 @synthesize xmppRosterStorage;
 @synthesize managedObjectContext;
 @synthesize xmppAttentionModule;
+
 - (id)init
 {
 	if ((self = [super init]))
@@ -53,7 +46,6 @@
         // Intialize controllers that are not loaded from NIB
         rosterController =          [[OSPRosterController alloc] initWithNibName:@"rosterView" bundle:nil];
         popoverController =         [[INPopoverController alloc] initWithContentViewController:rosterController];
-        notificationController =    [[OSPNotificationController alloc] init];
 
 		// Initialize XMPP modules
 		xmppStream =                [[XMPPStream alloc] init];

@@ -17,14 +17,14 @@ NSString * const View3IconImageName =   @"Developer";
 	[self mapViewsToToolbar];
 	[self firstPane];
     [self setPasswordForJid:[[NSUserDefaults standardUserDefaults] valueForKey:STDUSRDEF_ACCOUNTJID]];
-	[window center];
+	[self.window center];
 }
 
 #pragma mark - Map
 -(void)mapViewsToToolbar {
 	NSString *app = @"Preferences"; // Window title
 	
-    NSToolbar *toolbar = [window toolbar];
+    NSToolbar *toolbar = [self.window toolbar];
 	if(toolbar == nil)  
 	{
 		toolbar = [[NSToolbar alloc] initWithIdentifier: [NSString stringWithFormat: @"%@.mgpreferencepanel.toolbar", app]];
@@ -36,8 +36,8 @@ NSString * const View3IconImageName =   @"Developer";
     
 	[toolbar setDelegate: self]; 
 	
-	[window setToolbar: toolbar];	
-	[window setTitle:View1ItemIdentifier];
+	[self.window setToolbar: toolbar];
+	[self.window setTitle:View1ItemIdentifier];
 	
 	if([toolbar respondsToSelector: @selector(setSelectedItemIdentifier:)])
 	{
@@ -45,38 +45,42 @@ NSString * const View3IconImageName =   @"Developer";
 	}	
 }
 
+
 -(IBAction)changePanes:(id)sender {
-	NSView *view = nil;
-	
-	switch ([(NSView*)sender tag]) 
-	{
-		case 0:
-			[window setTitle:View1ItemIdentifier];
-			view = view1;
-			break;
-		case 1:
-			[window setTitle:View2ItemIdentifier];
-			view = view2;
-			break;
-		case 2:
-			[window setTitle:View3ItemIdentifier];
-			view = view3;
-			break;
-		default:
-			break;
+	[self changePanesProgramatically:[(NSView*)sender tag]];
+}
+
+- (void)changePanesProgramatically:(NSInteger)pane {
+    NSView *view = nil;
+    switch (pane)   {
+    case 0:
+        [self.window setTitle:View1ItemIdentifier];
+        view = view1;
+        break;
+    case 1:
+        [self.window setTitle:View2ItemIdentifier];
+        view = view2;
+        break;
+    case 2:
+        [self.window setTitle:View3ItemIdentifier];
+        view = view3;
+        break;
+    default:
+        break;
 	}
-	NSRect windowFrame = [window frame];
+	NSRect windowFrame = [self.window frame];
 	windowFrame.size.height = [view frame].size.height + WINDOW_TOOLBAR_HEIGHT;
 	windowFrame.size.width = [view frame].size.width;
-	windowFrame.origin.y = NSMaxY([window frame]) - ([view frame].size.height + WINDOW_TOOLBAR_HEIGHT);
+	windowFrame.origin.y = NSMaxY([self.window frame]) - ([view frame].size.height + WINDOW_TOOLBAR_HEIGHT);
 	
 	if ([[contentView subviews] count] != 0)
 	{
 		[[[contentView subviews] objectAtIndex:0] removeFromSuperview];
 	}
-	[window setFrame:windowFrame display:YES animate:YES];
+	[self.window setFrame:windowFrame display:YES animate:YES];
 	[contentView setFrame:[view frame]];
-	[contentView addSubview:view];	
+	[contentView addSubview:view];
+
 }
 
 #pragma mark - First pane
@@ -84,17 +88,17 @@ NSString * const View3IconImageName =   @"Developer";
 	NSView *view = nil;
 	view = view1;
 	
-	NSRect windowFrame = [window frame];
+	NSRect windowFrame = [self.window frame];
 	windowFrame.size.height = [view frame].size.height + WINDOW_TOOLBAR_HEIGHT;
 	windowFrame.size.width = [view frame].size.width;
-	windowFrame.origin.y = NSMaxY([window frame]) - ([view frame].size.height + WINDOW_TOOLBAR_HEIGHT);
+	windowFrame.origin.y = NSMaxY([self.window frame]) - ([view frame].size.height + WINDOW_TOOLBAR_HEIGHT);
 	
 	if ([[contentView subviews] count] != 0)
 	{
 		[[[contentView subviews] objectAtIndex:0] removeFromSuperview];
 	}
 	
-	[window setFrame:windowFrame display:YES animate:YES];
+	[self.window setFrame:windowFrame display:YES animate:YES];
 	[contentView setFrame:[view frame]];
 	[contentView addSubview:view];	
 }
@@ -230,7 +234,7 @@ NSString * const View3IconImageName =   @"Developer";
 # pragma mark - Resets
 - (IBAction)resetStores:(id)sender {
     NSBeep();
-    NSBeginAlertSheet(@"Danger Will Robinson!", @"Cancel", @"Delete", nil, window, self, @selector(resetStoresAlertSheetDidEnd:returnCode:contextInfo:), nil, nil, @"This operation might be potentially harmfull to your computer. By clicking Delete you acknowledge that you use this function at your own risk and hold only yourself responsible for any data-loss you might encounter.\n\nThis deletes ALL files in ~/Library/Application Support/Osprey.");
+    NSBeginAlertSheet(@"Danger Will Robinson!", @"Cancel", @"Delete", nil, self.window, self, @selector(resetStoresAlertSheetDidEnd:returnCode:contextInfo:), nil, nil, @"This operation might be potentially harmfull to your computer. By clicking Delete you acknowledge that you use this function at your own risk and hold only yourself responsible for any data-loss you might encounter.\n\nThis deletes ALL files in ~/Library/Application Support/Osprey.");
 }
 
 
@@ -260,7 +264,7 @@ NSString * const View3IconImageName =   @"Developer";
 }
 
 - (IBAction)resetPreferences:(id)sender {
-    NSBeginAlertSheet(@"Danger Will Robinson!", @"Cancel", @"Delete", nil, window, self, @selector(resetPreferencesAlertSheetDidEnd:returnCode:contextInfo:), nil, nil, @"This operation might be potentially harmfull to your computer. By clicking Delete you acknowledge that you use this function at your own risk and hold only yourself responsible for any data-loss you might encounter.\n\nThis deletes the file  ~/Library/Preferences/org.ospreyapp.Osprey.plist.");
+    NSBeginAlertSheet(@"Danger Will Robinson!", @"Cancel", @"Delete", nil, self.window, self, @selector(resetPreferencesAlertSheetDidEnd:returnCode:contextInfo:), nil, nil, @"This operation might be potentially harmfull to your computer. By clicking Delete you acknowledge that you use this function at your own risk and hold only yourself responsible for any data-loss you might encounter.\n\nThis deletes the file  ~/Library/Preferences/org.ospreyapp.Osprey.plist.");
     
 }
 - (void)resetPreferencesAlertSheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
