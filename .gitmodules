@@ -7,3 +7,6 @@
 [submodule "Osprey/Vendor/INPopoverController"]
 	path = Osprey/Vendor/INPopoverController
 	url = git://github.com/indragiek/INPopoverController.git
+[submodule "Osprey/Vendor/XMPPFramework"]
+	path = Osprey/Vendor/XMPPFramework
+	url = git://github.com/binarybucks/XMPPFramework.git
