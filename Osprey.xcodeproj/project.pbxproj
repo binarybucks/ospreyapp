@@ -12,17 +12,17 @@
 		110D47F515BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 110D47F415BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m */; };
 		113D866415B9C3E60022F052 /* OSPChatCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 113D866315B9C3E60022F052 /* OSPChatCoreDataStorage.m */; };
 		113D866A15B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 113D866915B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m */; };
+		1149BEBC15DFF5010079BF35 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1149BEBB15DFF5010079BF35 /* INAppStoreWindow.m */; };
 		115B0AE815A9B547001EB763 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 115B0AE715A9B546001EB763 /* libresolv.dylib */; };
 		115B0AEC15A9B600001EB763 /* chatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AEB15A9B600001EB763 /* chatView.xib */; };
 		115B0AEE15A9B614001EB763 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AED15A9B614001EB763 /* MainMenu.xib */; };
 		115B0AF015A9B62A001EB763 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AEF15A9B62A001EB763 /* Credits.rtf */; };
 		1160F5BA15DFF1830044CDA5 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1160F5B915DFF1830044CDA5 /* Sparkle.framework */; };
-		1160F94215DFF18E0044CDA5 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5BF15DFF18C0044CDA5 /* INAppStoreWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1160F94F15DFF18E0044CDA5 /* INKeychainAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5D915DFF18C0044CDA5 /* INKeychainAccess.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1160F95415DFF18E0044CDA5 /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5E015DFF18C0044CDA5 /* INPopoverController.m */; };
-		1160F95515DFF18E0044CDA5 /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5E615DFF18C0044CDA5 /* INPopoverParentWindow.m */; };
-		1160F95615DFF18E0044CDA5 /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5E915DFF18C0044CDA5 /* INPopoverWindow.m */; };
-		1160F95715DFF18E0044CDA5 /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5EB15DFF18C0044CDA5 /* INPopoverWindowFrame.m */; };
+		1160F95415DFF18E0044CDA5 /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5E015DFF18C0044CDA5 /* INPopoverController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1160F95515DFF18E0044CDA5 /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5E615DFF18C0044CDA5 /* INPopoverParentWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1160F95615DFF18E0044CDA5 /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5E915DFF18C0044CDA5 /* INPopoverWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1160F95715DFF18E0044CDA5 /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F5EB15DFF18C0044CDA5 /* INPopoverWindowFrame.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1160F96615DFF18E0044CDA5 /* XMPPAnonymousAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F60915DFF18C0044CDA5 /* XMPPAnonymousAuthentication.m */; };
 		1160F96715DFF18E0044CDA5 /* XMPPDeprecatedDigestAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F60C15DFF18C0044CDA5 /* XMPPDeprecatedDigestAuthentication.m */; };
 		1160F96815DFF18E0044CDA5 /* XMPPDeprecatedPlainAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1160F60F15DFF18C0044CDA5 /* XMPPDeprecatedPlainAuthentication.m */; };
@@ -201,13 +201,13 @@
 		113D866315B9C3E60022F052 /* OSPChatCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatCoreDataStorage.m; sourceTree = "<group>"; };
 		113D866815B9C4BE0022F052 /* OSPChatCoreDataStorageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatCoreDataStorageObject.h; sourceTree = "<group>"; };
 		113D866915B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatCoreDataStorageObject.m; sourceTree = "<group>"; };
+		1149BEBA15DFF5010079BF35 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
+		1149BEBB15DFF5010079BF35 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
 		115B0AE715A9B546001EB763 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		115B0AEB15A9B600001EB763 /* chatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatView.xib; sourceTree = "<group>"; };
 		115B0AED15A9B614001EB763 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		115B0AEF15A9B62A001EB763 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		1160F5B915DFF1830044CDA5 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = ../../Sparkle.framework; sourceTree = "<group>"; };
-		1160F5BE15DFF18C0044CDA5 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
-		1160F5BF15DFF18C0044CDA5 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
 		1160F5D815DFF18C0044CDA5 /* INKeychainAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INKeychainAccess.h; sourceTree = "<group>"; };
 		1160F5D915DFF18C0044CDA5 /* INKeychainAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INKeychainAccess.m; sourceTree = "<group>"; };
 		1160F5DF15DFF18C0044CDA5 /* INPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverController.h; sourceTree = "<group>"; };
@@ -573,8 +573,8 @@
 		1160F5BC15DFF18C0044CDA5 /* INAppStoreWindow */ = {
 			isa = PBXGroup;
 			children = (
-				1160F5BE15DFF18C0044CDA5 /* INAppStoreWindow.h */,
-				1160F5BF15DFF18C0044CDA5 /* INAppStoreWindow.m */,
+				1149BEBA15DFF5010079BF35 /* INAppStoreWindow.h */,
+				1149BEBB15DFF5010079BF35 /* INAppStoreWindow.m */,
 			);
 			path = INAppStoreWindow;
 			sourceTree = "<group>";
@@ -1521,7 +1521,6 @@
 				110D47F515BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m in Sources */,
 				11D1CCC215C3DF3C00FEEF34 /* OSPChat.xcdatamodel in Sources */,
 				118B8C6315D7C5770074A182 /* NSManagedObjectContext+EasyFetching.m in Sources */,
-				1160F94215DFF18E0044CDA5 /* INAppStoreWindow.m in Sources */,
 				1160F94F15DFF18E0044CDA5 /* INKeychainAccess.m in Sources */,
 				1160F95415DFF18E0044CDA5 /* INPopoverController.m in Sources */,
 				1160F95515DFF18E0044CDA5 /* INPopoverParentWindow.m in Sources */,
@@ -1631,6 +1630,7 @@
 				1160F9CE15DFF18E0044CDA5 /* DDXMLDocument.m in Sources */,
 				1160F9CF15DFF18E0044CDA5 /* DDXMLElement.m in Sources */,
 				1160F9D015DFF18E0044CDA5 /* DDXMLNode.m in Sources */,
+				1149BEBC15DFF5010079BF35 /* INAppStoreWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
