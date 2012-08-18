@@ -12,7 +12,6 @@
 		110D47F515BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 110D47F415BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m */; };
 		11203E5515ADE98600311AD3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11203E5415ADE98600311AD3 /* Sparkle.framework */; };
 		11203E5615ADE99400311AD3 /* Sparkle.framework in Copy Sparkle.framwork files */ = {isa = PBXBuildFile; fileRef = 11203E5415ADE98600311AD3 /* Sparkle.framework */; };
-		1131D16215A9F6D00030AA78 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1131D16115A9F6D00030AA78 /* INAppStoreWindow.m */; };
 		1131D16F15A9FA5D0030AA78 /* Growl.framework in Copy Growl.framework files */ = {isa = PBXBuildFile; fileRef = 1131D16B15A9F8C30030AA78 /* Growl.framework */; };
 		113D866415B9C3E60022F052 /* OSPChatCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 113D866315B9C3E60022F052 /* OSPChatCoreDataStorage.m */; };
 		113D866A15B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 113D866915B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m */; };
@@ -28,11 +27,6 @@
 		119164C715A9AF740021C203 /* Appearence.icns in Resources */ = {isa = PBXBuildFile; fileRef = 119164C315A9AF740021C203 /* Appearence.icns */; };
 		119164C815A9AF740021C203 /* Developer.icns in Resources */ = {isa = PBXBuildFile; fileRef = 119164C415A9AF740021C203 /* Developer.icns */; };
 		119164C915A9AF740021C203 /* General.icns in Resources */ = {isa = PBXBuildFile; fileRef = 119164C515A9AF740021C203 /* General.icns */; };
-		1191651A15A9AFAD0021C203 /* INKeychainAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164CC15A9AFAD0021C203 /* INKeychainAccess.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1191651B15A9AFAD0021C203 /* INPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164CE15A9AFAD0021C203 /* INPopoverController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1191651C15A9AFAD0021C203 /* INPopoverParentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D115A9AFAD0021C203 /* INPopoverParentWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1191651D15A9AFAD0021C203 /* INPopoverWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D315A9AFAD0021C203 /* INPopoverWindow.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		1191651E15A9AFAD0021C203 /* INPopoverWindowFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D515A9AFAD0021C203 /* INPopoverWindowFrame.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1191651F15A9AFAD0021C203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D615A9AFAD0021C203 /* main.m */; };
 		1191652015A9AFAD0021C203 /* NSColor+HexAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D815A9AFAD0021C203 /* NSColor+HexAdditions.m */; };
 		1191652115A9AFAD0021C203 /* OSPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164DA15A9AFAD0021C203 /* OSPAppDelegate.m */; };
@@ -211,8 +205,6 @@
 		110D47F315BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPArrayToSingleValueTransformer.h; sourceTree = "<group>"; };
 		110D47F415BA0B1B003F0CC1 /* OSPArrayToSingleValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPArrayToSingleValueTransformer.m; sourceTree = "<group>"; };
 		11203E5415ADE98600311AD3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Osprey/Sparkle.framework; sourceTree = "<group>"; };
-		1131D16015A9F6D00030AA78 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
-		1131D16115A9F6D00030AA78 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
 		1131D16B15A9F8C30030AA78 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Osprey/Growl.framework; sourceTree = "<group>"; };
 		113D866215B9C3E60022F052 /* OSPChatCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatCoreDataStorage.h; sourceTree = "<group>"; };
 		113D866315B9C3E60022F052 /* OSPChatCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatCoreDataStorage.m; sourceTree = "<group>"; };
@@ -235,17 +227,6 @@
 		119164C315A9AF740021C203 /* Appearence.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Appearence.icns; sourceTree = "<group>"; };
 		119164C415A9AF740021C203 /* Developer.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Developer.icns; sourceTree = "<group>"; };
 		119164C515A9AF740021C203 /* General.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = General.icns; sourceTree = "<group>"; };
-		119164CB15A9AFAD0021C203 /* INKeychainAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INKeychainAccess.h; sourceTree = "<group>"; };
-		119164CC15A9AFAD0021C203 /* INKeychainAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INKeychainAccess.m; sourceTree = "<group>"; };
-		119164CD15A9AFAD0021C203 /* INPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverController.h; sourceTree = "<group>"; };
-		119164CE15A9AFAD0021C203 /* INPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverController.m; sourceTree = "<group>"; };
-		119164CF15A9AFAD0021C203 /* INPopoverControllerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverControllerDefines.h; sourceTree = "<group>"; };
-		119164D015A9AFAD0021C203 /* INPopoverParentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverParentWindow.h; sourceTree = "<group>"; };
-		119164D115A9AFAD0021C203 /* INPopoverParentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverParentWindow.m; sourceTree = "<group>"; };
-		119164D215A9AFAD0021C203 /* INPopoverWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverWindow.h; sourceTree = "<group>"; };
-		119164D315A9AFAD0021C203 /* INPopoverWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindow.m; sourceTree = "<group>"; };
-		119164D415A9AFAD0021C203 /* INPopoverWindowFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INPopoverWindowFrame.h; sourceTree = "<group>"; };
-		119164D515A9AFAD0021C203 /* INPopoverWindowFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INPopoverWindowFrame.m; sourceTree = "<group>"; };
 		119164D615A9AFAD0021C203 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		119164D715A9AFAD0021C203 /* NSColor+HexAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+HexAdditions.h"; sourceTree = "<group>"; };
 		119164D815A9AFAD0021C203 /* NSColor+HexAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+HexAdditions.m"; sourceTree = "<group>"; };
@@ -628,7 +609,6 @@
 				1191654515A9AFCF0021C203 /* Subclasses */,
 				1191654415A9AFC80021C203 /* Transformer */,
 				1191654315A9AFC10021C203 /* Controller */,
-				1191654215A9AFB40021C203 /* Vendor */,
 				119164BF15A9AF5C0021C203 /* Interface */,
 				119164BD15A9AF310021C203 /* Resources */,
 			);
@@ -665,26 +645,6 @@
 				119164C015A9AF6A0021C203 /* chat.html */,
 			);
 			name = Interface;
-			sourceTree = "<group>";
-		};
-		1191654215A9AFB40021C203 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				1131D16015A9F6D00030AA78 /* INAppStoreWindow.h */,
-				1131D16115A9F6D00030AA78 /* INAppStoreWindow.m */,
-				119164CB15A9AFAD0021C203 /* INKeychainAccess.h */,
-				119164CC15A9AFAD0021C203 /* INKeychainAccess.m */,
-				119164CD15A9AFAD0021C203 /* INPopoverController.h */,
-				119164CE15A9AFAD0021C203 /* INPopoverController.m */,
-				119164CF15A9AFAD0021C203 /* INPopoverControllerDefines.h */,
-				119164D015A9AFAD0021C203 /* INPopoverParentWindow.h */,
-				119164D115A9AFAD0021C203 /* INPopoverParentWindow.m */,
-				119164D215A9AFAD0021C203 /* INPopoverWindow.h */,
-				119164D315A9AFAD0021C203 /* INPopoverWindow.m */,
-				119164D415A9AFAD0021C203 /* INPopoverWindowFrame.h */,
-				119164D515A9AFAD0021C203 /* INPopoverWindowFrame.m */,
-			);
-			name = Vendor;
 			sourceTree = "<group>";
 		};
 		1191654315A9AFC10021C203 /* Controller */ = {
@@ -1495,11 +1455,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1191651A15A9AFAD0021C203 /* INKeychainAccess.m in Sources */,
-				1191651B15A9AFAD0021C203 /* INPopoverController.m in Sources */,
-				1191651C15A9AFAD0021C203 /* INPopoverParentWindow.m in Sources */,
-				1191651D15A9AFAD0021C203 /* INPopoverWindow.m in Sources */,
-				1191651E15A9AFAD0021C203 /* INPopoverWindowFrame.m in Sources */,
 				1191651F15A9AFAD0021C203 /* main.m in Sources */,
 				1191652015A9AFAD0021C203 /* NSColor+HexAdditions.m in Sources */,
 				1191652115A9AFAD0021C203 /* OSPAppDelegate.m in Sources */,
@@ -1527,7 +1482,6 @@
 				1191653815A9AFAD0021C203 /* OSPTitleBarShadowView.m in Sources */,
 				1191653915A9AFAD0021C203 /* OSPTitleBarView.m in Sources */,
 				1191653A15A9AFAD0021C203 /* OSPXMPPResourceToStatusTextTransformer.m in Sources */,
-				1131D16215A9F6D00030AA78 /* INAppStoreWindow.m in Sources */,
 				110C2F9B15B2E08400CAD63A /* XMPPPresence+NiceShow.m in Sources */,
 				113D866415B9C3E60022F052 /* OSPChatCoreDataStorage.m in Sources */,
 				113D866A15B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m in Sources */,

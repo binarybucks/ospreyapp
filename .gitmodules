@@ -1,3 +1,9 @@
-[submodule "Osprey/XMPPFramework"]
-	path = Osprey/XMPPFramework
-	url = git://github.com/binarybucks/XMPPFramework.git
+[submodule "Osprey/Vendor/INAppStoreWindow"]
+	path = Osprey/Vendor/INAppStoreWindow
+	url = git://github.com/indragiek/INAppStoreWindow.git
+[submodule "Osprey/Vendor/INKeychainAccess"]
+	path = Osprey/Vendor/INKeychainAccess
+	url = git://github.com/indragiek/INKeychainAccess.git
+[submodule "Osprey/Vendor/INPopoverController"]
+	path = Osprey/Vendor/INPopoverController
+	url = git://github.com/indragiek/INPopoverController.git
