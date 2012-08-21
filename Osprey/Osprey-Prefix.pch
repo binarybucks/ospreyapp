@@ -4,8 +4,7 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
-#import "DDTTYLogger.h"
-
+    #import "DDTTYLogger.h"
     #import "OSPAppDelegate.h"
 
     #define LOGFUNCTIONCALL DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);

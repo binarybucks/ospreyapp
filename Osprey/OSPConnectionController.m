@@ -27,9 +27,7 @@
 
     [statusMenu setAutoenablesItems:NO];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_GENERALCONNECTONSTARTUP]) {
-        [self connect:nil];
-    }
+
 }
 
 - (void)addValToConnectionState:(int)connectionStateValue {
@@ -62,10 +60,13 @@
     
     // Do some checks for common mistakes 
     if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTJID]] == nil ) {        
-        [self handleError:connectionError withErrorString:ERROR_JID_NOT_SET];
+//        [self handleError:connectionError withErrorString:ERROR_JID_NOT_SET];
+        [[self notificationController] notificationForAuthenticationErrorWithErrorString:ERROR_JID_NOT_SET];
         return;
     }
-    if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTSERVER]] == nil ) {        
+    if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTSERVER]] == nil ) {
+        [[self notificationController] notificationForAuthenticationErrorWithErrorString:ERROR_JID_NOT_SET];
+
         [self handleError:connectionError withErrorString:ERROR_SERVER_NOT_SET];
         return;
     }

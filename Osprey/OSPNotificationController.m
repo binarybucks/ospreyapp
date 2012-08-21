@@ -1,13 +1,6 @@
 #import "OSPNotificationController.h"
 #import "NSXMLElement+XMPP.h"
 
-#define RECEIVED_CHAT_MESSAGE_NOTIFICATION_NAME @"incommingChatMessage"
-#define RECEIVED_CHAT_MESSAGE_HUMAN_READABLE @"Incomming chat message"
-
-#define RECEIVED_ATTENTION_REQUEST_NOTIFICATION_NAME @"incommingAttentionRequest"
-#define RECEIVED_ATTENTION_REQUEST_HUMAN_READABLE @"Incomming attention request"
-
-
 @implementation OSPNotificationController
 
 # pragma mark - Init
@@ -15,12 +8,13 @@
     self = [super init];
     if (self) {
         [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:(id)self];
-        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(removeAllNotifications) name:NSApplicationDidBecomeActiveNotification object:nil];
-
+        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(removeAllNotifcationCenterNotifications) name:NSApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
+
+# pragma mark - Notification Center Notifications
 - (void)notificationForIncommingMessage:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user {
     NSUserNotification *userNotification = [[NSUserNotification alloc] init];
     userNotification.title = user.displayName;
@@ -44,7 +38,7 @@
 
 }
 
-- (void) removeAllNotifications {
+- (void) removeAllNotifcationCenterNotifications {
 //    DDLogVerbose(@"Removing all notifications");
     [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
 }
@@ -57,31 +51,58 @@
     }
 }
 
-- (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr {
-    SEL sel = @selector(connectionErrorSheetClosed:returnCode:contextInfo:);
-    NSBeginAlertSheet(@"Connection Error", @"Retry", @"Cancel", NULL, window, self, sel, NULL, nil, errorStr, nil);
-}
+# pragma mark - Error Notifications
 
-- (void)connectionErrorSheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    if (returnCode == NSAlertDefaultReturn) {
-        [[[NSApp delegate] connectionController] connect:self];
-    } else if (returnCode == NSAlertAlternateReturn) {
-        [[[NSApp delegate] connectionController] disconnect:self];
-    }
+- (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr {
+    [self notificationForError:connectionError withErrorString:errorStr];
 }
 
 - (void)notificationForAuthenticationErrorWithErrorString:(NSString*)errorStr {
-    SEL sel = @selector(connectionErrorSheetClosed:returnCode:contextInfo:);
-    NSBeginAlertSheet(@"Connection Error", @"Retry", @"Change account", @"Cancel", window, self, sel, NULL, nil, errorStr, nil);
+    [self notificationForError:authenticationError withErrorString:errorStr];
+}
+
+- (void)notificationForError:(EErrorState)errorState withErrorString:(NSString*)errorString {
+    SEL sel = @selector(errorSheetClosed:returnCode:contextInfo:);
+    NSString *errorTitle;
+    
+    switch (errorState) {
+        case connectionError:
+            errorTitle = @"Connection Error";
+            break;
+        case authenticationError:
+            errorTitle = @"Authentication Error";
+            break;
+        default:
+            DDLogError(@"Notification for error type not implemented yet");
+            return;
+    }
+    
+    NSBeginAlertSheet(errorTitle, @"Reconnect", @"Check account", @"Cancel", window, self, sel, NULL, nil, errorString, nil);
 
 }
 
-- (void)authenticationErrorSheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-    if (returnCode == NSAlertDefaultReturn) {
-        [[[NSApp delegate] connectionController] connect:self];
-    } else if (returnCode == NSAlertAlternateReturn) {
+- (void)errorSheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    if (returnCode == NSAlertDefaultReturn) { // Reconnect
+        [[[NSApp delegate] connectionController] performSelector:@selector(connect:) withObject:nil afterDelay:0.5]; 
+    } else if (returnCode == NSAlertAlternateReturn) { // Check Account
         [[[NSApp delegate] preferencesController] changePanesProgramatically:1];
         [[[[NSApp delegate] preferencesController] window] makeKeyAndOrderFront:nil];
-    }
+    } else if (returnCode == NSAlertOtherReturn) { // Cancel
+        [[[NSApp delegate] connectionController] performSelector:@selector(disconnect:) withObject:nil afterDelay:0.5];     }
 }
+
+# pragma mark - Application Badge Notifications
+
+- (void) incrementBadgeCount {
+    
+}
+
+- (void) clearBadgeCount {
+    
+}
+
+- (void) decrementBadgeCountBy:(NSNumber*)number {
+    
+}
+
 @end

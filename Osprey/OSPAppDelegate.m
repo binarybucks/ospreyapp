@@ -107,6 +107,10 @@
     popoverController.closesWhenPopoverResignsKey = YES;
     popoverController.closesWhenApplicationBecomesInactive = NO;
     [popoverController setDelegate:self];
+
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:STDUSRDEF_GENERALCONNECTONSTARTUP]) {
+        [self.connectionController connect:nil];
+    }
 }
 
 // popover should probably be hanled by the rosterController
