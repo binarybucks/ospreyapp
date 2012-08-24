@@ -7,6 +7,8 @@
 @dynamic jidStr;
 @dynamic muted;
 @dynamic order;
+@dynamic unreadCount;
+
 @synthesize userStorageObject;
 
 /*!
@@ -70,6 +72,10 @@
 - (void)awakeFromFetch {
     [self prepareUserStorageObjectFetchRequest];
     [self refetchUserStorageObject];
-
 }
+
+- (BOOL) isEqualTo:(OSPChatCoreDataStorageObject*)object {
+    return self.streamBareJidStr == object.streamBareJidStr && self.jidStr == object.jidStr;
+}
+
 @end

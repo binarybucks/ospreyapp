@@ -24,11 +24,15 @@
 }
 @property (strong, readonly) NSManagedObjectContext *openChatsMoc;
 
-- (void)openChatWithUser:(OSPUserStorageObject*)user andMakeActive:(BOOL)makeActive;
-- (void)openChatWithJidStr:(NSString*)jidStr andMakeActive:(BOOL)makeActive;
-- (void)openChatWithStoredChat:(OSPChatCoreDataStorageObject*)storedChat andMakeActive:(BOOL)makeActive;
+- (OSPChatStorageObject*)openChatWithUser:(OSPUserStorageObject*)user andMakeActive:(BOOL)makeActive;
+- (OSPChatStorageObject*)openChatWithJidStr:(NSString*)jidStr andMakeActive:(BOOL)makeActive;
+- (void)openChatWithStoredChat:(OSPChatCoreDataStorageObject*)chatStorageObject andMakeActive:(BOOL)makeActive;
 
 - (void)closeChat:(OSPChatCoreDataStorageObject*)chat;
 - (IBAction)closeSelectedChat:(id)sender;
 
+- (OSPChatStorageObject*)selectedChat;
+- (BOOL)isActiveChat:(OSPChatStorageObject*)chat;
+
+    
 @end

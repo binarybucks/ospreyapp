@@ -2,16 +2,21 @@
 
 @interface OSPNotificationController : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate> {
     IBOutlet NSWindow *window;
+    int badgeCount;
 }
 
-- (void)notificationForIncommingMessage:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user;
-- (void)notificationForIncommingAttentionRequest:(XMPPMessage*)message fromUser:(OSPUserStorageObject*)user;
+- (void)notificationForIncommingMessage:(XMPPMessage*)message fromSingleChat:(OSPChatStorageObject*)chat;
+- (void)notificationForIncommingMessage:(XMPPMessage*)message fromSingleChat:(OSPChatStorageObject*)chat isChatSelected:(BOOL)isChatSelected;
 
 - (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr;
 - (void)notificationForAuthenticationErrorWithErrorString:(NSString*)errorStr;
 - (void)notificationForError:(EErrorState)errorState withErrorString:(NSString*)errorString;
 
-- (void)removeAllNotificationCenterNotifications;
+- (void)clearAllNotificationsOfChat:(OSPChatStorageObject*)chat;
 
+- (void)incrementBadgeCount;
+- (void)decrementBadgeCount;
+- (void)decrementBadgeCountBy:(int)number;
+- (void)clearBadgeCount;
 
 @end

@@ -90,6 +90,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    NSUserNotification *launchNotification = [[aNotification userInfo]
+                                              objectForKey:NSApplicationLaunchUserNotificationKey];
+    if (launchNotification) {
+        // application was launched by a user selection from Notification Center
+    }
+
+    
     //  Set height of titlebar and center traffic lights
     ((INAppStoreWindow*)self.window).centerFullScreenButton = YES;
     ((INAppStoreWindow*)self.window).titleBarHeight = 40;
@@ -115,7 +122,6 @@
 
 // popover should probably be hanled by the rosterController
 - (void)closeRosterPopover {
-    NSLog(@"closing");
         [popoverController closePopover:rosterPopover];
     }
 

@@ -140,7 +140,6 @@
 		1191651F15A9AFAD0021C203 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D615A9AFAD0021C203 /* main.m */; };
 		1191652015A9AFAD0021C203 /* NSColor+HexAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164D815A9AFAD0021C203 /* NSColor+HexAdditions.m */; };
 		1191652115A9AFAD0021C203 /* OSPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164DA15A9AFAD0021C203 /* OSPAppDelegate.m */; };
-		1191652215A9AFAD0021C203 /* OSPAutomationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164DC15A9AFAD0021C203 /* OSPAutomationController.m */; };
 		1191652315A9AFAD0021C203 /* OSPChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164DE15A9AFAD0021C203 /* OSPChatController.m */; };
 		1191652415A9AFAD0021C203 /* OSPChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164E015A9AFAD0021C203 /* OSPChatViewController.m */; };
 		1191652515A9AFAD0021C203 /* OSPConnectedBooleanToTextTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 119164E215A9AFAD0021C203 /* OSPConnectedBooleanToTextTransformer.m */; };
@@ -460,8 +459,6 @@
 		119164D815A9AFAD0021C203 /* NSColor+HexAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+HexAdditions.m"; sourceTree = "<group>"; };
 		119164D915A9AFAD0021C203 /* OSPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPAppDelegate.h; sourceTree = "<group>"; };
 		119164DA15A9AFAD0021C203 /* OSPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPAppDelegate.m; sourceTree = "<group>"; };
-		119164DB15A9AFAD0021C203 /* OSPAutomationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPAutomationController.h; sourceTree = "<group>"; };
-		119164DC15A9AFAD0021C203 /* OSPAutomationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPAutomationController.m; sourceTree = "<group>"; };
 		119164DD15A9AFAD0021C203 /* OSPChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatController.h; sourceTree = "<group>"; };
 		119164DE15A9AFAD0021C203 /* OSPChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatController.m; sourceTree = "<group>"; };
 		119164DF15A9AFAD0021C203 /* OSPChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatViewController.h; sourceTree = "<group>"; };
@@ -1340,8 +1337,6 @@
 				119164F215A9AFAD0021C203 /* OSPPreferencesController.m */,
 				119164ED15A9AFAD0021C203 /* OSPNotificationController.h */,
 				119164EE15A9AFAD0021C203 /* OSPNotificationController.m */,
-				119164DB15A9AFAD0021C203 /* OSPAutomationController.h */,
-				119164DC15A9AFAD0021C203 /* OSPAutomationController.m */,
 				119164DD15A9AFAD0021C203 /* OSPChatController.h */,
 				119164DE15A9AFAD0021C203 /* OSPChatController.m */,
 				119164DF15A9AFAD0021C203 /* OSPChatViewController.h */,
@@ -1503,7 +1498,6 @@
 				1191651F15A9AFAD0021C203 /* main.m in Sources */,
 				1191652015A9AFAD0021C203 /* NSColor+HexAdditions.m in Sources */,
 				1191652115A9AFAD0021C203 /* OSPAppDelegate.m in Sources */,
-				1191652215A9AFAD0021C203 /* OSPAutomationController.m in Sources */,
 				1191652315A9AFAD0021C203 /* OSPChatController.m in Sources */,
 				1191652415A9AFAD0021C203 /* OSPChatViewController.m in Sources */,
 				1191652515A9AFAD0021C203 /* OSPConnectedBooleanToTextTransformer.m in Sources */,
