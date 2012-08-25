@@ -8,6 +8,9 @@
     self = [super init];
     if (self) {
         [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:(id)self];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidBecomeActive:)
+                                                     name:NSApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -15,6 +18,7 @@
 - (OSPChatController*) chatController {
     return [[NSApp delegate] chatController];
 }
+
 
 # pragma mark - Chat Message Notifications
 
@@ -158,5 +162,12 @@
 - (void) setBadgeLabel:(NSString*)str {
     [[[NSApplication sharedApplication] dockTile] setBadgeLabel:str];
 }
+
+#pragma mark - Application activation handling
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    [self clearAllNotificationsOfChat:[[self chatController] activeChat]];
+}
+
 
 @end

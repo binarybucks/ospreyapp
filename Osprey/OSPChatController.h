@@ -32,6 +32,7 @@
 - (IBAction)closeSelectedChat:(id)sender;
 
 - (OSPChatStorageObject*)selectedChat;
+- (OSPChatStorageObject*)activeChat;
 - (BOOL)isActiveChat:(OSPChatStorageObject*)chat;
 
     

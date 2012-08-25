@@ -56,8 +56,13 @@
     return [[NSApp delegate] notificationController];
 }
 
+// deprecated
 - (OSPChatStorageObject*)selectedChat {
 	return [[openChatsArrayController selectedObjects] objectAtIndex:0];
+}
+
+- (OSPChatStorageObject*)activeChat {
+    return activeChat;
 }
 
 - (BOOL)isActiveChat:(OSPChatStorageObject*)chat {
