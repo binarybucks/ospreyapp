@@ -413,27 +413,6 @@
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # pragma mark - Storage accessors
 - (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream {
     
