@@ -1713,8 +1713,10 @@
 					"\"$(SRCROOT)/Osprey\"",
 					"\"$(SRCROOT)/Osprey/Vendor\"",
 				);
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Osprey/Osprey-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = Osprey/Info.plist;
@@ -1740,8 +1742,10 @@
 					"\"$(SRCROOT)/Osprey\"",
 					"\"$(SRCROOT)/Osprey/Vendor\"",
 				);
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Osprey/Osprey-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				HEADER_SEARCH_PATHS = "/usr/include/libxml2/**";
 				INFOPLIST_FILE = Osprey/Info.plist;

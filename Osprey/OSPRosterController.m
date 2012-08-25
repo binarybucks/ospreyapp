@@ -85,7 +85,7 @@
 
         [[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
         [[self xmppRoster] addDelegate:self delegateQueue:dispatch_get_main_queue()];
-        [rosterTable setDoubleAction:@selector(chat:)];
+        [rosterTable setDoubleAction:@selector(chat)];
         [rosterTable setTarget:self];
         
         [self _setArrayControllerFetchPredicate];
@@ -97,11 +97,12 @@
     }
 }
 
-- (IBAction)chat:(id)sender
+- (void)chat
 {
-	if ([rosterTable selectedRow] >= 0) {
+    OSPUserStorageObject* user = [[arrayController selectedObjects] lastObject];
+	if (user) {
         [[NSApp delegate] closeRosterPopover];
-        [[self chatController] openChatWithUser:[[arrayController selectedObjects] lastObject] andMakeActive:YES];
+        [[self chatController] openChatWithUser:user andMakeActive:YES];
     }
 }
 
@@ -128,7 +129,7 @@
         return YES;
     }
     else if(commandSelector == @selector(insertNewline:)) {
-        [self chat:nil];
+        [self chat];
         return YES;
     }
     else if(commandSelector == @selector(cancelOperation:)) {

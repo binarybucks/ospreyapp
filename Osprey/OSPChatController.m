@@ -154,6 +154,7 @@
 	if (makeActive) {
         [self activateChat:chatStorageObject withChatViewController:cvc];
 	}
+    return chatStorageObject;
 }
 
 /*!
@@ -189,7 +190,7 @@
     [self activateChatViewController:cvc];
     [openChatsArrayController setSelectedObjects:@[chatStorageObject]];
     activeChat = chatStorageObject; // Prevents rapid reselection in nstableview:selectionDidChange
-
+    
 }
 
 
@@ -251,7 +252,7 @@
 }
 
 /*!
- * @brief Shows the view of a ChatViewController in the ChatView and focuses it's input field
+ * @brief Shows the view of a ChatViewController in the ChatView and focuses it's input fi®eld
  */
 -(void)activateChatViewController:(OSPChatViewController*)cvc {
 	NSView * targetView = [cvc view];

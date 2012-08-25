@@ -9,6 +9,5 @@
 }
 @property(nonatomic, retain) IBOutlet NSSearchField *searchField;
 
-- (IBAction)chat:(id)sender;
 - (IBAction)filterRoster:(id)sender;
 @end
