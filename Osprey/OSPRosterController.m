@@ -153,7 +153,7 @@
     hadItems = [[arrayController arrangedObjects] count] > 0;
     hadSelectedItem = [[arrayController selectedObjects] count] >0 ;
     
-    if (hadItems) {
+    if (hadItems && hadSelectedItem) {
         selectedItemBeforeFilter = [[arrayController selectedObjects] objectAtIndex:0];
     }
 
