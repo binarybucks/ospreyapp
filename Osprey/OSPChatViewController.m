@@ -2,7 +2,7 @@
 #import "NSColor+HexAdditions.h"
 #import "Types.h"
 #import "XMPPMessage+XEP_0224.h"
-
+#import "XMPPMessage+XEP_0085.h"
 typedef enum {
     localToRemote = 1, 
     remoteToLocal = 2,
@@ -46,6 +46,10 @@ typedef enum {
 	return [[NSApp delegate] managedObjectContext];
 }
 
+//- (void)dealloc {
+//    [inputField removeDelegate:self];
+//}
+
 #pragma mark - Intialization
 - (id)initWithRemoteJid:(XMPPJID*)rjid
 {
@@ -62,6 +66,14 @@ typedef enum {
         processingQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
         dispatch_suspend(processingQueue);
         processionQueueIsSuspended = YES;
+        typing = NO;
+        //[NSTimer scheduledTimerWithTimeInterval:2.0
+//    target:self
+//    selector:@selector(targetMethod:)
+//    userInfo:nil
+//    repeats:NO];
+
+
 
     }
     return self;
@@ -208,7 +220,10 @@ typedef enum {
 // Takes input from the user, sends it and enques for display
 - (IBAction) send:(id)sender {
     XMPPMessage *message = [[XMPPMessage alloc] initWithType:@"chat" to:remoteJid];
+    [message addActiveChatState];
+    
     NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
+
     [body setStringValue:[sender stringValue]];
     [message addChild:body];
     
@@ -247,6 +262,49 @@ typedef enum {
     
     [avatar setSize:NSMakeSize(38.0, 38.0)];
     return avatar;
+}
+
+
+/*!
+ * @brief Starts a timer for typing notification when the user starts entering text in the input field
+ */
+- (void)controlTextDidBeginEditing:(NSNotification *)notification{    
+    [self sendChatStateComposing];
+    inputTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(userStopedTyping) userInfo:nil repeats:NO];
+    typing = YES;
+}
+
+/*!
+ * @brief Refreshes timer when new text is entered,  resends typing notification ajd refreshes timer when user restarts typing
+ */
+- (void)controlTextDidChange:(NSNotification *)notification {
+    if (!typing) {
+        [self sendChatStateComposing];
+        typing = YES;
+    }
+    
+    [inputTimer invalidate];
+    inputTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(userStopedTyping) userInfo:nil repeats:NO];
+}
+
+/*!
+ * @brief Sends active state when timer expires. Sending paused state would make more sense, but most clients support just active and typing states 
+ */
+- (void) userStopedTyping {
+    [self sendChatStateActive];
+    typing = NO;
+}
+
+- (void)sendChatStateActive {
+    XMPPMessage *message = [[XMPPMessage alloc] initWithType:@"chat" to:remoteJid];
+    [message addActiveChatState];
+    [[self xmppStream] sendElement:message];
+}
+
+- (void)sendChatStateComposing {
+    XMPPMessage *message = [[XMPPMessage alloc] initWithType:@"chat" to:remoteJid];
+    [message addComposingChatState];
+    [[self xmppStream] sendElement:message];
 }
 
 @end

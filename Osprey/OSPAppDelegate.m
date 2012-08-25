@@ -60,7 +60,9 @@
         xmppTime =                  [[XMPPTime alloc] init];
 		turnSockets =               [[NSMutableArray alloc] init];
         xmppAttentionModule =       [[XMPPAttentionModule alloc] init];
-    
+        
+        xmppChatStateNotificationModule =[[XMPPChatStateNotificationModule alloc] init];
+        
         // Configure XMPP modules
         [xmppCapabilities setAutoFetchHashedCapabilities:YES];
         [xmppCapabilities setAutoFetchNonHashedCapabilities:NO];
@@ -76,6 +78,8 @@
         [xmppvCardTempModule   activate:xmppStream];
         [xmppvCardAvatarModule activate:xmppStream];
         [xmppAttentionModule activate:xmppStream];
+//        [xmppChatStateNotificationModule activate:xmppStream];
+        
         [xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:xmppStream]; // We start with a clean roster for now
         // Set up delegates        
         [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];

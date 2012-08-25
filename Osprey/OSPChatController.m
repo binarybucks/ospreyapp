@@ -3,7 +3,7 @@
 #import "XMPPPresence+NiceShow.h"
 #import "XMPPMessage+XEP_0224.h"
 #import "NSManagedObjectContext+EasyFetching.h"
-
+#import "XMPPMessage+XEP_0085.h"
 @interface OSPChatController (PrivateApi)
 - (void)_threadsaveXmppRosterDidChange:(NSNotification *)notification;
 - (OSPChatViewController*) chatViewControllerForJidStr:(NSString*)jidStr;
@@ -351,6 +351,12 @@
         [[openChatViewControllers valueForKey:chat.jidStr] displayChatMessage:message];
         [[self notificationController] notificationForIncommingMessage:message fromSingleChat:chat]; // Displays all neccessary notifications for that message
 	}
+    
+    if ([message isActiveChatState]) {
+        
+    } else if ([message isComposingChatState]) {
+        
+    }
 }
 
 - (void)xmppAttention:(XMPPAttentionModule *)sender didReceiveAttentionHeadlineMessage:(XMPPMessage *)message {

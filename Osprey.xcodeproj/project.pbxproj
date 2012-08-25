@@ -168,6 +168,7 @@
 		1191654E15A9B3400021C203 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191654D15A9B3400021C203 /* CoreLocation.framework */; };
 		1191655015A9B3630021C203 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191654F15A9B3630021C203 /* SystemConfiguration.framework */; };
 		1191655215A9B42D0021C203 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191655115A9B42D0021C203 /* Security.framework */; };
+		1197356815E9686D002C2BE7 /* XMPPChatStateNotificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1197356715E9686D002C2BE7 /* XMPPChatStateNotificationModule.m */; };
 		11D1CCC215C3DF3C00FEEF34 /* OSPChat.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */; };
 		11EA735815B230BF00EF1DC6 /* rosterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EA735715B230BF00EF1DC6 /* rosterView.xib */; };
 		11ED0C5C15ADE20600F0930E /* sparklePublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */; };
@@ -513,6 +514,8 @@
 		1191654D15A9B3400021C203 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1191654F15A9B3630021C203 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1191655115A9B42D0021C203 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1197356615E9686D002C2BE7 /* XMPPChatStateNotificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPChatStateNotificationModule.h; path = XMPPFrameworkCustom/XMPPChatStateNotificationModule.h; sourceTree = "<group>"; };
+		1197356715E9686D002C2BE7 /* XMPPChatStateNotificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPChatStateNotificationModule.m; path = XMPPFrameworkCustom/XMPPChatStateNotificationModule.m; sourceTree = "<group>"; };
 		11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = OSPChat.xcdatamodel; path = XMPPFrameworkCustom/OSPChat.xcdatamodel; sourceTree = "<group>"; };
 		11EA735715B230BF00EF1DC6 /* rosterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rosterView.xib; sourceTree = "<group>"; };
 		11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sparklePublicDSAKey.pem; sourceTree = "<group>"; };
@@ -554,6 +557,8 @@
 				113D866915B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m */,
 				110D47EF15B9D979003F0CC1 /* OSPRosterCoreDataStorage.h */,
 				110D47F015B9D979003F0CC1 /* OSPRosterCoreDataStorage.m */,
+				1197356615E9686D002C2BE7 /* XMPPChatStateNotificationModule.h */,
+				1197356715E9686D002C2BE7 /* XMPPChatStateNotificationModule.m */,
 			);
 			name = XMPPFrameworkCustom;
 			sourceTree = "<group>";
@@ -1638,6 +1643,7 @@
 				1186F1F215DFF973003BA0A6 /* DDXMLDocument.m in Sources */,
 				1186F1F315DFF973003BA0A6 /* DDXMLElement.m in Sources */,
 				1186F1F415DFF973003BA0A6 /* DDXMLNode.m in Sources */,
+				1197356815E9686D002C2BE7 /* XMPPChatStateNotificationModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

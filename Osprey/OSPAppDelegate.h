@@ -24,6 +24,7 @@
     XMPPvCardAvatarModule               *xmppvCardAvatarModule;
     XMPPvCardTempModule                 *xmppvCardTempModule;
     XMPPAttentionModule                 *xmppAttentionModule;
+    XMPPChatStateNotificationModule     *xmppChatStateNotificationModule;
 	NSMutableArray                      *turnSockets;
     
     OSPRosterController                 *rosterController;

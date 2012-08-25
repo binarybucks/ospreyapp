@@ -3,7 +3,7 @@
 #import <WebKit/WebResourceLoadDelegate.h>
 #import <WebKit/WebFrameLoadDelegate.h>
 
-@interface OSPChatViewController : NSViewController {
+@interface OSPChatViewController : NSViewController<NSControlTextEditingDelegate>   {
     IBOutlet NSTextField    *inputField;
     IBOutlet WebView        *webView;
     IBOutlet NSWindow       *window;
@@ -20,6 +20,9 @@
     
     dispatch_queue_t processingQueue;
     BOOL processionQueueIsSuspended;
+    NSTimer *inputTimer;
+    BOOL typing;
+
 }
 
 - (id)initWithRemoteJid:(XMPPJID*)rjid;

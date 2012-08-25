@@ -22,6 +22,8 @@
     bool initialAwakeFromNibCallFinished;
     int summedUnreadCount;
 }
+
+
 @property (strong, readonly) NSManagedObjectContext *openChatsMoc;
 
 - (OSPChatStorageObject*)openChatWithUser:(OSPUserStorageObject*)user andMakeActive:(BOOL)makeActive;

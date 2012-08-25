@@ -79,3 +79,5 @@
 #import "XMPPResourceCoreDataStorageObject.h"
 
 #import "XMPPAttentionModule.h"
+
+#import "XMPPChatStateNotificationModule.h"
