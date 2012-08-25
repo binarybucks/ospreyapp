@@ -4383,19 +4383,19 @@ A</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">title: objectValue.unreadCount</string>
+						<string key="label">title: objectValue.unreadCount.stringValue</string>
 						<reference key="source" ref="364044046"/>
 						<reference key="destination" ref="1043458972"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="364044046"/>
 							<reference key="NSDestination" ref="1043458972"/>
-							<string key="NSLabel">title: objectValue.unreadCount</string>
+							<string key="NSLabel">title: objectValue.unreadCount.stringValue</string>
 							<string key="NSBinding">title</string>
-							<string key="NSKeyPath">objectValue.unreadCount</string>
+							<string key="NSKeyPath">objectValue.unreadCount.stringValue</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">1448</int>
+					<int key="connectionID">1449</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -6598,7 +6598,7 @@ A</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1448</int>
+			<int key="maxID">1449</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
