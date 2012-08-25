@@ -7,7 +7,6 @@
     NSEntityDescription *entityDescription;
     NSFetchRequest *request;    
     NSPredicate *predicate;
-
 }
 
 @property (nonatomic, retain) NSString * streamBareJidStr;
@@ -17,6 +16,7 @@
 @property (nonatomic, retain) NSNumber *unreadCount;
 @property (nonatomic, retain) NSDecimalNumber * order;
 @property (readonly, weak) id userStorageObject;
+@property (nonatomic, retain) NSNumber *isTyping;
 
 - (void)refetchUserStorageObject;
 

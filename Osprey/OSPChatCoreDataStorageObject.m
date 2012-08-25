@@ -8,6 +8,7 @@
 @dynamic muted;
 @dynamic order;
 @dynamic unreadCount;
+@dynamic isTyping;
 
 @synthesize userStorageObject;
 

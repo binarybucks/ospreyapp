@@ -4,19 +4,6 @@
 #import "XMPPMessage+XEP_0224.h"
 #import "NSManagedObjectContext+EasyFetching.h"
 #import "XMPPMessage+XEP_0085.h"
-@interface OSPChatController (PrivateApi)
-- (void)_threadsaveXmppRosterDidChange:(NSNotification *)notification;
-- (OSPChatViewController*) chatViewControllerForJidStr:(NSString*)jidStr;
-- (void)_incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user;
-- (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user;
-- (void)_setBadgeLabelToCurrentSummedUnreadCount;
-- (void)chatStorageMainThreadManagedObjectContextDidMergeChanges;
-- (NSArray*) allChatStorageObjectsForXmppStream:(XMPPStream*)stream;
-- (OSPChatCoreDataStorageObject*) chatStorageObjectForXmppStream:(XMPPStream*)stream jid:(XMPPJID *)jid;
-- (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges;
-- (OSPChatCoreDataStorageObject*)persistOpenChatWithJid:(NSString*)jidStr;
--(void)makeChatViewControllerActive:(OSPChatViewController*)cvc ;
-@end
 
 /*!
  * @class OSPChatController
@@ -310,6 +297,12 @@
     
 }
 
+- (IBAction)closeSelectedChat:(id)sender{
+	if ([openChatsTable selectedRow] >= 0) {
+		[self closeChat:[self selectedChat]];
+	}
+}
+
 /*!
  * @brief Triggered when the user clicks on row other than the currently selected one to change chats (CAUTION: also when table is reloaded)
  */
@@ -321,25 +314,16 @@
 	}
 }
 
-#pragma mark - Message handling
-- (void) handlePresence:(XMPPPresence*)presence {
-	OSPChatViewController *cvc = [openChatViewControllers valueForKey:[[XMPPJID jidWithString:[presence attributeStringValueForName:@"from"]] bare]];
-	if (cvc == nil) {
-		return;
-	} else {
-		[cvc displayPresenceMessage:presence];
-	}
-}
 
-// Chat messages
+#pragma mark - Message handling
+/*
+ * Message handlich is already slightly meh, and has the potential to get even clumsy in the future. TODO: Refactor that mess
+ */
 - (void) handleChatMessage:(XMPPMessage*)message {
     OSPUserStorageObject *user = [[self xmppRosterStorage] userForJID:[message from] xmppStream:[self xmppStream] managedObjectContext:[self rosterManagedObjectContext]];
 	
     [self openChatWithUser:user andMakeActive:NO]; // lazyloads ChatViewController and 
 	[[openChatViewControllers valueForKey:user.jidStr] displayChatMessage:message];
-    
-//[self _incrementUnreadCounterForUserIfNeccessary:user];
-//    [[self notificationController] notificationForIncommingMessage:message fromUser:user];
 }
 
 
@@ -348,75 +332,21 @@
 	if ([message isChatMessageWithBody])
 	{
         OSPChatStorageObject *chat = [self openChatWithJidStr:[[message from] bare] andMakeActive:NO];
+        [chat setValue:[NSNumber numberWithBool:NO] forKey:@"isTyping"];
+        
         [[openChatViewControllers valueForKey:chat.jidStr] displayChatMessage:message];
         [[self notificationController] notificationForIncommingMessage:message fromSingleChat:chat]; // Displays all neccessary notifications for that message
-	}
+	} else {
+        if ([message isActiveChatState]) {
+            OSPChatStorageObject *chat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:message.from.bare];
+            [chat setValue:[NSNumber numberWithBool:NO] forKey:@"isTyping"];
+        } else if ([message isComposingChatState]) {
+            OSPChatStorageObject *chat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:message.from.bare];
+            [chat setValue:[NSNumber numberWithBool:YES] forKey:@"isTyping"];
+        }
     
-    if ([message isActiveChatState]) {
-        
-    } else if ([message isComposingChatState]) {
         
     }
-}
-
-- (void)xmppAttention:(XMPPAttentionModule *)sender didReceiveAttentionHeadlineMessage:(XMPPMessage *)message {
-	if (![message isAttentionMessageWithBody]) {
-		[message addChild:[NSXMLElement elementWithName:@"body" stringValue:@"wants your attention!"]];
-	}
-    
-    //    [self handleAttentionMessage:message];
-}
-
-- (void) incrementUnreadCounterForUserIfNeccessary:(OSPUserStorageObject*)user {
-    //    BOOL userIsSelected = openChatsArrayController.selectedObjects.lastObject == user;
-	BOOL userIsSelected = YES;
-    
-	BOOL windowsIsKeyWindow = [[[NSApp delegate] window] isKeyWindow];
-    
-	if (!userIsSelected || !windowsIsKeyWindow) {
-        //        [user setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKey:@"unreadMessages"];
-        //         [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:([[user unreadMessages] intValue] + 1)] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
-        //        NSError *error = nil;
-        //        if (![self.rosterManagedObjectContext save:&error]) {
-        //            DDLogError(@"ManagedObjectContext save failed");
-        //            DDLogError(@"%@",[error description]);
-        //        }
-		summedUnreadCount++;
-		[self _setBadgeLabelToCurrentSummedUnreadCount];
-	}
-}
-
-- (void)_clearUnreadCounterForUser:(OSPUserStorageObject*)user {
-	if (!user.unreadMessages) {
-		return;
-	}
-    
-	NSNumber *userUnreadCount = user.unreadMessages;
-	summedUnreadCount -= [userUnreadCount intValue];
-    //    [user setValue:[NSNumber numberWithInt:0] forKey:@"unreadMessages"];
-    //    [[self xmppRosterStorage] setValue:[NSNumber numberWithInt:0] forKeyPath:@"unreadMessages" forUserWithJid:user.jid onStream:[self xmppStream]];
-    
-	[self _setBadgeLabelToCurrentSummedUnreadCount];
-}
-
-- (void)_setBadgeLabelToCurrentSummedUnreadCount {
-	if (summedUnreadCount <= 0) {
-		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
-		summedUnreadCount = 0; // set to 0 in case we hit a negative number
-	} else {
-		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%d", summedUnreadCount]];
-	}
-}
-
-- (void)windowDidBecomeKey:(NSNotification *)notification {
-    //    [self _clearUnreadCounterForUser:openChatsArrayController.selectedObjects.lastObject];
-}
-
-# pragma mark - Navigation
-- (IBAction)closeSelectedChat:(id)sender{
-	if ([openChatsTable selectedRow] >= 0) {
-		[self closeChat:[self selectedChat]];
-	}
 }
 
 # pragma mark - Storage accessors
