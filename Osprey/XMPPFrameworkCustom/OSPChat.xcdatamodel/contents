@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12B19" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="OSPChatCoreDataStorageObject" representedClassName="OSPChatCoreDataStorageObject" syncable="YES">
+        <attribute name="isMuted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isTyping" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="jidStr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="muted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="streamBareJidStr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
-        <attribute name="unreadCount" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="unreadCount" optional="YES" transient="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="OSPChatCoreDataStorageObject" positionX="160" positionY="192" width="128" height="150"/>
