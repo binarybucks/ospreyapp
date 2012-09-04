@@ -2,21 +2,6 @@
 
 @implementation OSPAppDelegate
 
-@synthesize window = _window;
-
-@synthesize chatController;
-@synthesize xmppvCardAvatarModule;
-@synthesize xmppvCardTempModule;
-@synthesize xmppStream;
-@synthesize xmppReconnect;
-@synthesize xmppCapabilities;
-@synthesize xmppCapabilitiesStorage;
-@synthesize xmppPing;
-@synthesize xmppRoster;
-@synthesize xmppRosterStorage;
-@synthesize managedObjectContext;
-@synthesize xmppAttentionModule;
-
 - (id)init
 {
 	if ((self = [super init]))
@@ -44,47 +29,51 @@
 
         
         // Intialize controllers that are not loaded from NIB
-        rosterController =          [[OSPRosterController alloc] initWithNibName:@"rosterView" bundle:nil];
-        popoverController =         [[INPopoverController alloc] initWithContentViewController:rosterController];
+        _rosterController =          [[OSPRosterController alloc] initWithNibName:@"rosterView" bundle:nil];
+        popoverController =         [[INPopoverController alloc] initWithContentViewController:_rosterController];
 
-		// Initialize XMPP modules
-		xmppStream =                [[XMPPStream alloc] init];
-        xmppReconnect =             [[XMPPReconnect alloc] init];
-        xmppRosterStorage =         [[OSPRosterStorage alloc] initWithDatabaseFilename:@"XMPPRoster.sqlite"];
-        xmppRoster =                [[XMPPRoster alloc] initWithRosterStorage:xmppRosterStorage];
-        xmppCapabilitiesStorage =   [XMPPCapabilitiesCoreDataStorage sharedInstance];
-        xmppCapabilities =          [[XMPPCapabilities alloc] initWithCapabilitiesStorage:xmppCapabilitiesStorage];
-        xmppvCardTempModule =       [[XMPPvCardTempModule alloc] initWithvCardStorage:[XMPPvCardCoreDataStorage sharedInstance]];
-        xmppvCardAvatarModule =     [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:xmppvCardTempModule];
-        xmppPing =                  [[XMPPPing alloc] init];
-        xmppTime =                  [[XMPPTime alloc] init];
-		turnSockets =               [[NSMutableArray alloc] init];
-        xmppAttentionModule =       [[XMPPAttentionModule alloc] init];
+		// Initialize XMPP modules and datastores
+		_xmppStream =                [[XMPPStream alloc] init];
+        _xmppReconnectModule =             [[XMPPReconnect alloc] init];
+        _xmppRosterStorage =         [[OSPRosterStorage alloc] initWithDatabaseFilename:@"OSPRoster.sqlite"];
+        _xmppRosterModule =                [[XMPPRoster alloc] initWithRosterStorage:_xmppRosterStorage];
+        _xmppCapabilitiesStorage =   [[XMPPCapabilitiesCoreDataStorage alloc] initWithDatabaseFilename:@"OSPCapabilities.sqlite"];
+        _xmppCapabilitiesModule =          [[XMPPCapabilities alloc] initWithCapabilitiesStorage:_xmppCapabilitiesStorage];
+        _xmppvCardTempModule =       [[XMPPvCardTempModule alloc] initWithvCardStorage:[[XMPPvCardCoreDataStorage alloc] initWithDatabaseFilename:@"OSPVCard.sqlite"]];
         
-        xmppChatStateNotificationModule =[[XMPPChatStateNotificationModule alloc] init];
+        
+        _xmppvCardAvatarModule =     [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:_xmppvCardTempModule];
+        _xmppPingModule =                  [[XMPPPing alloc] init];
+        _xmppTimeModule =                  [[XMPPTime alloc] init];
+		turnSockets =               [[NSMutableArray alloc] init];
+        _xmppAttentionModule =       [[XMPPAttentionModule alloc] init];
+        _xmppMessageArchivingCoreDataStorage = [[XMPPMessageArchivingCoreDataStorage alloc] init];
+        _xmppMessageArchivingModule = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:_xmppMessageArchivingCoreDataStorage];
         
         // Configure XMPP modules
-        [xmppCapabilities setAutoFetchHashedCapabilities:YES];
-        [xmppCapabilities setAutoFetchNonHashedCapabilities:NO];
-        [xmppRoster setAutoFetchRoster:YES];
-        [xmppRoster setAutoAcceptKnownPresenceSubscriptionRequests:YES];        
+        [_xmppCapabilitiesModule setAutoFetchHashedCapabilities:YES];
+        [_xmppCapabilitiesModule setAutoFetchNonHashedCapabilities:NO];
+        [_xmppRosterModule setAutoFetchRoster:YES];
+        [_xmppRosterModule setAutoAcceptKnownPresenceSubscriptionRequests:YES];
         
         // Activate XMPP modules
-        [xmppReconnect activate:xmppStream];
-		[xmppRoster activate:xmppStream];
-		[xmppCapabilities activate:xmppStream];
-		[xmppPing activate:xmppStream];
-		[xmppTime activate:xmppStream];
-        [xmppvCardTempModule   activate:xmppStream];
-        [xmppvCardAvatarModule activate:xmppStream];
-        [xmppAttentionModule activate:xmppStream];
-//        [xmppChatStateNotificationModule activate:xmppStream];
+        [_xmppReconnectModule activate:_xmppStream];
+		[_xmppRosterModule activate:_xmppStream];
+		[_xmppCapabilitiesModule activate:_xmppStream];
+		[_xmppPingModule activate:_xmppStream];
+		[_xmppTimeModule activate:_xmppStream];
+        [_xmppvCardTempModule   activate:_xmppStream];
+        [_xmppvCardAvatarModule activate:_xmppStream];
+        [_xmppAttentionModule activate:_xmppStream];
+        // [xmppChatStateNotificationModule activate:xmppStream];
         
-        [xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:xmppStream]; // We start with a clean roster for now
-        // Set up delegates        
-        [xmppvCardAvatarModule addDelegate:xmppRoster delegateQueue:xmppRoster.moduleQueue];
+        // We start with a clean roster for now
+        [_xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:_xmppStream]; 
+        _managedObjectContext = [_xmppRosterStorage mainThreadManagedObjectContext];
+
+        // Set up delegates
+        [_xmppvCardAvatarModule addDelegate:_xmppRosterModule delegateQueue:_xmppRosterModule.moduleQueue];
         
-        managedObjectContext = [xmppRosterStorage mainThreadManagedObjectContext];
 
 
     }
@@ -134,7 +123,7 @@
 }
 
 - (void)popoverDidShow:(INPopoverController*)popover {
-    [rosterController.searchField becomeFirstResponder];
+    [_rosterController.searchField becomeFirstResponder];
 }
 
 @end

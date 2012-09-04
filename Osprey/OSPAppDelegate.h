@@ -12,47 +12,41 @@
 
 
 @interface OSPAppDelegate : NSObject <NSApplicationDelegate, NSSplitViewDelegate, INPopoverControllerDelegate> {
-    XMPPStream                          *xmppStream;
-	XMPPReconnect                       *xmppReconnect;
-    XMPPRoster                          *xmppRoster;
-    OSPRosterStorage                    *xmppRosterStorage;
-    NSManagedObjectContext              *managedObjectContext;
-    XMPPPing                            *xmppPing;
-	XMPPTime                            *xmppTime;
-	XMPPCapabilities                    *xmppCapabilities;
-	XMPPCapabilitiesCoreDataStorage     *xmppCapabilitiesStorage;
-    XMPPvCardAvatarModule               *xmppvCardAvatarModule;
-    XMPPvCardTempModule                 *xmppvCardTempModule;
-    XMPPAttentionModule                 *xmppAttentionModule;
-    XMPPChatStateNotificationModule     *xmppChatStateNotificationModule;
 	NSMutableArray                      *turnSockets;
-    
-    OSPRosterController                 *rosterController;
-    
     INPopoverController                 *popoverController;
+    
     IBOutlet NSPopover                  *rosterPopover;
     IBOutlet NSButton                   *rosterPopoverButton;
     IBOutlet NSView                     *toolbarRightView;
     IBOutlet NSSplitView                *splitView;
 }
 
+// Modules
+@property (nonatomic, readonly) XMPPStream                          *xmppStream;
 @property (nonatomic, readonly) XMPPvCardAvatarModule               *xmppvCardAvatarModule;
 @property (nonatomic, readonly) XMPPvCardTempModule                 *xmppvCardTempModule;
-@property (nonatomic, readonly) XMPPStream                          *xmppStream;
-@property (nonatomic, readonly) XMPPReconnect                       *xmppReconnect;
-@property (nonatomic, readonly) XMPPCapabilities                    *xmppCapabilities;
-@property (nonatomic, readonly) XMPPCapabilitiesCoreDataStorage     *xmppCapabilitiesStorage;
-@property (nonatomic, readonly) XMPPPing                            *xmppPing;
-@property (nonatomic, readonly) XMPPRoster                          *xmppRoster;
+@property (nonatomic, readonly) XMPPReconnect                       *xmppReconnectModule;
+@property (nonatomic, readonly) XMPPCapabilities                    *xmppCapabilitiesModule;
+@property (nonatomic, readonly) XMPPPing                            *xmppPingModule;
+@property (nonatomic, readonly) XMPPRoster                          *xmppRosterModule;
 @property (nonatomic, readonly) XMPPAttentionModule                 *xmppAttentionModule;
-@property (nonatomic, readonly) XMPPRosterCoreDataStorage           *xmppRosterStorage;
-@property (nonatomic, readonly) NSManagedObjectContext              *managedObjectContext;
+@property (nonatomic, readonly) XMPPMessageArchiving                *xmppMessageArchivingModule;
+@property (nonatomic, readonly) XMPPTime                            *xmppTimeModule;
+@property (nonatomic, readonly) XMPPPing                            *xmppPing;
 
-@property (assign)  IBOutlet INAppStoreWindow           *window;
-@property (weak)    IBOutlet OSPChatController          *chatController;
-@property (weak)    IBOutlet OSPConnectionController        *connectionController;
-@property (weak)    IBOutlet OSPNotificationController *notificationController;
-@property (weak)    IBOutlet OSPPreferencesController *preferencesController;
+// Datastores
+@property (nonatomic, readonly) OSPRosterStorage                    *xmppRosterStorage;
+@property (nonatomic, readonly) XMPPCapabilitiesCoreDataStorage     *xmppCapabilitiesStorage;
+@property (nonatomic, readonly) NSManagedObjectContext              *managedObjectContext;
+@property (nonatomic, readonly) XMPPMessageArchivingCoreDataStorage              *xmppMessageArchivingCoreDataStorage;
+
+// Controller
+@property (assign)  IBOutlet INAppStoreWindow                       *window;
+@property (weak)    IBOutlet OSPChatController                      *chatController;
+@property (weak)    IBOutlet OSPConnectionController                *connectionController;
+@property (weak)    IBOutlet OSPNotificationController              *notificationController;
+@property (weak)    IBOutlet OSPPreferencesController               *preferencesController;
+@property (strong)  IBOutlet OSPRosterController                  *rosterController;
 
 - (void)closeRosterPopover;
 - (IBAction)openRosterPopover:(id)sender;

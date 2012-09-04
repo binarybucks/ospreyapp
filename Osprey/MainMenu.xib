@@ -3250,22 +3250,6 @@ A</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">window</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="972006081"/>
-					</object>
-					<int key="connectionID">532</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">statusController</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="571269916"/>
-					</object>
-					<int key="connectionID">545</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">splitView</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="148370925"/>
@@ -3314,19 +3298,19 @@ A</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">notificationController</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="273086878"/>
-					</object>
-					<int key="connectionID">1444</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">connectionController</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="571269916"/>
 					</object>
-					<int key="connectionID">1445</int>
+					<int key="connectionID">1461</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">notificationController</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="273086878"/>
+					</object>
+					<int key="connectionID">1462</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3334,7 +3318,15 @@ A</bytes>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="97721039"/>
 					</object>
-					<int key="connectionID">1446</int>
+					<int key="connectionID">1463</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">window</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="972006081"/>
+					</object>
+					<int key="connectionID">1464</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -6687,7 +6679,7 @@ A</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1460</int>
+			<int key="maxID">1464</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6726,6 +6718,7 @@ A</bytes>
 						<string key="connectionController">OSPConnectionController</string>
 						<string key="notificationController">OSPNotificationController</string>
 						<string key="preferencesController">OSPPreferencesController</string>
+						<string key="rosterController">OSPRosterController</string>
 						<string key="rosterPopover">NSPopover</string>
 						<string key="rosterPopoverButton">NSButton</string>
 						<string key="splitView">NSSplitView</string>
@@ -6748,6 +6741,10 @@ A</bytes>
 						<object class="IBToOneOutletInfo" key="preferencesController">
 							<string key="name">preferencesController</string>
 							<string key="candidateClassName">OSPPreferencesController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rosterController">
+							<string key="name">rosterController</string>
+							<string key="candidateClassName">OSPRosterController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rosterPopover">
 							<string key="name">rosterPopover</string>
@@ -6982,6 +6979,49 @@ A</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/OSPPreferencesController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">OSPRosterController</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">filterRoster:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">filterRoster:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">filterRoster:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="arrayController">NSArrayController</string>
+						<string key="rosterTable">NSTableView</string>
+						<string key="scrollView">NSScrollView</string>
+						<string key="searchField">NSSearchField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="arrayController">
+							<string key="name">arrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rosterTable">
+							<string key="name">rosterTable</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">NSScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchField">
+							<string key="name">searchField</string>
+							<string key="candidateClassName">NSSearchField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OSPRosterController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

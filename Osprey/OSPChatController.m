@@ -23,7 +23,7 @@
 
 - (XMPPRoster *)xmppRoster
 {
-	return [[NSApp delegate] xmppRoster];
+	return [[NSApp delegate] xmppRosterModule];
 }
 
 - (OSPRosterStorage *)xmppRosterStorage

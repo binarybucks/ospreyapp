@@ -81,3 +81,6 @@
 #import "XMPPAttentionModule.h"
 
 #import "XMPPChatStateNotificationModule.h"
+
+#import "XMPPMessageArchiving.h"
+#import "XMPPMessageArchivingCoreDataStorage.h"
