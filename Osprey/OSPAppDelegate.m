@@ -47,7 +47,7 @@
         _xmppTimeModule =                  [[XMPPTime alloc] init];
 		turnSockets =               [[NSMutableArray alloc] init];
         _xmppAttentionModule =       [[XMPPAttentionModule alloc] init];
-        _xmppMessageArchivingCoreDataStorage = [[XMPPMessageArchivingCoreDataStorage alloc] init];
+        _xmppMessageArchivingCoreDataStorage = [[XMPPMessageArchivingCoreDataStorage alloc] initWithDatabaseFilename:@"OSPMessages.sqlite"];
         _xmppMessageArchivingModule = [[XMPPMessageArchiving alloc] initWithMessageArchivingStorage:_xmppMessageArchivingCoreDataStorage];
         
         // Configure XMPP modules
@@ -55,6 +55,7 @@
         [_xmppCapabilitiesModule setAutoFetchNonHashedCapabilities:NO];
         [_xmppRosterModule setAutoFetchRoster:YES];
         [_xmppRosterModule setAutoAcceptKnownPresenceSubscriptionRequests:YES];
+        [_xmppMessageArchivingModule setClientSideMessageArchivingOnly:YES];
         
         // Activate XMPP modules
         [_xmppReconnectModule activate:_xmppStream];
@@ -65,12 +66,14 @@
         [_xmppvCardTempModule   activate:_xmppStream];
         [_xmppvCardAvatarModule activate:_xmppStream];
         [_xmppAttentionModule activate:_xmppStream];
+        [_xmppMessageArchivingModule activate:_xmppStream];
         // [xmppChatStateNotificationModule activate:xmppStream];
         
         // We start with a clean roster for now
         [_xmppRosterStorage clearAllUsersAndResourcesForXMPPStream:_xmppStream]; 
         _managedObjectContext = [_xmppRosterStorage mainThreadManagedObjectContext];
-
+        _messagesStoreMainThreadManagedObjectContext = [_xmppMessageArchivingCoreDataStorage mainThreadManagedObjectContext];
+        
         // Set up delegates
         [_xmppvCardAvatarModule addDelegate:_xmppRosterModule delegateQueue:_xmppRosterModule.moduleQueue];
         

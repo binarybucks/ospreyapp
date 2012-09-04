@@ -37,8 +37,9 @@
 // Datastores
 @property (nonatomic, readonly) OSPRosterStorage                    *xmppRosterStorage;
 @property (nonatomic, readonly) XMPPCapabilitiesCoreDataStorage     *xmppCapabilitiesStorage;
+@property (nonatomic, readonly) XMPPMessageArchivingCoreDataStorage *xmppMessageArchivingCoreDataStorage;
 @property (nonatomic, readonly) NSManagedObjectContext              *managedObjectContext;
-@property (nonatomic, readonly) XMPPMessageArchivingCoreDataStorage              *xmppMessageArchivingCoreDataStorage;
+@property (nonatomic, readonly) NSManagedObjectContext              *messagesStoreMainThreadManagedObjectContext;
 
 // Controller
 @property (assign)  IBOutlet INAppStoreWindow                       *window;
@@ -46,7 +47,7 @@
 @property (weak)    IBOutlet OSPConnectionController                *connectionController;
 @property (weak)    IBOutlet OSPNotificationController              *notificationController;
 @property (weak)    IBOutlet OSPPreferencesController               *preferencesController;
-@property (strong)  IBOutlet OSPRosterController                  *rosterController;
+@property (strong)  IBOutlet OSPRosterController                    *rosterController;
 
 - (void)closeRosterPopover;
 - (IBAction)openRosterPopover:(id)sender;

@@ -7,6 +7,8 @@
     IBOutlet NSTextField    *inputField;
     IBOutlet WebView        *webView;
     IBOutlet NSWindow       *window;
+    IBOutlet NSArrayController *arrayController;
+    
     
     XMPPJID *localJid;
     XMPPJID *remoteJid;

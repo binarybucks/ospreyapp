@@ -51,6 +51,17 @@ typedef enum {
 //}
 
 #pragma mark - Intialization
+- (void) setArrayControllerFetchPredicate {
+    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"bareJidStr == %@ && streamBareJidStr == %@", remoteJid.bare, [[[[NSApp delegate] xmppStream] myJID] bare]];
+    [arrayController setFetchPredicate:fetchPredicate];
+}
+
+
+- (void) setArrayControllerFilterPredicate {
+
+}
+
+
 - (id)initWithRemoteJid:(XMPPJID*)rjid
 {
     self = [super initWithNibName:@"chatView" bundle:nil];
@@ -89,6 +100,9 @@ typedef enum {
 
 - (void) awakeFromNib {
     [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
+    [self setArrayControllerFetchPredicate];
+    [self setArrayControllerFilterPredicate];
+
 }
 
 
