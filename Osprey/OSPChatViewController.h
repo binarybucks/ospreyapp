@@ -5,23 +5,23 @@
 
 @interface OSPChatViewController : NSViewController<NSControlTextEditingDelegate>   {
     IBOutlet NSTextField    *inputField;
-    IBOutlet WebView        *webView;
+//    IBOutlet WebView        *webView;
     IBOutlet NSWindow       *window;
     IBOutlet NSArrayController *arrayController;
-    
+    IBOutlet NSScrollView *scrollView;
     
     XMPPJID *localJid;
     XMPPJID *remoteJid;
     XMPPJID *lastMessageFromJid;
     DOMHTMLElement *streakElement;
  
-    NSMutableArray *messageQueue;
+//    NSMutableArray *messageQueue;
     
-    BOOL isLoadViewFinished;
-    BOOL isWebViewReady;
+//    BOOL isLoadViewFinished;
+//    BOOL isWebViewReady;
     
-    dispatch_queue_t processingQueue;
-    BOOL processionQueueIsSuspended;
+//    dispatch_queue_t processingQueue;
+//    BOOL processionQueueIsSuspended;
     NSTimer *inputTimer;
     BOOL typing;
 
@@ -32,9 +32,9 @@
 - (IBAction) send:(id)sender;
 
 
-- (void) displayChatMessage:(XMPPMessage*)message;
-- (void) displayAttentionMessage:(XMPPMessage*)message;
-- (void) displayPresenceMessage:(XMPPPresence*)message;
-- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector;
+//- (void) displayChatMessage:(XMPPMessage*)message;
+//- (void) displayAttentionMessage:(XMPPMessage*)message;
+//- (void) displayPresenceMessage:(XMPPPresence*)message;
+//- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector;
 
 @end

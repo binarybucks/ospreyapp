@@ -52,12 +52,13 @@ typedef enum {
 
 #pragma mark - Intialization
 - (void) setArrayControllerFetchPredicate {
-    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"bareJidStr == %@ && streamBareJidStr == %@", remoteJid.bare, [[[[NSApp delegate] xmppStream] myJID] bare]];
+    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"(bareJidStr == %@) AND (streamBareJidStr == %@)", remoteJid.bare, [[[[NSApp delegate] xmppStream] myJID] bare]];
     [arrayController setFetchPredicate:fetchPredicate];
 }
 
 
 - (void) setArrayControllerFilterPredicate {
+    
 
 }
 
@@ -66,24 +67,20 @@ typedef enum {
 {
     self = [super initWithNibName:@"chatView" bundle:nil];
     if (self) {
-        isLoadViewFinished = NO;
-        isWebViewReady = NO;
+//        isLoadViewFinished = NO;
+//        isWebViewReady = NO;
         localJid = [[self xmppStream] myJID];
         remoteJid = rjid;
-        messageQueue = [[NSMutableArray alloc] init];
+//        messageQueue = [[NSMutableArray alloc] init];
         
         
         
-        processingQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
-        dispatch_suspend(processingQueue);
-        processionQueueIsSuspended = YES;
+//        processingQueue = dispatch_queue_create(nil, DISPATCH_QUEUE_SERIAL);
+//        dispatch_suspend(processingQueue);
+//        processionQueueIsSuspended = YES;
         typing = NO;
-        //[NSTimer scheduledTimerWithTimeInterval:2.0
-//    target:self
-//    selector:@selector(targetMethod:)
-//    userInfo:nil
-//    repeats:NO];
 
+        
 
 
     }
@@ -99,10 +96,10 @@ typedef enum {
 }
 
 - (void) awakeFromNib {
-    [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
     [self setArrayControllerFetchPredicate];
     [self setArrayControllerFilterPredicate];
 
+    [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
 }
 
 
@@ -112,28 +109,43 @@ typedef enum {
 }
 
 - (void)cstmviewDidLoad {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"chat" withExtension:@"html"];
-	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"chat" withExtension:@"html"];
+//	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
-- (void)loadView {
-    if (!isLoadViewFinished) {
-        [self cstmviewWillLoad];
-        [super loadView];
-        [self cstmviewDidLoad];
-        isLoadViewFinished = YES;
-    }
-}
+//- (void)loadView {
+//    if (!isLoadViewFinished) {
+//        [self cstmviewWillLoad];
+//        [super loadView];
+//        [self cstmviewDidLoad];
+//        isLoadViewFinished = YES;
+//    }
+//}
 
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
-    isWebViewReady = YES;
-    // There is no way to know if a queue is suspended and suspending a already suspended queue crashes 
-    if (processionQueueIsSuspended) {
-        dispatch_resume(processingQueue);
-        processionQueueIsSuspended = NO;
-    }
+//    isWebViewReady = YES;
+//    // There is no way to know if a queue is suspended and suspending a already suspended queue crashes 
+//    if (processionQueueIsSuspended) {
+//        dispatch_resume(processingQueue);
+//        processionQueueIsSuspended = NO;
+//    }
 }
 
+- (void)scrollToBottom:sender;
+{
+    NSPoint newScrollOrigin;
+    
+    // assume that the scrollview is an existing variable
+    if ([[scrollView documentView] isFlipped]) {
+        newScrollOrigin=NSMakePoint(0.0,NSMaxY([[scrollView documentView] frame])
+                                    -NSHeight([[scrollView contentView] bounds]));
+    } else {
+        newScrollOrigin=NSMakePoint(0.0,0.0);
+    }
+    
+    [[scrollView documentView] scrollPoint:newScrollOrigin];
+    
+}
 
 
 
@@ -152,85 +164,87 @@ typedef enum {
 # pragma mark - Message display 
 
 // Convenience accessors to processing queue
-- (void) displayChatMessage:(XMPPMessage*)message {
-    [self dispatch:message toSelector:@selector(_displayChatMessage:)];
-
-}
-- (void) displayAttentionMessage:(XMPPMessage*)message {
-    [self dispatch:message toSelector:@selector(_displayAttentionMessage:)];
-
-}
-- (void) displayPresenceMessage:(XMPPPresence*)message {
-    [self dispatch:message toSelector:@selector(_displayPresenceMessage:)];
-     
-}
-
-// Processing queue scheduler
-- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector {
-    dispatch_block_t block = ^{ @autoreleasepool {
-        //    if ([self respondsToSelector:selector]) {
-            dispatch_async(dispatch_get_main_queue(), ^{  
-                [self tryToPerform:selector with:object];
-            });
-        }
-    };
-	
-	if (isWebViewReady == YES) {  block(); } 
-    else { self.loadView; dispatch_async(processingQueue, block); }    
-}
-
-// Private methods for actual display. 
+//- (void) displayChatMessage:(XMPPMessage*)message {
+//    [self dispatch:message toSelector:@selector(_displayChatMessage:)];
+//
+//}
+//- (void) displayAttentionMessage:(XMPPMessage*)message {
+//    [self dispatch:message toSelector:@selector(_displayAttentionMessage:)];
+//
+//}
+//- (void) displayPresenceMessage:(XMPPPresence*)message {
+//    [self dispatch:message toSelector:@selector(_displayPresenceMessage:)];
+//     
+//}
+//
+//// Processing queue scheduler
+//- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector {
+//    dispatch_block_t block = ^{ @autoreleasepool {
+//        //    if ([self respondsToSelector:selector]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{  
+//                [self tryToPerform:selector with:object];
+//            });
+//        }
+//    };
+//	
+//	if (isWebViewReady == YES) {  block(); } 
+//    else { self.loadView; dispatch_async(processingQueue, block); }    
+//}
+//
+//// Private methods for actual display. 
 // Never call from outside as corresponding webView might not be ready.
 - (void) _displayChatMessage:(XMPPMessage*)message {
-    XMPPJID *fromJID = [[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]] bareJID]; 
-    DOMHTMLElement *messageElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
-
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm:ss"];
-    
-    DOMHTMLElement *datetime = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"span"];
-    [datetime setAttribute:@"class" value:@"datetime"];
-    [datetime setInnerText:[formatter stringFromDate:[NSDate date]]];
-    
-    // Check if we have an inbound or outbound message
-    NSString *inOut = [fromJID isEqualToJID:remoteJid] ? @"in" : @"out";
-    
-    
-    // Check if message is in a streak
-    if ((![fromJID isEqualToJID:lastMessageFromJid]) || (streakElement == nil)) {
-        streakElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
-        [streakElement setAttribute:@"class" value:[NSString stringWithFormat:@"streak %@", inOut]]; 
-        [[[[webView mainFrame] DOMDocument] getElementById:@"chat"] appendChild:streakElement];
-    }
-    
-    [messageElement setAttribute:@"class" value:[NSString stringWithFormat:@"message %@", inOut]];    
-    [messageElement setInnerHTML:[NSString stringWithFormat:@"%@", [[message elementForName:@"body"] stringValue]]];
-    [messageElement appendChild:datetime];
-    lastMessageFromJid = fromJID;
-    
-    [streakElement appendChild:messageElement];
-    [messageElement scrollIntoView:YES];
-}
-
-- (void) _displayAttentionMessage:(XMPPMessage*)message {
-    DOMHTMLElement *messageElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
-
-    streakElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
-    [streakElement setAttribute:@"class" value:@"streak attention"]; 
-    [[[[webView mainFrame] DOMDocument] getElementById:@"chat"] appendChild:streakElement];
-    
-    [messageElement setAttribute:@"class" value:[NSString stringWithFormat:@"message"]];    
-    [messageElement setInnerHTML:[NSString stringWithFormat:@"Your contact %@", [[message elementForName:@"body"] stringValue]]];
-
-    lastMessageFromJid = nil;
-
-    [streakElement appendChild:messageElement];
-    [messageElement scrollIntoView:YES];
-}
-
-- (void) _displayPresenceMessage:(XMPPPresence*)presence {
+//    XMPPJID *fromJID = [[XMPPJID jidWithString:[message attributeStringValueForName:@"from"]] bareJID]; 
+//    DOMHTMLElement *messageElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
+//
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"HH:mm:ss"];
+//    
+//    DOMHTMLElement *datetime = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"span"];
+//    [datetime setAttribute:@"class" value:@"datetime"];
+//    [datetime setInnerText:[formatter stringFromDate:[NSDate date]]];
+//    
+//    // Check if we have an inbound or outbound message
+//    NSString *inOut = [fromJID isEqualToJID:remoteJid] ? @"in" : @"out";
+//    
+//    
+//    // Check if message is in a streak
+//    if ((![fromJID isEqualToJID:lastMessageFromJid]) || (streakElement == nil)) {
+//        streakElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
+//        [streakElement setAttribute:@"class" value:[NSString stringWithFormat:@"streak %@", inOut]]; 
+//        [[[[webView mainFrame] DOMDocument] getElementById:@"chat"] appendChild:streakElement];
+//    }
+//    
+//    [messageElement setAttribute:@"class" value:[NSString stringWithFormat:@"message %@", inOut]];    
+//    [messageElement setInnerHTML:[NSString stringWithFormat:@"%@", [[message elementForName:@"body"] stringValue]]];
+//    [messageElement appendChild:datetime];
+//    lastMessageFromJid = fromJID;
+//    
+//    [streakElement appendChild:messageElement];
+//    [messageElement scrollIntoView:YES];
     
 }
+
+//- (void) _displayAttentionMessage:(XMPPMessage*)message {
+//    DOMHTMLElement *messageElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
+//
+//    streakElement = (DOMHTMLElement*)[[[webView mainFrame] DOMDocument] createElement:@"div"];
+//    [streakElement setAttribute:@"class" value:@"streak attention"]; 
+//    [[[[webView mainFrame] DOMDocument] getElementById:@"chat"] appendChild:streakElement];
+//    
+//    [messageElement setAttribute:@"class" value:[NSString stringWithFormat:@"message"]];    
+//    [messageElement setInnerHTML:[NSString stringWithFormat:@"Your contact %@", [[message elementForName:@"body"] stringValue]]];
+//
+//    lastMessageFromJid = nil;
+//
+//    [streakElement appendChild:messageElement];
+//    [messageElement scrollIntoView:YES];
+//}
+//
+//- (void) _displayPresenceMessage:(XMPPPresence*)presence {
+//    
+//}
+
 // Takes input from the user, sends it and enques for display
 - (IBAction) send:(id)sender {
     XMPPMessage *message = [[XMPPMessage alloc] initWithType:@"chat" to:remoteJid];
@@ -244,7 +258,7 @@ typedef enum {
     [[self xmppStream] sendElement:message];
     [message addAttributeWithName:@"from" stringValue:[localJid full]];
     
-    [self displayChatMessage:message];
+//    [self displayChatMessage:message];
     
     [sender setStringValue:@""];
 }
