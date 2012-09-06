@@ -331,11 +331,11 @@
 {
 	if ([message isChatMessageWithBody])
 	{
-//        OSPChatStorageObject *chat = [self openChatWithJidStr:[[message from] bare] andMakeActive:NO];
-//        [chat setValue:[NSNumber numberWithBool:NO] forKey:@"isTyping"];
-//        
+        OSPChatStorageObject *chat = [self openChatWithJidStr:[[message from] bare] andMakeActive:NO];
+        [chat setValue:[NSNumber numberWithBool:NO] forKey:@"isTyping"];
+        
 //        [[openChatViewControllers valueForKey:chat.jidStr] displayChatMessage:message];
-//        [[self notificationController] notificationForIncommingMessage:message fromSingleChat:chat]; // Displays all neccessary notifications for that message
+        [[self notificationController] notificationForIncommingMessage:message fromSingleChat:chat]; // Displays all neccessary notifications for that message
 	} else {
         if ([message isActiveChatState]) {
             OSPChatStorageObject *chat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:message.from.bare];
