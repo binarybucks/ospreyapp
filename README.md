@@ -8,7 +8,7 @@ Head over to [Ospreyapp.org](http://ospreyapp.org) to get the latest version and
 
 ![Osprey](http://ospreyapp.org/images/osprey_0.1.0_screen.png)
 
-Please note, that Osprey is yet in a very early stage. Thus, Expect things to break and don't hesitate to report errors you encounter to our [issue tracker](https://github.com/binarybucks/ospreyapp/issues). 
+Please note, that Osprey is yet in a very early stage. Thus, expect things to break and don't hesitate to report errors you encounter to our [issue tracker](https://github.com/binarybucks/ospreyapp/issues). 
 
 
 ### Contribute
