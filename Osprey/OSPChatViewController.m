@@ -100,6 +100,7 @@ typedef enum {
     [self setArrayControllerFilterPredicate];
 
     [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
+    
 }
 
 
@@ -302,6 +303,32 @@ typedef enum {
     typing = YES;
 }
 
+- (NSView *)tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row {
+    
+    NSTableCellView *view = nil;
+    XMPPMessageArchiving_Message_CoreDataObject *item = [[arrayController arrangedObjects] objectAtIndex:row];
+    
+    if ([item isOutgoing]) {
+        view = [tableView makeViewWithIdentifier:@"outgoingMessageCellView" owner:self];
+    } else {
+        view = [tableView makeViewWithIdentifier:@"incommingMessageCellView" owner:self];
+    }
+    return view;
+}
+- (void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
+//
+//    NSInteger numberOfRows = [tableView numberOfRows];
+////    
+////    if (numberOfRows > 0)
+////        [tableView scrollRowToVisible:numberOfRows - 1];
+//    NSLog(@"row: %lu, %lu numberOfRows ", row, numberOfRows);
+//    if (row == numberOfRows-1) {
+//        [tableView scrollRowToVisible:numberOfRows - 1];
+//    }
+}
+
 /*!
  * @brief Refreshes timer when new text is entered,  resends typing notification ajd refreshes timer when user restarts typing
  */
@@ -334,5 +361,8 @@ typedef enum {
     [message addComposingChatState];
     [[self xmppStream] sendElement:message];
 }
+
+
+
 
 @end

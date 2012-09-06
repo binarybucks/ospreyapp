@@ -3,7 +3,7 @@
 #import <WebKit/WebResourceLoadDelegate.h>
 #import <WebKit/WebFrameLoadDelegate.h>
 
-@interface OSPChatViewController : NSViewController<NSControlTextEditingDelegate>   {
+@interface OSPChatViewController : NSViewController<NSControlTextEditingDelegate, NSTableViewDelegate>   {
     IBOutlet NSTextField    *inputField;
 //    IBOutlet WebView        *webView;
     IBOutlet NSWindow       *window;
