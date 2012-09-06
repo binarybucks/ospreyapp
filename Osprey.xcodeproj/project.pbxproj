@@ -171,6 +171,7 @@
 		1197356815E9686D002C2BE7 /* XMPPChatStateNotificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1197356715E9686D002C2BE7 /* XMPPChatStateNotificationModule.m */; };
 		11D1CCC215C3DF3C00FEEF34 /* OSPChat.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */; };
 		11DCB3AA15F790F3001C8400 /* OSPChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3A915F790F3001C8400 /* OSPChatTableView.m */; };
+		11DCB3B415F91C31001C8400 /* OSPChatArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3B315F91C31001C8400 /* OSPChatArrayController.m */; };
 		11EA735815B230BF00EF1DC6 /* rosterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EA735715B230BF00EF1DC6 /* rosterView.xib */; };
 		11ED0C5C15ADE20600F0930E /* sparklePublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */; };
 		11ED23C315DFFB9C001A169D /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1186EF6C15DFF971003BA0A6 /* libidn.a */; };
@@ -520,6 +521,8 @@
 		11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = OSPChat.xcdatamodel; path = XMPPFrameworkCustom/OSPChat.xcdatamodel; sourceTree = "<group>"; };
 		11DCB3A815F790F3001C8400 /* OSPChatTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatTableView.h; sourceTree = "<group>"; };
 		11DCB3A915F790F3001C8400 /* OSPChatTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatTableView.m; sourceTree = "<group>"; };
+		11DCB3B215F91C31001C8400 /* OSPChatArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatArrayController.h; sourceTree = "<group>"; };
+		11DCB3B315F91C31001C8400 /* OSPChatArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatArrayController.m; sourceTree = "<group>"; };
 		11EA735715B230BF00EF1DC6 /* rosterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rosterView.xib; sourceTree = "<group>"; };
 		11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sparklePublicDSAKey.pem; sourceTree = "<group>"; };
 		11ED23C415DFFBB2001A169D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Osprey/Vendor/Sparkle.framework; sourceTree = "<group>"; };
@@ -1401,6 +1404,8 @@
 				119164F015A9AFAD0021C203 /* OSPPopoverHeaderView.m */,
 				11DCB3A815F790F3001C8400 /* OSPChatTableView.h */,
 				11DCB3A915F790F3001C8400 /* OSPChatTableView.m */,
+				11DCB3B215F91C31001C8400 /* OSPChatArrayController.h */,
+				11DCB3B315F91C31001C8400 /* OSPChatArrayController.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -1650,6 +1655,7 @@
 				1186F1F415DFF973003BA0A6 /* DDXMLNode.m in Sources */,
 				1197356815E9686D002C2BE7 /* XMPPChatStateNotificationModule.m in Sources */,
 				11DCB3AA15F790F3001C8400 /* OSPChatTableView.m in Sources */,
+				11DCB3B415F91C31001C8400 /* OSPChatArrayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
