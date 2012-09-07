@@ -2,6 +2,10 @@
 
 @implementation OSPChatTableView
 
+- (void) awakeFromNib {
+    [self setIntercellSpacing:NSMakeSize(0.0, 0.0)];
+}
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];

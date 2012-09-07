@@ -2,7 +2,9 @@
 #import "NSColor+HexAdditions.h"
 #import "Types.h"
 #import "XMPPMessage+XEP_0224.h"
+#import "OSPMessageTableCellView.h"
 #import "XMPPMessage+XEP_0085.h"
+
 typedef enum {
     localToRemote = 1, 
     remoteToLocal = 2,
@@ -79,8 +81,8 @@ typedef enum {
 //        dispatch_suspend(processingQueue);
 //        processionQueueIsSuspended = YES;
         typing = NO;
-
-        
+        cachedUsernames = [[NSMutableDictionary alloc] init];
+         
 
 
     }
@@ -98,7 +100,7 @@ typedef enum {
 - (void) awakeFromNib {
     [self setArrayControllerFetchPredicate];
     [self setArrayControllerFilterPredicate];
-
+    
     [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
     
 }
@@ -306,28 +308,140 @@ typedef enum {
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
-    
-    NSTableCellView *view = nil;
+    OSPMessageTableCellView *view = nil;
     XMPPMessageArchiving_Message_CoreDataObject *item = [[arrayController arrangedObjects] objectAtIndex:row];
+    BOOL isLastInStreak = [self isLastInStreak:row tableView:tableView item:item];
     
+    
+
+    
+    
+
     if ([item isOutgoing]) {
-        view = [tableView makeViewWithIdentifier:@"outgoingMessageCellView" owner:self];
+                if (isLastInStreak && (row != [tableView numberOfRows]-1)) {
+                    view = [tableView makeViewWithIdentifier:@"lastOutgoingMessageCellView" owner:self];
+                } else {
+                    view = [tableView makeViewWithIdentifier:@"outgoingMessageCellView" owner:self];
+                }
+
     } else {
-        view = [tableView makeViewWithIdentifier:@"incommingMessageCellView" owner:self];
+        if (isLastInStreak  && (row != [tableView numberOfRows]-1)) {
+            view = [tableView makeViewWithIdentifier:@"lastIncommingMessageCellView" owner:self];
+        } else {
+            view = [tableView makeViewWithIdentifier:@"incommingMessageCellView" owner:self];
+        }
     }
     return view;
 }
-- (void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
+
+//- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
+//    OSPMessageTableRowView *rowView = nil;
+//    
+////    BOOL isFirstInStreak = [self isNewStreak:row];
+//    XMPPMessageArchiving_Message_CoreDataObject *item = [[arrayController arrangedObjects] objectAtIndex:row];
 //
-//    NSInteger numberOfRows = [tableView numberOfRows];
-////    
-////    if (numberOfRows > 0)
-////        [tableView scrollRowToVisible:numberOfRows - 1];
-//    NSLog(@"row: %lu, %lu numberOfRows ", row, numberOfRows);
-//    if (row == numberOfRows-1) {
-//        [tableView scrollRowToVisible:numberOfRows - 1];
+//    BOOL isLastInStreak = [self isLastInStreak:row tableView:tableView item:item];
+//
+//    
+//    
+//    if ([item isOutgoing]) {
+//        if (isLastInStreak) {
+//            rowView = [[OSPOutgoingMessageTableRowView alloc] init];
+//        } else {
+//            rowView = [[OSPFirstOutgoingMessageTableRowView alloc] init];
+//        }
+//    } else {
+//        if (isLastInStreak) {
+//            rowView = [[OSPIncommingMessageTableRowView alloc] init];
+//        } else {
+//            rowView = [[OSPFirstIncommingMessageTableRowView alloc] init];
+//        }
 //    }
+//    return rowView;
+//
+//}
+
+- (BOOL)isLastInStreak:(NSInteger)row tableView:(NSTableView*)tableView item:(XMPPMessageArchiving_Message_CoreDataObject *)item{
+    if (row == [tableView numberOfRows]-1) {
+        return YES;
+    }
+    
+    XMPPMessageArchiving_Message_CoreDataObject *nextItem = [[arrayController arrangedObjects] objectAtIndex:row+1];
+    
+    BOOL currentRowOutgoing = item.isOutgoing;
+    BOOL nextRowOutgoing = nextItem.isOutgoing;
+    
+    if ((currentRowOutgoing && nextRowOutgoing) || (!currentRowOutgoing && !nextRowOutgoing)) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
+
+- (BOOL)isFirstInStreak:(NSInteger)row{
+    if (row == 0) {
+        return YES;
+    }
+    
+    XMPPMessageArchiving_Message_CoreDataObject *item = [[arrayController arrangedObjects] objectAtIndex:row];
+    XMPPMessageArchiving_Message_CoreDataObject *previousItem = [[arrayController arrangedObjects] objectAtIndex:row-1];
+
+    BOOL currentRowOutgoing = item.isOutgoing;
+    BOOL previousRowOutgoing = previousItem.isOutgoing;
+
+    if ((currentRowOutgoing && previousRowOutgoing) || (!currentRowOutgoing && !previousRowOutgoing)) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (NSString*)cachedUsernameForJid:(XMPPJID*)jid {
+    
+    NSString *username = [cachedUsernames valueForKey:jid.bare];
+    if (username == nil) {
+        OSPUserStorageObject *user = [[self xmppRosterStorage] userForJID:jid xmppStream:[self xmppStream] managedObjectContext:[self managedObjectContext]];
+
+        username = user.displayName;
+    
+        [cachedUsernames setValue:username forKey:jid.bare];
+    }
+    NSLog(@"name: %@", username);
+    return username;
+}
+
+//- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+//    
+////    BOOL previousRowIsOutgoing = NO;
+////    BOOL currentRowIsOutgoing;
+////    BOOL nextRowIsOutgoing = NO;
+//////NSInteger rows = [tableView numberOfRows]-1;
+////    
+//////
+////    currentRowIsOutgoing = [((XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row]) isOutgoing];
+//////    
+//////    // Check if we're last
+////    if (row < rows) {
+////        nextRowIsOutgoing = [((XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row+1]) isOutgoing];
+////    }
+////    
+////    if (row > 0) {
+////        previousRowIsOutgoing = [((XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row-1]) isOutgoing];
+////    }
+////
+////    if ((currentRowIsOutgoing && nextRowIsOutgoing && previousRowIsOutgoing) || (!currentRowIsOutgoing && !nextRowIsOutgoing && !previousRowIsOutgoing)) {
+////        // in a streak
+////        return 25.0;
+////    } else if ((currentRowIsOutgoing && !nextRowIsOutgoing && !previousRowIsOutgoing) || (!currentRowIsOutgoing && nextRowIsOutgoing && previousRowIsOutgoing)){
+////        // one between two 
+////        return 60.0;
+////    } else {
+////        // first or last in streak
+////        return 40.0;
+////    }
+////    return 45.0;
+//}
+
 
 /*!
  * @brief Refreshes timer when new text is entered,  resends typing notification ajd refreshes timer when user restarts typing

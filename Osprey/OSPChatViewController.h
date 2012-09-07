@@ -14,6 +14,7 @@
     XMPPJID *remoteJid;
     XMPPJID *lastMessageFromJid;
     DOMHTMLElement *streakElement;
+    NSMutableDictionary *cachedUsernames;
  
 //    NSMutableArray *messageQueue;
     
