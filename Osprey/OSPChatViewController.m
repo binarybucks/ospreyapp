@@ -35,7 +35,14 @@
     [self setArrayControllerFilterPredicate];
     
     [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewContentBoundsDidChange:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
+
 }
+
+
+
+
 
 - (void) setArrayControllerFetchPredicate {
     NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"(bareJidStr == %@) AND (streamBareJidStr == %@)", remoteJid.bare, [[[[NSApp delegate] xmppStream] myJID] bare]];
@@ -71,7 +78,7 @@
 /*!
  * @brief Returns the correct TableCellViews depending on where in a message streak a given row is and wheter it is incomming or outgoing
  */
-- (NSView *)tableView:(NSTableView *)tableView
+- (NSView *)tableView:(NSTableView *)aTableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
     // This method isn't a beauty. TODO: Refactor
@@ -82,15 +89,15 @@
 
     if ([item isOutgoing]) {
         if (isLastInStreak && (row != [tableView numberOfRows]-1)) {
-            view = [tableView makeViewWithIdentifier:@"lastOutgoingMessageCellView" owner:self];
+            view = [aTableView makeViewWithIdentifier:@"lastOutgoingMessageCellView" owner:self];
         } else {
-            view = [tableView makeViewWithIdentifier:@"outgoingMessageCellView" owner:self];
+            view = [aTableView makeViewWithIdentifier:@"outgoingMessageCellView" owner:self];
         }
     } else {
         if (isLastInStreak  && (row != [tableView numberOfRows]-1)) {
-            view = [tableView makeViewWithIdentifier:@"lastIncommingMessageCellView" owner:self];
+            view = [aTableView makeViewWithIdentifier:@"lastIncommingMessageCellView" owner:self];
         } else {
-            view = [tableView makeViewWithIdentifier:@"incommingMessageCellView" owner:self];
+            view = [aTableView makeViewWithIdentifier:@"incommingMessageCellView" owner:self];
         }
     }
     return view;
@@ -99,8 +106,8 @@
 /*!
  * @brief Checks if a row is the last one in a given message streak
  */
-- (BOOL)isLastInStreak:(NSInteger)row tableView:(NSTableView*)tableView item:(XMPPMessageArchiving_Message_CoreDataObject *)item{
-    if (row == [tableView numberOfRows]-1) {
+- (BOOL)isLastInStreak:(NSInteger)row tableView:(NSTableView*)aTableView item:(XMPPMessageArchiving_Message_CoreDataObject *)item{
+    if (row == [aTableView numberOfRows]-1) {
         return YES;
     }
     
@@ -116,88 +123,34 @@
     }
 }
 
+/*!
+ * @brief Calculates the height of each row depending on how much vertical space the message body requires approximately. 
+ * The actual NSTextField expands automatically via Cocoa Auto Layout, we just have to give it enough room to expand or it will cut it's excess content. 
+ */
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    // filteredMessageCache is an NSArray of the log entries currently displayed
-//    LogEntry* logEntry = [filteredMessageCache objectAtIndex:row];
-    
-    // messageColumn is the NSTableColumn displaying the long strings to be wrapped
-    
-    // rowview should just have one subview, giving us the TableCelLView with all the content
-
     NSString *message = [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
     NSSize stringSize = [message sizeWithAttributes:[[NSDictionary alloc] init]];
+    
     NSInteger effectiveWitdthAvailableForMessageBody = [messageTableColumn width]-25-25-25-80;
     NSInteger stringWitdh = stringSize.width;
     if (stringSize.width > effectiveWitdthAvailableForMessageBody) {
-        
         // approximateNumberOfLines * lineHeight + paddingTopAndBottom
-        return (stringWitdh / effectiveWitdthAvailableForMessageBody) * 17 + 9 + 9;
-//        return 60.0;
+        return (stringWitdh / effectiveWitdthAvailableForMessageBody) * 17.0 + 9.0 + 9.0;
     } else {
         return 35.0;
     }
-    
-    
-    //    OSPMessageTableCellView *cellView = [[[tableView rowViewAtRow:row makeIfNecessary:NO] subviews] objectAtIndex:0];
-
-    //    NSTextField *messageBody = [cellView body];
-
-    
-//    //Calculate the expected size based on the font and linebreak mode of the label
-//    CGFloat maxWidth = cellView.bounds.size.width - 100;
-//    CGFloat maxHeight = 9999;
-//    CGSize maximumLabelSize = CGSizeMake(maxWidth,maxHeight);
-    
-//
-//    NSSize bounds = [[messageBody cell] cellSizeForBounds:cellView.bounds];
-//
-//    NSRect frame = [messageBody frame] ;
-//    frame.size.width = bounds.width ;
-//    frame.size.height = bounds.height ;
-//    [messageBody setFrame:frame] ;
-//    [messageBody setNeedsDisplay:YES];
-//
-//    //    CGSize expectedLabelSize = [self sizeWithFont:[NSFont systemFontOfSize:size] constrainedToSize:maximumLabelSize lineBreakMode:UILineBreakModeWordWrap];
-//    
-//    return bounds.height;
 }
-//boundingRectWithSize:size options:NSLineBreakByWordWrapping | NSStringDrawingUsesLineFragmentOrigin attributes:attributes
-    //    NSSize *messageBodySize = [[messageBody stringValue] sizeWithWidth:200.0 andFont:[messageBody font]];
-//
-//    CGFloat columnWidth = [messageTableColumn width];
-//    
-//    // My LogEntry class has a messageSize NSSize ivar. It would be prettier if it was not directly in the model class...
-//    NSSize stringSize = messageBody.stringValue;
-//    
-//    if (stringSize.width < 0.0)
-//    {
-//        // messageCell is the NSTextFieldCell messageColumn's dataCell
-//        [messageCell setStringValue:logEntry.message];
-//        stringSize = [messageCell cellSizeForBounds:NSMakeRect(0.0, 0.0, FLT_MAX, FLT_MAX)];
-//        logEntry.messageSize = stringSize;
-//    }
-//    
-//    CGFloat rowHeight = ceilf(stringSize.width / columnWidth) * [tableView rowHeight];
-//    
-//    return MAX(rowHeight, stringSize.height);
 
-//
-//- (void)tableViewColumnDidResize:(NSNotification *)notification
-//{
-//    NSSize invalidSize = NSMakeSize(-1.0, -1.0);
-//    
-//    // reset the size of all messages. Again, it would be prettier if it was not directly in the model class...
-//    for (LogEntry* logEntry in messageCache)
-//    {
-//        logEntry.messageSize = invalidSize;
-//    }
-//    
-//    NSRange allIndexes = NSMakeRange(0, [filteredMessageCache count]);
-//    [logTable noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:allIndexes]];
-//}
-
-
+// Triggers recalculating of row heights when window size changes
+- (void)scrollViewContentBoundsDidChange:(NSNotification*)notification
+{
+    NSRange visibleRows = [tableView rowsInRect:scrollView.contentView.bounds];
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0];
+    [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
+    [NSAnimationContext endGrouping];
+}
 
 
 # pragma mark - Typing notifications

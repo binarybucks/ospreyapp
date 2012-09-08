@@ -10,7 +10,8 @@
     IBOutlet NSArrayController *arrayController;
     IBOutlet NSScrollView *scrollView;
     IBOutlet NSTableColumn *messageTableColumn;
-    
+    IBOutlet NSTableView *tableView;
+
     XMPPJID *localJid;
     XMPPJID *remoteJid;
     XMPPJID *lastMessageFromJid;
