@@ -1,5 +1,11 @@
 #import "OSPMessageTableCellView.h"
-#import "NSColor+HexAdditions.h"
+
+/*!
+ * @class OSPMessageTableCellView.h
+ * @brief Generic class that handles drawing of messages
+ *
+ * This class handles drawing of generic characteristics that are common to all messages no matter if they are incomming or outgoing
+ */
 @implementation OSPMessageTableCellView
 
 - (id)initWithFrame:(NSRect)frame
@@ -12,6 +18,9 @@
     return self;
 }
 
+/*!
+ * @brief Sets the text color for incomming and outgoing a messages. Background drawing is handled by subclasses
+ */
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];

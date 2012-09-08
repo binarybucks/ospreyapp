@@ -1,5 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
-@interface OSPChatArrayController : NSArrayController
+@interface OSPChatArrayController : NSArrayController {
+    BOOL initialFetch;
+}
 
 @end

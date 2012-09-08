@@ -93,6 +93,19 @@
 	}
 }
 
+//- (void)loadView {
+//    [self myViewWillLoad];
+//    [super loadView];
+//    [self myViewDidLoad];
+//}
+//
+//- (void)myViewWillLoad {
+//}
+//
+//- (void)myViewDidLoad {
+//
+//}
+
 - (void) setArrayControllerFetchPredicate {
     /*
      * No need to fetch more than neccessary.
@@ -286,13 +299,10 @@
     
 	if ([[chatView subviews] count] != 0)
 		[[[chatView subviews] objectAtIndex:0] removeFromSuperview];
- //Now handled correctly by OpenChatsArrayController
 	if (((numberOfRows-1) > 0) && (selectedRow != numberOfRows)) { // select previous if at end
-[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
-       // [openChatsArrayController selectPrevious:nil];
+        [openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-1] byExtendingSelection:NO];
 	} else if ((numberOfRows-1 > 0) && (selectedRow == numberOfRows)) { // select next if not at end
-[openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-2] byExtendingSelection:NO];
-        //[openChatsArrayController selectNext:nil];
+        [openChatsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow-2] byExtendingSelection:NO];
 	}
     
 }
@@ -316,25 +326,12 @@
 
 
 #pragma mark - Message handling
-/*
- * Message handlich is already slightly meh, and has the potential to get even clumsy in the future. TODO: Refactor that mess
- */
-//- (void) handleChatMessage:(XMPPMessage*)message {
-//    OSPUserStorageObject *user = [[self xmppRosterStorage] userForJID:[message from] xmppStream:[self xmppStream] managedObjectContext:[self rosterManagedObjectContext]];
-//	
-//    [self openChatWithUser:user andMakeActive:NO]; // lazyloads ChatViewController and 
-//	[[openChatViewControllers valueForKey:user.jidStr] displayChatMessage:message];
-//}
-//
-
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
 	if ([message isChatMessageWithBody])
 	{
         OSPChatStorageObject *chat = [self openChatWithJidStr:[[message from] bare] andMakeActive:NO];
         [chat setValue:[NSNumber numberWithBool:NO] forKey:@"isTyping"];
-        
-//        [[openChatViewControllers valueForKey:chat.jidStr] displayChatMessage:message];
         [[self notificationController] notificationForIncommingMessage:message fromSingleChat:chat]; // Displays all neccessary notifications for that message
 	} else {
         if ([message isActiveChatState]) {
@@ -344,8 +341,6 @@
             OSPChatStorageObject *chat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:message.from.bare];
             [chat setValue:[NSNumber numberWithBool:YES] forKey:@"isTyping"];
         }
-    
-        
     }
 }
 

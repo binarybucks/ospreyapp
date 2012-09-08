@@ -9,6 +9,7 @@
     IBOutlet NSWindow       *window;
     IBOutlet NSArrayController *arrayController;
     IBOutlet NSScrollView *scrollView;
+    IBOutlet NSTableColumn *messageTableColumn;
     
     XMPPJID *localJid;
     XMPPJID *remoteJid;

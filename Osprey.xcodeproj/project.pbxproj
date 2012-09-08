@@ -177,6 +177,7 @@
 		11DCB3BD15F9F117001C8400 /* OSPIncommingMessageTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3BC15F9F117001C8400 /* OSPIncommingMessageTableCellView.m */; };
 		11DCB3CF15FA3BEC001C8400 /* OSPLastIncommingMessageTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3CE15FA3BEB001C8400 /* OSPLastIncommingMessageTableCellView.m */; };
 		11DCB3D215FA3BF8001C8400 /* OSPLastOutgoingMessageTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3D115FA3BF7001C8400 /* OSPLastOutgoingMessageTableCellView.m */; };
+		11DCB3D515FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3D415FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m */; };
 		11EA735815B230BF00EF1DC6 /* rosterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EA735715B230BF00EF1DC6 /* rosterView.xib */; };
 		11ED0C5C15ADE20600F0930E /* sparklePublicDSAKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = 11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */; };
 		11ED23C315DFFB9C001A169D /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1186EF6C15DFF971003BA0A6 /* libidn.a */; };
@@ -538,6 +539,8 @@
 		11DCB3CE15FA3BEB001C8400 /* OSPLastIncommingMessageTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPLastIncommingMessageTableCellView.m; sourceTree = "<group>"; };
 		11DCB3D015FA3BF6001C8400 /* OSPLastOutgoingMessageTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPLastOutgoingMessageTableCellView.h; sourceTree = "<group>"; };
 		11DCB3D115FA3BF7001C8400 /* OSPLastOutgoingMessageTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPLastOutgoingMessageTableCellView.m; sourceTree = "<group>"; };
+		11DCB3D315FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPDateToMessageTimeStringTransformer.h; sourceTree = "<group>"; };
+		11DCB3D415FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPDateToMessageTimeStringTransformer.m; sourceTree = "<group>"; };
 		11EA735715B230BF00EF1DC6 /* rosterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = rosterView.xib; sourceTree = "<group>"; };
 		11ED0C5B15ADE20600F0930E /* sparklePublicDSAKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sparklePublicDSAKey.pem; sourceTree = "<group>"; };
 		11ED23C415DFFBB2001A169D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Osprey/Vendor/Sparkle.framework; sourceTree = "<group>"; };
@@ -1374,6 +1377,8 @@
 		1191654415A9AFC80021C203 /* Transformer */ = {
 			isa = PBXGroup;
 			children = (
+				11DCB3D315FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.h */,
+				11DCB3D415FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m */,
 				1191650B15A9AFAD0021C203 /* OSPXMPPResourceToStatusTextTransformer.h */,
 				1191650C15A9AFAD0021C203 /* OSPXMPPResourceToStatusTextTransformer.m */,
 				119164E115A9AFAD0021C203 /* OSPConnectedBooleanToTextTransformer.h */,
@@ -1686,6 +1691,7 @@
 				11DCB3BD15F9F117001C8400 /* OSPIncommingMessageTableCellView.m in Sources */,
 				11DCB3CF15FA3BEC001C8400 /* OSPLastIncommingMessageTableCellView.m in Sources */,
 				11DCB3D215FA3BF8001C8400 /* OSPLastOutgoingMessageTableCellView.m in Sources */,
+				11DCB3D515FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
