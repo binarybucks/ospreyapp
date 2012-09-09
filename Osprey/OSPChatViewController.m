@@ -16,6 +16,9 @@
         localJid = [[self xmppStream] myJID];
         remoteJid = rjid;
         typing = NO;
+        dummycell = [[NSTextFieldCell alloc] init];
+        [dummycell setLineBreakMode:NSLineBreakByWordWrapping];
+        [dummycell setFont:[NSFont fontWithName:@"System" size:13.0]];
     }
     return self;
     
@@ -129,17 +132,73 @@
  */
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    NSString *message = [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
-    NSSize stringSize = [message sizeWithAttributes:[[NSDictionary alloc] init]];
+    CGFloat heightOfRow;
+    NSString *string =  [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
     
-    NSInteger effectiveWitdthAvailableForMessageBody = [messageTableColumn width]-25-25-25-80;
-    NSInteger stringWitdh = stringSize.width;
-    if (stringSize.width > effectiveWitdthAvailableForMessageBody) {
-        // approximateNumberOfLines * lineHeight + paddingTopAndBottom
-        return (stringWitdh / effectiveWitdthAvailableForMessageBody) * 17.0 + 9.0 + 9.0;
-    } else {
+    if (!string) {
+        string = @"NIL";
+    }
+    if (messageTableColumn)
+    {
+        [dummycell setStringValue:string];
+        NSRect myRect = NSMakeRect(0, 0, [messageTableColumn width]-25-25-25-80, CGFLOAT_MAX);
+        heightOfRow =  ([dummycell cellSizeForBounds:myRect].height+18.0)*1.4;
+        NSLog(@"string %@", string);
+        NSLog(@"width: %f", [messageTableColumn width]-25-25-25-80);
+        NSLog(@"proposed height: %f", heightOfRow);
+    }
+    
+    
+    if (heightOfRow > 35.0)
+        return heightOfRow;
+    else {
         return 35.0;
     }
+    
+    
+    //    NSString *message = [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
+//
+//    NSTextFieldCell *cell = [[NSTextFieldCell alloc] init];
+//    [cell setLineBreakMode:NSLineBreakByWordWrapping];
+//    [cell setStringValue:message];
+//    
+//    NSSize size = [cell cellSizeForBounds:NSMakeRect(0.0, 0.0, [messageTableColumn width]-25-25-25-80, 1000.0)];
+//    
+//    return size.height+18;
+    
+//    NSSize stringSize = [message sizeWithAttributes:[[NSDictionary alloc] init]];
+//    
+//    CGFloat effectiveWitdthAvailableForMessageBody = [messageTableColumn width]-25-25-25-80;
+//    CGFloat stringWitdh = stringSize.width;
+//    if (stringSize.width > effectiveWitdthAvailableForMessageBody) {
+//        NSLog(@"string witdh: %f", stringSize.width);
+//        NSLog(@"effectiveWitdthAvailableForMessageBody : %f", effectiveWitdthAvailableForMessageBody);
+//
+//        NSLog(@"requiring rows: %f", ceil(stringWitdh / effectiveWitdthAvailableForMessageBody));
+//        // ceil(stringWitdh / effectiveWitdthAvailableForMessageBody) gives number of required rows
+//        // 17.0 is actual row height, while 9.0 are padding at top and bottom
+//        CGFloat space = (ceil(stringWitdh / effectiveWitdthAvailableForMessageBody) * 17.0) + 9.0 + 9.0;
+//        NSLog(@"height: %f", space);
+//        return (ceil(stringWitdh / effectiveWitdthAvailableForMessageBody) * 17.0) + 9.0 + 9.0;
+//    } else {
+//        return 35.0;
+//    }
+//    NSTextStorage * storage = [[NSTextStorage alloc] initWithString:message];
+//    
+//    NSTextContainer * container = [[NSTextContainer alloc] initWithContainerSize: NSMakeSize([messageTableColumn width]-25-25-25-80, 500.0)];
+//    NSLayoutManager * manager = [[NSLayoutManager alloc] init];
+//    
+//    [manager addTextContainer: container];
+//    [storage addLayoutManager: manager];
+//    
+//    [manager glyphRangeForTextContainer: container];
+//    
+//    NSRect idealRect = [manager usedRectForTextContainer: container];
+//    
+//    
+//    // Include a fudge factor.
+//    return idealRect.size.height + 35;
+
 }
 
 // Triggers recalculating of row heights when window size changes

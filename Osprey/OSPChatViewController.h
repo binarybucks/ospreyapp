@@ -27,6 +27,10 @@
 //    BOOL processionQueueIsSuspended;
     NSTimer *inputTimer;
     BOOL typing;
+    
+    
+    NSTextFieldCell *dummycell;
+
 
 }
 
