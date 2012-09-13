@@ -38,4 +38,11 @@ typedef enum {
     chat = 4,
 } EStatusState;
 
+typedef enum {
+    singleChat = 1,
+    multiChat = 2,
+    multiChatAutojoin = 3,
+} EChatType;
+
+
 #endif

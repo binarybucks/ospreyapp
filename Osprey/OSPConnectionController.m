@@ -61,14 +61,16 @@
     // Do some checks for common mistakes 
     if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTJID]] == nil ) {        
 //        [self handleError:connectionError withErrorString:ERROR_JID_NOT_SET];
-        [[self notificationController] notificationForAuthenticationErrorWithErrorString:ERROR_JID_NOT_SET];
+//        [[self notificationController] notificationForAuthenticationErrorWithErrorString:ERROR_JID_NOT_SET];
+        [[self notificationController] notificationForUnsetAccountPreferences];
         return;
     }
     if ([XMPPJID jidWithString:[[NSUserDefaults standardUserDefaults] stringForKey:STDUSRDEF_ACCOUNTSERVER]] == nil ) {
-        [[self notificationController] notificationForAuthenticationErrorWithErrorString:ERROR_JID_NOT_SET];
-
-        [self handleError:connectionError withErrorString:ERROR_SERVER_NOT_SET];
-        return;
+//        [[self notificationController] notificationForAuthenticationErrorWithErrorString:ERROR_JID_NOT_SET];
+        [[self notificationController] notificationForUnsetAccountPreferences];
+//        
+//        [self handleError:connectionError withErrorString:ERROR_SERVER_NOT_SET];
+//        return;
     }
 
     if(![[self xmppStream] isConnected])
@@ -307,22 +309,18 @@
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error
 {    
 	DDLogError(@"%@: %@: %@", THIS_FILE, THIS_METHOD, error);
+    if (error) {
+        [self handleError:connectionError withErrorString:[error localizedDescription]];
+    }
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
 { 
-    LOGFUNCTIONCALL
+	DDLogError(@"%@: %@: %@", THIS_FILE, THIS_METHOD, error);
     
 	// Update tracking variables
     [self setValue:[NSNumber numberWithInt:disconnected] forKey:@"connectionState"];
-    //    Set disconnected is equal to:
-    //    [self removeValFromConnectionState:connected];
-    //    [self removeValFromConnectionState:registering];
-    //    [self removeValFromConnectionState:registered];
-    //    [self removeValFromConnectionState:authenticating];
-    //    [self removeValFromConnectionState:authenticated];
-        
-    
+            
     if (error) {
         [self handleError:connectionError withErrorString:[error localizedDescription]];
     }

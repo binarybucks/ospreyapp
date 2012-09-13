@@ -3,10 +3,14 @@
 @interface OSPNotificationController : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate> {
     IBOutlet NSWindow *window;
     int badgeCount;
+    NSDictionary *sheetCallbacks;
 }
 
 - (void)notificationForIncommingMessage:(XMPPMessage*)message fromSingleChat:(OSPChatStorageObject*)chat;
 - (void)notificationForIncommingMessage:(XMPPMessage*)message fromSingleChat:(OSPChatStorageObject*)chat isChatSelected:(BOOL)isChatSelected;
+
+
+- (void)notificationForUnsetAccountPreferences;
 
 - (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr;
 - (void)notificationForAuthenticationErrorWithErrorString:(NSString*)errorStr;

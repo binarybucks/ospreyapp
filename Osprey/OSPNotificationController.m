@@ -11,6 +11,15 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidBecomeActive:)
                                                      name:NSApplicationDidBecomeActiveNotification object:nil];
+        
+        sheetCallbacks =
+        @{
+        @"showAccountPreferencesCallback" : ^{DDLogVerbose(@"CALLBACK: Showing account preferences");     [[[NSApp delegate] preferencesController] changePanesProgramatically:1];
+            [[[[NSApp delegate] preferencesController] window] makeKeyAndOrderFront:nil];},
+        @"reconnectCallback" : ^{DDLogVerbose(@"CALLBACK: Reconnecting");  [[[NSApp delegate] connectionController] connect:nil];},
+            @"cancelCallback" : ^{DDLogVerbose(@"CALLBACK: Cancel");},
+        };
+        
     }
     return self;
 }
@@ -96,44 +105,89 @@
 }
 
 # pragma mark - Error Notifications
+- (void)notificationForUnsetAccountPreferences {
+
+    NSDictionary *callbackIdentifiersForReturnCode = @{
+        @"NSAlertDefaultReturn" : @"showAccountPreferencesCallback",
+        @"NSAlertAlternateReturn" : @"cancelCallback"
+    };
+    
+    [self beginAlertSheet:@"Incomplete Account Details"
+                     text:@"Your account details seem to be missing some required details."
+       defaultButtonLabel:@"Edit Account"
+     alternateButtonLabel:@"Cancel"
+         otherButtonLabel:nil
+      callBackIdentifiers:callbackIdentifiersForReturnCode];
+}
+
+
+
 
 - (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr {
-    [self notificationForError:connectionError withErrorString:errorStr];
+    
+    NSDictionary *callbackIdentifiersForReturnCode = @{
+    @"NSAlertDefaultReturn" : @"reconnectCallback",
+    @"NSAlertAlternateReturn" : @"cancelCallback",
+    @"NSAlertOtherReturn" : @"showAccountPreferencesCallback"
+    };
+    
+    [self beginAlertSheet:@"Connection Error"
+                     text:errorStr
+       defaultButtonLabel:@"Reconnect"
+     alternateButtonLabel:@"Cancel"
+         otherButtonLabel:@"Edit Account"
+      callBackIdentifiers:callbackIdentifiersForReturnCode];
 }
+
 
 - (void)notificationForAuthenticationErrorWithErrorString:(NSString*)errorStr {
-    [self notificationForError:authenticationError withErrorString:errorStr];
+    
+    NSDictionary *callbackIdentifiersForReturnCode = @{
+    @"NSAlertDefaultReturn" : @"reconnectCallback",
+    @"NSAlertAlternateReturn" : @"cancelCallback",
+    @"NSAlertOtherReturn" : @"showAccountPreferencesCallback"
+    };
+    
+    [self beginAlertSheet:@"Authentication Error"
+                     text:errorStr
+       defaultButtonLabel:@"Reconnect"
+     alternateButtonLabel:@"Cancel"
+         otherButtonLabel:@"Edit Account"
+      callBackIdentifiers:callbackIdentifiersForReturnCode];
 }
 
-- (void)notificationForError:(EErrorState)errorState withErrorString:(NSString*)errorString {
-//    SEL sel = @selector(errorSheetClosed:returnCode:contextInfo:);
-//    NSString *errorTitle;
-//    
-//    switch (errorState) {
-//        case connectionError:
-//            errorTitle = @"Connection Error";
-//            break;
-//        case authenticationError:
-//            errorTitle = @"Authentication Error";
-//            break;
-//        default:
-//            DDLogError(@"Notification for error type not implemented yet");
-//            return;
-//    }
-//    
-//    NSBeginAlertSheet(errorTitle, @"Reconnect", @"Check account", @"Cancel", window, self, sel, NULL, nil, errorString, nil);
 
+/*!
+ * @brief Convenience wrapper for showing an alert sheet
+ */
+- (void)beginAlertSheet:(NSString*)title text:(NSString*)text defaultButtonLabel:(NSString*)defaultButtonLabel alternateButtonLabel:(NSString*)alternateButtonLabel otherButtonLabel:(NSString*)otherButtonLabel callBackIdentifiers:(NSDictionary*)callbackIdentifiers {
+    
+    NSBeginAlertSheet( title, defaultButtonLabel, alternateButtonLabel, otherButtonLabel,  window, self, @selector(sheetClosed:returnCode:contextInfo:), NULL, (__bridge_retained void *)(callbackIdentifiers), text, nil);
 }
 
-//- (void)errorSheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-//    if (returnCode == NSAlertDefaultReturn) { // Reconnect
-//        [[[NSApp delegate] connectionController] performSelector:@selector(connect:) withObject:nil afterDelay:0.5]; 
-//    } else if (returnCode == NSAlertAlternateReturn) { // Check Account
-//        [[[NSApp delegate] preferencesController] changePanesProgramatically:1];
-//        [[[[NSApp delegate] preferencesController] window] makeKeyAndOrderFront:nil];
-//    } else if (returnCode == NSAlertOtherReturn) { // Cancel
-//        [[[NSApp delegate] connectionController] performSelector:@selector(disconnect:) withObject:nil afterDelay:0.5];     }
-//}
+/*!
+ * @brief Generic selector for sheet callbacks
+ * Takes a NSDictionary as context info that contains the numeric values of NSAlertDefaultReturn, NSAlertAlternateReturn and NSAlertOtherReturn in string format as keys and showAccountPreferences keys as values. Thus, if you want to reconnect on NSAlertDefaultReturn, pass in @{[NSString stringWithFormat:@"%d", NSAlertAlternateReturn]: @"reconnect"} as context info
+ */
+- (void)sheetClosed:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+    NSDictionary *callbackIdentifiersForReturnCode = (__bridge_transfer NSDictionary*) contextInfo;
+    NSString *callbackIdentifier; // Default callback
+    
+    if (returnCode == NSAlertDefaultReturn) {
+        callbackIdentifier = [callbackIdentifiersForReturnCode valueForKey:@"NSAlertDefaultReturn"];
+    } else if (returnCode == NSAlertAlternateReturn) {
+        callbackIdentifier = [callbackIdentifiersForReturnCode valueForKey:@"NSAlertAlternateReturn"];
+    } else if (returnCode == NSAlertOtherReturn) {
+        callbackIdentifier = [callbackIdentifiersForReturnCode valueForKey:@"NSAlertOtherReturn"];
+    }
+    
+    void (^callbackBlock)() = (void (^)())[sheetCallbacks valueForKey:callbackIdentifier];
+    if (callbackBlock) {
+        callbackBlock();
+    } else {
+        DDLogError(@"No callback block associated with return code");
+    };
+}
 
 # pragma mark - Application Badge Notifications
 - (void) incrementBadgeCount {

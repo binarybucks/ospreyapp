@@ -39,7 +39,7 @@
     
     [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewContentBoundsDidChange:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewContentBoundsDidChange:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
 
 }
 
@@ -132,30 +132,48 @@
  */
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    CGFloat heightOfRow;
+
+    
+    CGFloat width = [messageTableColumn width]-25-25-25-80;
+    
     NSString *string =  [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
     
-    if (!string) {
-        string = @"NIL";
-    }
-    if (messageTableColumn)
-    {
-        [dummycell setStringValue:string];
-        NSRect myRect = NSMakeRect(0, 0, [messageTableColumn width]-25-25-25-80, CGFLOAT_MAX);
-        heightOfRow =  ([dummycell cellSizeForBounds:myRect].height+18.0)*1.4;
-        NSLog(@"string %@", string);
-        NSLog(@"width: %f", [messageTableColumn width]-25-25-25-80);
-        NSLog(@"proposed height: %f", heightOfRow);
-    }
+    CGFloat textwidth = [string sizeWithAttributes:[NSDictionary dictionaryWithObject:[NSFont fontWithName:@"LucidaGrande" size:13.00] forKey:@"NSFontAttributeName"]].width;
+    
+    float newHeight = MAX(ceil(textwidth/width)*17+18, 35.0);
+    return newHeight;
+    
+// KIND OF WORKING
+//    CGFloat heightOfRow;
+//    NSString *string =  [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
+//    
+//    if (!string) {
+//        string = @"NIL";
+//    }
+//    if (messageTableColumn)
+//    {
+//        [dummycell setStringValue:string];
+//        NSRect myRect = NSMakeRect(0, 0, [messageTableColumn width]-25-25-25-86, CGFLOAT_MAX);
+//        heightOfRow =  ([dummycell cellSizeForBounds:myRect].height+18.0+6);
+//        NSLog(@"string %@", string);
+//        NSLog(@"width: %f", [messageTableColumn width]-25-25-25-80);
+//        NSLog(@"proposed height: %f", heightOfRow);
+//    }
+//    
+//    return MAX(heightOfRow,35.0);
+
     
     
-    if (heightOfRow > 35.0)
-        return heightOfRow;
-    else {
-        return 35.0;
-    }
     
     
+    
+    
+    
+    
+    
+    
+    
+    /// MEH CODE
     //    NSString *message = [(XMPPMessageArchiving_Message_CoreDataObject*)[[arrayController arrangedObjects] objectAtIndex:row] body];
 //
 //    NSTextFieldCell *cell = [[NSTextFieldCell alloc] init];
@@ -201,8 +219,7 @@
 
 }
 
-// Triggers recalculating of row heights when window size changes
-- (void)scrollViewContentBoundsDidChange:(NSNotification*)notification
+- (void)tableViewColumnDidResize:(NSNotification *)aNotification
 {
     NSRange visibleRows = [tableView rowsInRect:scrollView.contentView.bounds];
     [NSAnimationContext beginGrouping];
@@ -210,6 +227,17 @@
     [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
     [NSAnimationContext endGrouping];
 }
+
+
+//// Triggers recalculating of row heights when window size changes
+//- (void)scrollViewContentBoundsDidChange:(NSNotification*)notification
+//{
+//    NSRange visibleRows = [tableView rowsInRect:scrollView.contentView.bounds];
+//    [NSAnimationContext beginGrouping];
+//    [[NSAnimationContext currentContext] setDuration:0];
+//    [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
+//    [NSAnimationContext endGrouping];
+//}
 
 
 # pragma mark - Typing notifications

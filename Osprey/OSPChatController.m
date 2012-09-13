@@ -214,6 +214,8 @@
         
 		chatObject.jidStr = jidStr;
 		chatObject.streamBareJidStr = [[[self xmppStream] myJID] bare];
+        chatObject.type = [NSNumber numberWithInt:singleChat];
+        
 		NSError *error = nil;
 		[openChatsMoc save:&error];
 		if (error != nil) {
