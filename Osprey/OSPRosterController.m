@@ -207,4 +207,12 @@
 }
 
 
+#pragma mark - Subscription management 
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {
+    DDLogInfo(@"Received presenceSubscriptionRequest from %@", presence.fromStr);
+    
+}
+
+
+
 @end

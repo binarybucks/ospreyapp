@@ -124,8 +124,8 @@
      * We filter them out until there is an UserStorageObject associated with them, hence the userStorageObject != nil
      * TODO: Call when jid changes
      */
-    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"userStorageObject != nil"];
-    [openChatsArrayController setFilterPredicate:fetchPredicate];
+//    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"userStorageObject != nil"];
+//    [openChatsArrayController setFilterPredicate:fetchPredicate];
 }
 
 

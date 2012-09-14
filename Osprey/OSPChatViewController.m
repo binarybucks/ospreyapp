@@ -18,7 +18,7 @@
         typing = NO;
         dummycell = [[NSTextFieldCell alloc] init];
         [dummycell setLineBreakMode:NSLineBreakByWordWrapping];
-        [dummycell setFont:[NSFont fontWithName:@"System" size:13.0]];
+        [dummycell setFont:[NSFont fontWithName:@"LucidaGrande" size:13.0]];
     }
     return self;
     

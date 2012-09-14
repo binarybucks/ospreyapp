@@ -12,6 +12,14 @@
 
 @synthesize userStorageObject;
 
+- (NSString*)displayName {
+    if (userStorageObject != nil) {
+        return [self.userStorageObject valueForKey:@"displayName"];
+    } else {
+        return [self valueForKey:@"jidStr"];
+    }
+}
+
 /*!
  * @brief Fetches UserStorageObject associated with that ChatStorageObject from the corresponding store
  * UserStorageObjects reside in a completely different store. Thus, to circumvent subclassing stores set up by
