@@ -309,9 +309,9 @@
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error
 {    
 	DDLogError(@"%@: %@: %@", THIS_FILE, THIS_METHOD, error);
-    if (error) {
-        [self handleError:connectionError withErrorString:[error localizedDescription]];
-    }
+//    if (error) {
+//        [self handleError:connectionError withErrorString:[error str]];
+//    }
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
@@ -340,8 +340,8 @@
         }
         
         switch (state) {
-            case connectionError  : [[self notificationController] notificationForConnectionErrorWithErrorString:errorStr];  break;
-            case authenticationError  : [[self notificationController] notificationForAuthenticationErrorWithErrorString:errorStr];  break;
+            case connectionError  : [[self notificationController] notificationForConnectionErrorWithErrorString:errorDescription];  break;
+            case authenticationError  : [[self notificationController] notificationForAuthenticationErrorWithErrorString:errorDescription];  break;
             case registrationError  : break;
             default: break;
         }
