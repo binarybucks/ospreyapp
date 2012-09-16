@@ -370,4 +370,77 @@
     OSPChatCoreDataStorageObject* result = [array lastObject];
     return result;
 }
+
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+    LOGFUNCTIONCALL
+    NSInteger clickedRow = [openChatsTable clickedRow];
+
+    // Just display menu when clicked on an item
+    if (!(clickedRow >= 0 && clickedRow < [openChatsTable numberOfRows])) {
+        return;
+    }
+    
+    // Prepare data
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:clickedRow];
+    OSPUserStorageObject *user = [[self xmppRosterStorage] userForJID:[XMPPJID jidWithString:chat.jidStr] xmppStream:[self xmppStream] managedObjectContext:[self rosterManagedObjectContext]];
+    
+    
+    
+    // Item 1
+    [[menu itemAtIndex:0] setTitle:[NSString stringWithFormat:@"Jid: %@", [chat displayName]]];
+    [[menu itemAtIndex:0] setEnabled:NO];
+
+    NSNumber *type = [chat type];
+    
+    switch ([type intValue]) {
+        case singleChat:
+            [[menu itemAtIndex:1] setTitle:@"Type: Single chat"];
+            break;
+        case multiChat:
+            [[menu itemAtIndex:1] setTitle:@"Type: Group chat"];
+
+        case multiChatAutojoin:
+            [[menu itemAtIndex:1] setTitle:@"Type: Group chat"];
+
+        default:
+            break;
+    }
+    [[menu itemAtIndex:1] setEnabled:NO];
+    
+    // Item 2
+    if (user != nil) {
+        [[menu itemAtIndex:3] setTitle:@"Remove from roster"];
+        [[menu itemAtIndex:3] setAction:@selector(removeFromRoster)];
+    } else {
+        [[menu itemAtIndex:3] setTitle:@"Add to roster"];
+        [[menu itemAtIndex:3] setAction:@selector(addToRoster)];
+
+    }
+    [[menu itemAtIndex:3] setEnabled:YES];
+    
+    // Item 3
+    [[menu itemAtIndex:4] setTitle:@"Dummy"];
+    [[menu itemAtIndex:4] setEnabled:YES];
+}
+
+- (void)removeFromRoster {
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
+
+    NSLog(@"removing %@", chat.jidStr);
+}
+
+
+- (void)addToRoster {
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
+    
+    NSLog(@"adding %@", chat.jidStr);
+}
+
+- (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn {
+    
+}
+
+
+
+
 @end

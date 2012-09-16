@@ -50,6 +50,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         initialAwakeFromNibCallFinished = NO;
+        requests = [[NSMutableArray alloc] init];
+        int jidIndex = -1;
     }
     
     return self;
@@ -83,14 +85,22 @@
     if (!initialAwakeFromNibCallFinished) {
         LOGFUNCTIONCALL
 
-        [[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
-        [[self xmppRoster] addDelegate:self delegateQueue:dispatch_get_main_queue()];
         [rosterTable setDoubleAction:@selector(chat)];
         [rosterTable setTarget:self];
         
         [self _setArrayControllerFetchPredicate];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_setArrayControllerFetchPredicate) name:@"UserChangedJid" object:nil];
+        
+        NSRect visibleFrame = [[requestWindow screen] visibleFrame];
+        NSRect windowFrame = [requestWindow frame];
+        
+        NSPoint windowPosition;
+        windowPosition.x = visibleFrame.origin.x + visibleFrame.size.width - windowFrame.size.width - 5;
+        windowPosition.y = visibleFrame.origin.y + visibleFrame.size.height - windowFrame.size.height - 5;
+        
+        [requestWindow setFrameOrigin:windowPosition];
+        
         initialAwakeFromNibCallFinished = YES;
         
         
@@ -209,10 +219,65 @@
 
 #pragma mark - Subscription management 
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence {
-    DDLogInfo(@"Received presenceSubscriptionRequest from %@", presence.fromStr);
+    NSLog(@"Delegate call received %@", presence.fromStr);
     
+	XMPPJID *jid = [presence from];
+	
+	if(![requests containsObject:jid])
+	{
+		[requests addObject:jid];
+		
+		if([requests count] == 1)
+		{
+			jidIndex = 0;
+			
+			[jidField setStringValue:[jid bare]];
+			[xofyField setHidden:YES];
+			
+			[requestWindow setAlphaValue:0.85F];
+			[requestWindow makeKeyAndOrderFront:self];
+		}
+		else
+		{
+			[xofyField setStringValue:[NSString stringWithFormat:@"%i of %i", (jidIndex+1), (int)[requests count]]];
+			[xofyField setHidden:NO];
+		}
+	}
 }
 
+- (IBAction)acceptRequest:(id)sender
+{
+	XMPPJID *jid = [requests objectAtIndex:jidIndex];
+	
+	[[self xmppRoster] acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+	
+	[self nextRequest];
+}
 
-
+- (IBAction)rejectRequest:(id)sender
+{
+	XMPPJID *jid = [requests objectAtIndex:jidIndex];
+	
+	[[self xmppRoster] rejectPresenceSubscriptionRequestFrom:jid];
+	
+	[self nextRequest];
+}
+- (void)nextRequest
+{
+	DDLogInfo(@"RequestController: nextRequest");
+	
+	if(++jidIndex < [requests count])
+	{
+		XMPPJID *jid = [requests objectAtIndex:jidIndex];
+		
+		[jidField setStringValue:[jid bare]];
+		[xofyField setStringValue:[NSString stringWithFormat:@"%i of %i", (jidIndex+1), (int)[requests count]]];
+	}
+	else
+	{
+		[requests removeAllObjects];
+		jidIndex = -1;
+		[requestWindow close];
+	}
+}
 @end

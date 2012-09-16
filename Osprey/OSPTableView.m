@@ -6,4 +6,11 @@
 {
     return NO;
 }
+
+// Disable blue row frame for right clicked rows
+- (void)drawContextMenuHighlightForRow:(int)row {
+
+}
+
+
 @end

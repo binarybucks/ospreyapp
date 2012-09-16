@@ -76,6 +76,7 @@
         
         // Set up delegates
         [_xmppvCardAvatarModule addDelegate:_xmppRosterModule delegateQueue:_xmppRosterModule.moduleQueue];
+        [_xmppRosterModule addDelegate:_rosterController delegateQueue:dispatch_get_current_queue()];
         
 
 

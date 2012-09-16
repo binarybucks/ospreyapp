@@ -8,7 +8,7 @@
 #import "XMPPAttentionModule.h"
 #import "OSPChatCoreDataStorage.h"
 
-@interface OSPChatController : NSObject <NSTableViewDelegate, NSWindowDelegate, XMPPAttentionDelegate>{
+@interface OSPChatController : NSObject <NSTableViewDelegate, NSWindowDelegate, XMPPAttentionDelegate, NSMenuDelegate>{
     IBOutlet OSPTableView       *openChatsTable;
     IBOutlet NSView             *chatView;
     IBOutlet NSArrayController  *openChatsArrayController;
