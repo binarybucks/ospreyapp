@@ -46,6 +46,8 @@
     } else {
         DDLogError(@"Error: %@", [error description]);
     }
+    
+    NSLog(@"jid %@, intShw %d", self.jidStr, ((XMPPUserCoreDataStorageObject*)self.userStorageObject).primaryResource.intShow);
 }
 
 /*!

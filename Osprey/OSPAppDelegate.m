@@ -54,7 +54,7 @@
         [_xmppCapabilitiesModule setAutoFetchHashedCapabilities:YES];
         [_xmppCapabilitiesModule setAutoFetchNonHashedCapabilities:NO];
         [_xmppRosterModule setAutoFetchRoster:YES];
-        [_xmppRosterModule setAutoAcceptKnownPresenceSubscriptionRequests:YES];
+        [_xmppRosterModule setAutoAcceptKnownPresenceSubscriptionRequests:NO];
         [_xmppMessageArchivingModule setClientSideMessageArchivingOnly:YES];
         
         // Activate XMPP modules

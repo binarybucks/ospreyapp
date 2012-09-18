@@ -12,6 +12,8 @@
  * This class controlls handling of open chats, allocation of chatViewControllers and routing of incomming messages
  * to their corresponding chatViewController where they will be displayed.
  */
+#import "XMPPUserCoreDataStorageObject+NotSubscribed.h"
+
 @implementation OSPChatController
 @synthesize openChatsMoc;
 
@@ -82,13 +84,7 @@
                                                  selector:@selector(rosterStorageMainThreadManagedObjectContextDidMergeChanges)
                                                      name:@"rosterStorageMainThreadManagedObjectContextDidMergeChanges"
                                                    object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(chatStorageMainThreadManagedObjectContextDidMergeChanges)
-                                                     name:@"chatStorageMainThreadManagedObjectContextDidMergeChanges"
-                                                   object:nil];
-        
-		summedUnreadCount = 0;
+                
 		initialAwakeFromNibCallFinished = YES;
 	}
 }
@@ -124,8 +120,8 @@
      * We filter them out until there is an UserStorageObject associated with them, hence the userStorageObject != nil
      * TODO: Call when jid changes
      */
-//    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"userStorageObject != nil"];
-//    [openChatsArrayController setFilterPredicate:fetchPredicate];
+    //    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"userStorageObject != nil"];
+    //    [openChatsArrayController setFilterPredicate:fetchPredicate];
 }
 
 
@@ -133,16 +129,81 @@
  * Brief: Tells every ChatStorageObject for the current XMPPStream to refetch its UserStorageObject
  */
 - (void) rosterStorageMainThreadManagedObjectContextDidMergeChanges {
+    DDLogVerbose(@"rosterStorageMainThreadManagedObjectContextDidMergeChanges");
     // TODO: Just refetch updated UserStorageObjects
     
     for (OSPChatStorageObject *chatStorageObject in [self allChatStorageObjectsForXmppStream:[self xmppStream]]) {
         [chatStorageObject refetchUserStorageObject];
     }
+    [openChatsTable reloadData];
 }
 
-- (void)chatStorageMainThreadManagedObjectContextDidMergeChanges {
-    // Nothing to be done here. Notification not send yet
+#pragma mark - Chat object display 
+
+- (NSView *)tableView:(NSTableView *)aTableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row {
+    // This method isn't a beauty. TODO: Refactor
+    
+    OSPRosterTableCellView *view = [aTableView makeViewWithIdentifier:@"RosterTableCellView" owner:self];;
+    
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:row];
+
+    OSPUserStorageObject *user = chat.userStorageObject;
+
+    NSString *username;
+    NSString *status;
+
+    if (user) {
+        username = user.displayName;
+        
+        if (![[[NSApp delegate] xmppStream] isAuthenticated]) {
+            status = @"Offline";
+        } else if (user.isPendingApproval) {
+            status = @"Pending approval";
+        } else if (user.isNotSubscribed) {
+            status = @"Not subscribed";
+        } else if (chat.isTyping == [NSNumber numberWithBool:YES]) {
+            status = @"Typing...";
+            
+        } else if (user.primaryResource == nil) {
+            status = @"Offline";
+        } else {
+            
+            switch (user.primaryResource.intShow)
+            {
+                case 3:
+                    status = @"Online";
+                    break;
+                case 2:
+                    status = @"Away";
+                    break;
+                case 0:
+                    status = @"Do not distrub";
+                    break;
+                case 1:
+                    status = @"Extended away";
+                    break;
+                case 4:
+                    status = @"Free for chat";
+                    break;
+                default:
+                    status = @"Unknown";
+            }
+        }
+    }
+    else    // User is not in our roster or we don't have a roster yet
+    {
+        username = chat.jidStr;
+        status = @"Not in roster";
+    }
+    
+    view.textField.stringValue = username;
+    view.statusTextfield.stringValue = status;
+
+    return view;
 }
+
 
 
 # pragma mark - Chat Opening
@@ -371,6 +432,11 @@
     return result;
 }
 
+
+
+/*!
+ * @brief Prepares the context menu for a chat 
+ */
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     LOGFUNCTIONCALL
     NSInteger clickedRow = [openChatsTable clickedRow];
@@ -409,30 +475,74 @@
     
     // Item 2
     if (user != nil) {
-        [[menu itemAtIndex:3] setTitle:@"Remove from roster"];
-        [[menu itemAtIndex:3] setAction:@selector(removeFromRoster)];
+        [[menu itemAtIndex:2] setTitle:[NSString stringWithFormat:@"Subscription: %@", user.subscription]];
+        
+        [[menu itemAtIndex:3] setTitle:[NSString stringWithFormat:@"Ask: %@", user.ask]];
+
+        // + Divider
+        
+        [[menu itemAtIndex:5] setTitle:@"Remove from roster"];
+        [[menu itemAtIndex:5] setAction:@selector(removeFromRoster)];
+        [[menu itemAtIndex:5] setEnabled:YES];
+        
+        
+        if (([user.subscription isEqualToString:@"both"]) || ([user.subscription isEqualToString:@"to" ])) {
+            [[menu itemAtIndex:6] setTitle:@"Unsubscribe from presence"];
+            [[menu itemAtIndex:6] setEnabled:YES];
+            [[menu itemAtIndex:6] setAction:@selector(unsubscribe)];
+
+        } else {
+            [[menu itemAtIndex:6] setTitle:@"Subscribe to presence"];
+            [[menu itemAtIndex:6] setEnabled:YES];
+            [[menu itemAtIndex:6] setAction:@selector(subscribe)];
+
+        }
+        
+        
     } else {
-        [[menu itemAtIndex:3] setTitle:@"Add to roster"];
-        [[menu itemAtIndex:3] setAction:@selector(addToRoster)];
+        [[menu itemAtIndex:2] setTitle:@"Subscription: Unknown"];
+        [[menu itemAtIndex:3] setTitle:@"Ask: Unknown"];
+        
+        // + Divider
+        
+        [[menu itemAtIndex:5] setTitle:@"Add to roster"];
+        [[menu itemAtIndex:5] setAction:@selector(addToRoster)];
+        [[menu itemAtIndex:5] setEnabled:YES];
+
 
     }
-    [[menu itemAtIndex:3] setEnabled:YES];
     
-    // Item 3
-    [[menu itemAtIndex:4] setTitle:@"Dummy"];
-    [[menu itemAtIndex:4] setEnabled:YES];
+
+    
+    if (([user.subscription isEqualToString:@"both"]) || ([user.subscription isEqualToString:@"from" ])) {
+        [[menu itemAtIndex:7] setTitle:@"Block"];
+        [[menu itemAtIndex:7] setEnabled:YES];
+        [[menu itemAtIndex:7] setAction:@selector(block)];
+        [[menu itemAtIndex:7] setHidden:NO];
+    } else {
+        [[menu itemAtIndex:7] setHidden:YES];
+    }
+
+
+
+    
+
 }
 
 - (void)removeFromRoster {
     OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
 
     NSLog(@"removing %@", chat.jidStr);
+    
+    [[self xmppRoster] removeUser:[XMPPJID jidWithString:chat.jidStr]];
 }
 
 
 - (void)addToRoster {
     OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
-    
+
+    [[self xmppRoster] addUser:[XMPPJID jidWithString:chat.jidStr] withNickname:nil];
+
     NSLog(@"adding %@", chat.jidStr);
 }
 
@@ -440,6 +550,41 @@
     
 }
 
+
+// Cancels a subscription previously granted to a contact, thereby disabling sending of our presence to the contact.
+// this is similar to forcing a Twitter contact to unfollow you
+// Sends <presence to='romeo@example.net' type='unsubscribed'/>
+// Note: Does not remove contact from roster
+- (void)block{
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
+
+    [[self xmppRoster] revokePresencePermissionFromUser:[XMPPJID jidWithString:chat.jidStr]];
+}
+
+// Unsubscribes from presence updates send by a contact
+// Sends <presence to='juliet@example.com' type='unsubscribe'/>
+- (void)unsubscribe {
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
+    
+    [[self xmppRoster] unsubscribePresenceFromUser:[XMPPJID jidWithString:chat.jidStr]];
+}
+
+
+// Sends a presence subscription request to the contact
+// <presence to='juliet@example.com' type='subscribe'/>
+
+// Contact answers with:
+// <presence to='romeo@example.net' type='subscribed'/> to accept
+// or
+// <presence to='romeo@example.net' type='unsubscribed'/> to reject the request
+
+-(void)subscribe {
+    OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
+
+    XMPPPresence *presence = [XMPPPresence presenceWithType:@"subscribe" to:[XMPPJID jidWithString:chat.jidStr]];
+	[[self xmppStream] sendElement:presence];
+	
+}
 
 
 

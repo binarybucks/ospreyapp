@@ -1,5 +1,5 @@
 #import "OSPXMPPResourceToStatusTextTransformer.h"
-
+#import "XMPPResourceCoreDataStorageObject.h"
 @implementation OSPXMPPResourceToStatusTextTransformer
 - (id)init
 {
@@ -25,6 +25,7 @@
     if (value == nil || ![[[NSApp delegate] xmppStream] isAuthenticated]) {
         return @"Offline";
     }
+    
     switch ([value intValue]) {
         case 3:
             return @"Online";

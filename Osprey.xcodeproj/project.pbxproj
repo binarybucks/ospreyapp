@@ -13,6 +13,7 @@
 		1134EA6F15DE4AC700B33F13 /* OSPConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1134EA6E15DE4AC700B33F13 /* OSPConnectionController.m */; };
 		113D866415B9C3E60022F052 /* OSPChatCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 113D866315B9C3E60022F052 /* OSPChatCoreDataStorage.m */; };
 		113D866A15B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 113D866915B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m */; };
+		1157B0FD160714310002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1157B0FC160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m */; };
 		115B0AE815A9B547001EB763 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 115B0AE715A9B546001EB763 /* libresolv.dylib */; };
 		115B0AEC15A9B600001EB763 /* chatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AEB15A9B600001EB763 /* chatView.xib */; };
 		115B0AEE15A9B614001EB763 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AED15A9B614001EB763 /* MainMenu.xib */; };
@@ -211,6 +212,8 @@
 		113D866315B9C3E60022F052 /* OSPChatCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatCoreDataStorage.m; sourceTree = "<group>"; };
 		113D866815B9C4BE0022F052 /* OSPChatCoreDataStorageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatCoreDataStorageObject.h; sourceTree = "<group>"; };
 		113D866915B9C4BE0022F052 /* OSPChatCoreDataStorageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatCoreDataStorageObject.m; sourceTree = "<group>"; };
+		1157B0FB160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XMPPUserCoreDataStorageObject+NotSubscribed.h"; path = "XMPPFrameworkCustom/XMPPUserCoreDataStorageObject+NotSubscribed.h"; sourceTree = "<group>"; };
+		1157B0FC160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XMPPUserCoreDataStorageObject+NotSubscribed.m"; path = "XMPPFrameworkCustom/XMPPUserCoreDataStorageObject+NotSubscribed.m"; sourceTree = "<group>"; };
 		115B0AE715A9B546001EB763 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		115B0AEB15A9B600001EB763 /* chatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatView.xib; sourceTree = "<group>"; };
 		115B0AED15A9B614001EB763 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
@@ -1460,6 +1463,8 @@
 				119164D815A9AFAD0021C203 /* NSColor+HexAdditions.m */,
 				118B8C6115D7C5770074A182 /* NSManagedObjectContext+EasyFetching.h */,
 				118B8C6215D7C5770074A182 /* NSManagedObjectContext+EasyFetching.m */,
+				1157B0FB160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.h */,
+				1157B0FC160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1692,6 +1697,7 @@
 				11DCB3CF15FA3BEC001C8400 /* OSPLastIncommingMessageTableCellView.m in Sources */,
 				11DCB3D215FA3BF8001C8400 /* OSPLastOutgoingMessageTableCellView.m in Sources */,
 				11DCB3D515FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m in Sources */,
+				1157B0FD160714310002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

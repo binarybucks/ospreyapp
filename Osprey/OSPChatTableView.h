@@ -1,5 +1,7 @@
 #import <Cocoa/Cocoa.h>
 
-@interface OSPChatTableView : NSTableView
+@interface OSPChatTableView : NSTableView {
+    BOOL initialScroll;
+}
 
 @end
