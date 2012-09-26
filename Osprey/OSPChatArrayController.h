@@ -1,7 +1,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface OSPChatArrayController : NSArrayController {
-    BOOL initialFetch;
+    int fetchCount;
 }
+- (IBAction)fetchMore:(id)sender;
 
 @end

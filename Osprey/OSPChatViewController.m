@@ -40,11 +40,16 @@
     [inputField bind:@"hidden" toObject:[[NSApp delegate] connectionController] withKeyPath:@"connectionState" options:[NSDictionary dictionaryWithObjectsAndKeys:@"OSPConnectionStateToNotAuthenticatedTransformer",NSValueTransformerNameBindingOption, nil]];
     
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewContentBoundsDidChange:) name:NSViewBoundsDidChangeNotification object:scrollView.contentView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollViewContentBoundsDidChange:) name:NSViewBoundsDidChangeNotification object:tableView.enclosingScrollView];
+//    [scrollView setDelegate:self];
+
+    [_scrollView setDelegate:self];
 
 }
 
-
+- (void)ptrScrollViewDidTriggerRefresh:(id)sender {
+    [arrayController fetchMore:self];
+}
 
 
 
@@ -220,24 +225,45 @@
 
 }
 
+- (IBAction)loadMore:(id)sender {
+    
+}
+
 - (void)tableViewColumnDidResize:(NSNotification *)aNotification
 {
-    NSRange visibleRows = [tableView rowsInRect:scrollView.contentView.bounds];
-    [NSAnimationContext beginGrouping];
+    NSRange visibleRows = [tableView rowsInRect:_scrollView.contentView.bounds];
+    [NSAnimationContext beginGrouping]; 
     [[NSAnimationContext currentContext] setDuration:0];
     [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
     [NSAnimationContext endGrouping];
 }
 
 
-//// Triggers recalculating of row heights when window size changes
+//-(void)scrollViewDidScroll: (OSPScrollView*)aScrollView {
+//    
+//    NSRange rowsInRect = [tableView rowsInRect:tableView.superview.bounds];
+//    NSInteger firstVisibleRow = rowsInRect.location;
+//    
+//    if (firstVisibleRow == 0) {
+//        [arrayController fetchMore:nil];
+//
+//    }
+//
+//
+//}
+
+////// Triggers recalculating of row heights when window size changes
 //- (void)scrollViewContentBoundsDidChange:(NSNotification*)notification
 //{
-//    NSRange visibleRows = [tableView rowsInRect:scrollView.contentView.bounds];
-//    [NSAnimationContext beginGrouping];
-//    [[NSAnimationContext currentContext] setDuration:0];
-//    [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
-//    [NSAnimationContext endGrouping];
+//
+//    if ([notification object] == [[tableView    ] contentView])
+//        [self doSomethingInterestingIfDocumentVisibleRectSatisfiesMe];
+//
+//    //    NSRange visibleRows = [tableView rowsInRect:scrollView.contentView.bounds];
+////    [NSAnimationContext beginGrouping];
+////    [[NSAnimationContext currentContext] setDuration:0];
+////    [tableView noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndexesInRange:visibleRows]];
+////    [NSAnimationContext endGrouping];
 //}
 
 

@@ -2,13 +2,15 @@
 #import <WebKit/WebKit.h>
 #import <WebKit/WebResourceLoadDelegate.h>
 #import <WebKit/WebFrameLoadDelegate.h>
+#import "PullToRefreshScrollView.h"
+#import "OSPChatArrayController.h"
 
 @interface OSPChatViewController : NSViewController<NSControlTextEditingDelegate, NSTableViewDelegate>   {
     IBOutlet NSTextField    *inputField;
 //    IBOutlet WebView        *webView;
     IBOutlet NSWindow       *window;
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet NSScrollView *scrollView;
+    IBOutlet OSPChatArrayController *arrayController;
+//    IBOutlet OSPScrollView *scrollView;
     IBOutlet NSTableColumn *messageTableColumn;
     IBOutlet NSTableView *tableView;
 
@@ -28,7 +30,7 @@
     NSTimer *inputTimer;
     BOOL typing;
     
-    
+    NSArray *messages;
     NSTextFieldCell *dummycell;
 
 
@@ -43,5 +45,8 @@
 //- (void) displayAttentionMessage:(XMPPMessage*)message;
 //- (void) displayPresenceMessage:(XMPPPresence*)message;
 //- (void) dispatch:(NSXMLElement*)object toSelector:(SEL)selector;
+//-(void)scrollViewDidScroll: (OSPScrollView*)aScrollView;
+
+@property (weak) IBOutlet PullToRefreshScrollView *scrollView;
 
 @end

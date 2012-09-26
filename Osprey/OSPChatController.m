@@ -84,7 +84,13 @@
                                                  selector:@selector(rosterStorageMainThreadManagedObjectContextDidMergeChanges)
                                                      name:@"rosterStorageMainThreadManagedObjectContextDidMergeChanges"
                                                    object:nil];
-                
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(setArrayControllerFetchPredicate)
+                                                     name:@"UserChangedJid"
+                                                   object:nil];
+        
+        
 		initialAwakeFromNibCallFinished = YES;
 	}
 }
@@ -453,7 +459,7 @@
     
     
     // Item 1
-    [[menu itemAtIndex:0] setTitle:[NSString stringWithFormat:@"Jid: %@", [chat displayName]]];
+    [[menu itemAtIndex:0] setTitle:[NSString stringWithFormat:@"Jid: %@", [chat jidStr]]];
     [[menu itemAtIndex:0] setEnabled:NO];
 
     NSNumber *type = [chat type];
@@ -463,9 +469,6 @@
             [[menu itemAtIndex:1] setTitle:@"Type: Single chat"];
             break;
         case multiChat:
-            [[menu itemAtIndex:1] setTitle:@"Type: Group chat"];
-
-        case multiChatAutojoin:
             [[menu itemAtIndex:1] setTitle:@"Type: Group chat"];
 
         default:

@@ -41,7 +41,6 @@ typedef enum {
 typedef enum {
     singleChat = 1,
     multiChat = 2,
-    multiChatAutojoin = 3,
 } EChatType;
 
 

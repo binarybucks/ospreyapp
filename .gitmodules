@@ -10,3 +10,6 @@
 [submodule "Osprey/Vendor/XMPPFramework"]
 	path = Osprey/Vendor/XMPPFramework
 	url = git://github.com/binarybucks/XMPPFramework.git
+[submodule "Osprey/Vendor/PullToRefresh"]
+	path = Osprey/Vendor/PullToRefresh
+	url = git://github.com/vincentmac/PullToRefresh.git

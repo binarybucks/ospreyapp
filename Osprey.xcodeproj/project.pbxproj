@@ -170,6 +170,10 @@
 		1191655015A9B3630021C203 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191654F15A9B3630021C203 /* SystemConfiguration.framework */; };
 		1191655215A9B42D0021C203 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1191655115A9B42D0021C203 /* Security.framework */; };
 		1197356815E9686D002C2BE7 /* XMPPChatStateNotificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1197356715E9686D002C2BE7 /* XMPPChatStateNotificationModule.m */; };
+		119DAFB2161380CA00CAF00A /* pull-to-refresh-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 119DAFA3161380CA00CAF00A /* pull-to-refresh-arrow.png */; };
+		119DAFB4161380CA00CAF00A /* PullToRefreshClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 119DAFA7161380CA00CAF00A /* PullToRefreshClipView.m */; };
+		119DAFB5161380CA00CAF00A /* PullToRefreshScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 119DAFAA161380CA00CAF00A /* PullToRefreshScrollView.m */; };
+		119DAFB6161380CA00CAF00A /* release-to-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 119DAFAB161380CA00CAF00A /* release-to-refresh.png */; };
 		11D1CCC215C3DF3C00FEEF34 /* OSPChat.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */; };
 		11DCB3AA15F790F3001C8400 /* OSPChatTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3A915F790F3001C8400 /* OSPChatTableView.m */; };
 		11DCB3B415F91C31001C8400 /* OSPChatArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DCB3B315F91C31001C8400 /* OSPChatArrayController.m */; };
@@ -527,6 +531,13 @@
 		1191655115A9B42D0021C203 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1197356615E9686D002C2BE7 /* XMPPChatStateNotificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPChatStateNotificationModule.h; path = XMPPFrameworkCustom/XMPPChatStateNotificationModule.h; sourceTree = "<group>"; };
 		1197356715E9686D002C2BE7 /* XMPPChatStateNotificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPChatStateNotificationModule.m; path = XMPPFrameworkCustom/XMPPChatStateNotificationModule.m; sourceTree = "<group>"; };
+		119DAFA3161380CA00CAF00A /* pull-to-refresh-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pull-to-refresh-arrow.png"; sourceTree = "<group>"; };
+		119DAFA6161380CA00CAF00A /* PullToRefreshClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshClipView.h; sourceTree = "<group>"; };
+		119DAFA7161380CA00CAF00A /* PullToRefreshClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshClipView.m; sourceTree = "<group>"; };
+		119DAFA8161380CA00CAF00A /* PullToRefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshDelegate.h; sourceTree = "<group>"; };
+		119DAFA9161380CA00CAF00A /* PullToRefreshScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshScrollView.h; sourceTree = "<group>"; };
+		119DAFAA161380CA00CAF00A /* PullToRefreshScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshScrollView.m; sourceTree = "<group>"; };
+		119DAFAB161380CA00CAF00A /* release-to-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "release-to-refresh.png"; sourceTree = "<group>"; };
 		11D1CCC115C3DF3C00FEEF34 /* OSPChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = OSPChat.xcdatamodel; path = XMPPFrameworkCustom/OSPChat.xcdatamodel; sourceTree = "<group>"; };
 		11DCB3A815F790F3001C8400 /* OSPChatTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSPChatTableView.h; sourceTree = "<group>"; };
 		11DCB3A915F790F3001C8400 /* OSPChatTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSPChatTableView.m; sourceTree = "<group>"; };
@@ -1348,6 +1359,7 @@
 		1191654215A9AFB40021C203 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				119DAF97161380CA00CAF00A /* PullToRefresh */,
 				1186F2ED15DFFAA5003BA0A6 /* INKeychainAccess */,
 				1186F2EC15DFF9B0003BA0A6 /* INAppStoreWindow */,
 				1186F2EB15DFF9A1003BA0A6 /* INPopoverController */,
@@ -1469,6 +1481,21 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		119DAF97161380CA00CAF00A /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				119DAFA3161380CA00CAF00A /* pull-to-refresh-arrow.png */,
+				119DAFA6161380CA00CAF00A /* PullToRefreshClipView.h */,
+				119DAFA7161380CA00CAF00A /* PullToRefreshClipView.m */,
+				119DAFA8161380CA00CAF00A /* PullToRefreshDelegate.h */,
+				119DAFA9161380CA00CAF00A /* PullToRefreshScrollView.h */,
+				119DAFAA161380CA00CAF00A /* PullToRefreshScrollView.m */,
+				119DAFAB161380CA00CAF00A /* release-to-refresh.png */,
+			);
+			name = PullToRefresh;
+			path = Vendor/PullToRefresh/PullToRefresh;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1535,6 +1562,8 @@
 				11EA735815B230BF00EF1DC6 /* rosterView.xib in Resources */,
 				1186F1F015DFF973003BA0A6 /* README.txt in Resources */,
 				1186F1F515DFF973003BA0A6 /* libidn-1.24.tar.gz in Resources */,
+				119DAFB2161380CA00CAF00A /* pull-to-refresh-arrow.png in Resources */,
+				119DAFB6161380CA00CAF00A /* release-to-refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1698,6 +1727,8 @@
 				11DCB3D215FA3BF8001C8400 /* OSPLastOutgoingMessageTableCellView.m in Sources */,
 				11DCB3D515FA8FB5001C8400 /* OSPDateToMessageTimeStringTransformer.m in Sources */,
 				1157B0FD160714310002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m in Sources */,
+				119DAFB4161380CA00CAF00A /* PullToRefreshClipView.m in Sources */,
+				119DAFB5161380CA00CAF00A /* PullToRefreshScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
