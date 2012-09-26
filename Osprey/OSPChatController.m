@@ -286,7 +286,7 @@
 		NSError *error = nil;
 		[openChatsMoc save:&error];
 		if (error != nil) {
-			NSLog(@"Error saving ChatStorageObject for %@. Error was: %@", jidStr, [error description]);
+			DDLogError(@"Error saving ChatStorageObject for %@. Error was: %@", jidStr, [error description]);
 			storedChat = nil;
 		}
         // Without this, the arrayController takes ages to show the objecs
@@ -361,7 +361,7 @@
     NSError *error = nil;
     [openChatsMoc save:&error];
     if (error != nil) {
-        NSLog(@"Error saving removal of ChatStorageObject. Error was: %@", [error description]);
+        DDLogError(@"Error saving removal of ChatStorageObject. Error was: %@", [error description]);
     }
     [openChatsMoc processPendingChanges];
     [openChatsArrayController rearrangeObjects];
@@ -535,7 +535,7 @@
 - (void)removeFromRoster {
     OSPChatStorageObject *chat = [[openChatsArrayController arrangedObjects] objectAtIndex:[openChatsTable  clickedRow]];
 
-    NSLog(@"removing %@", chat.jidStr);
+    DDLogVerbose(@"removing %@", chat.jidStr);
     
     [[self xmppRoster] removeUser:[XMPPJID jidWithString:chat.jidStr]];
 }
@@ -546,7 +546,7 @@
 
     [[self xmppRoster] addUser:[XMPPJID jidWithString:chat.jidStr] withNickname:nil];
 
-    NSLog(@"adding %@", chat.jidStr);
+    DDLogVerbose(@"adding %@", chat.jidStr);
 }
 
 - (void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn {
