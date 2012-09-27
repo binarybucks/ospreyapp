@@ -441,14 +441,19 @@
 
 
 /*!
- * @brief Prepares the context menu for a chat 
+ * @brief Prepares the contextmenu for a chat 
  */
+- (NSString*)nullToNone:(NSString*)str {
+    return str != nil ? str : @"none";
+}
+
 - (void)menuNeedsUpdate:(NSMenu *)menu {
     LOGFUNCTIONCALL
     NSInteger clickedRow = [openChatsTable clickedRow];
 
     // Just display menu when clicked on an item
     if (!(clickedRow >= 0 && clickedRow < [openChatsTable numberOfRows])) {
+        [menu cancelTracking];
         return;
     }
     
@@ -466,10 +471,10 @@
     
     switch ([type intValue]) {
         case singleChat:
-            [[menu itemAtIndex:1] setTitle:@"Type: Single chat"];
+            [[menu itemAtIndex:1] setTitle:@"Type: single chat"];
             break;
         case multiChat:
-            [[menu itemAtIndex:1] setTitle:@"Type: Group chat"];
+            [[menu itemAtIndex:1] setTitle:@"Type: group chat"];
 
         default:
             break;
@@ -478,9 +483,9 @@
     
     // Item 2
     if (user != nil) {
-        [[menu itemAtIndex:2] setTitle:[NSString stringWithFormat:@"Subscription: %@", user.subscription]];
+        [[menu itemAtIndex:2] setTitle:[NSString stringWithFormat:@"Subscription: %@", [self nullToNone:user.subscription]]];
         
-        [[menu itemAtIndex:3] setTitle:[NSString stringWithFormat:@"Ask: %@", user.ask]];
+        [[menu itemAtIndex:3] setTitle:[NSString stringWithFormat:@"Ask: %@", [self nullToNone:user.ask]]];
 
         // + Divider
         
