@@ -285,6 +285,9 @@
     [self activateChatViewController:cvc];
     [openChatsArrayController setSelectedObjects:@[chatStorageObject]];
     activeChat = chatStorageObject; // Prevents rapid reselection in nstableview:selectionDidChange
+    
+    // Scroll down
+    [cvc scrollToBottom];
 }
 
 

@@ -13,7 +13,7 @@
 //    IBOutlet OSPScrollView *scrollView;
     IBOutlet NSTableColumn *messageTableColumn;
     IBOutlet NSTableView *tableView;
-
+    
     XMPPJID *localJid;
     XMPPJID *remoteJid;
     XMPPJID *lastMessageFromJid;
@@ -37,7 +37,7 @@
 - (id) initWithRemoteJid:(XMPPJID *)rjid;
 - (void) focusInputField;
 - (IBAction) send:(id)sender;
-
+- (void)scrollToBottom;
 //- (void) displayChatMessage:(XMPPMessage*)message;
 //- (void) displayAttentionMessage:(XMPPMessage*)message;
 //- (void) displayPresenceMessage:(XMPPPresence*)message;

@@ -74,6 +74,14 @@
     [inputField becomeFirstResponder];
 }
 
+/* 
+    A little hack to scroll to the bottom of the chat programatically once the chat becomes active, as somehow the scrollview
+    forgets that its scroll position
+ */
+- (void) scrollToBottom {
+    NSInteger numberOfRows = [tableView numberOfRows];
+    [tableView scrollRowToVisible:numberOfRows - 1];
+}
 
 #pragma mark - Message sending
 - (IBAction) send:(id)sender
