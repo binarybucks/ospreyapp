@@ -1,18 +1,23 @@
 #import "OSPConnectionStateToAuthenticatedTransformer.h"
 
 @implementation OSPConnectionStateToAuthenticatedTransformer
-+ (Class)transformedValueClass
-
++ (Class) transformedValueClass
 {
     return [NSNumber class];
 }
-- (id)transformedValue:(id)value
-{    
+
+
+- (id) transformedValue:(id)value
+{
     int status = [value intValue];
-    
-    if (status & authenticated) {
+
+    if (status & authenticated)
+    {
         return [NSNumber numberWithBool:YES];
     }
+
     return [NSNumber numberWithBool:NO];
 }
+
+
 @end

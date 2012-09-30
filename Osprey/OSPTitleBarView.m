@@ -2,27 +2,35 @@
 
 @implementation OSPTitleBarView
 
-- (id)initWithFrame:(NSRect)frame
+- (id) initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code here.
     }
-    
+
     return self;
 }
 
-- (void) awakeFromNib {
-    [[title cell] setBackgroundStyle:NSBackgroundStyleRaised];
 
-}
-- (void)drawRect:(NSRect)dirtyRect
+- (void) awakeFromNib
 {
-    if([NSApp isActive] && [[self window] isMainWindow]) {
+    [[title cell] setBackgroundStyle:NSBackgroundStyleRaised];
+}
+
+
+- (void) drawRect:(NSRect)dirtyRect
+{
+    if ([NSApp isActive] && [[self window] isMainWindow])
+    {
         [title setEnabled:YES];
-    } else {
+    }
+    else
+    {
         [title setEnabled:NO];
     }
 }
+
 
 @end

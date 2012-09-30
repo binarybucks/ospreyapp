@@ -4,10 +4,10 @@
 #import "XMPPRoster.h"
 
 @interface OSPRosterController : NSViewController <NSTableViewDelegate, XMPPRosterDelegate> {
-    IBOutlet NSTableView * rosterTable;
+    IBOutlet NSTableView *rosterTable;
     IBOutlet NSArrayController *arrayController;
     IBOutlet NSScrollView *scrollView;
-    
+
     IBOutlet NSTextField *jidField;
     IBOutlet NSTextField *xofyField;
     IBOutlet NSWindow *requestWindow;
@@ -16,10 +16,10 @@
 
     BOOL initialAwakeFromNibCallFinished;
 }
-@property(nonatomic, retain) IBOutlet NSSearchField *searchField;
+@property (nonatomic, retain) IBOutlet NSSearchField *searchField;
 
-- (IBAction)filterRoster:(id)sender;
-- (IBAction)acceptRequest:(id)sender;
-- (IBAction)rejectRequest:(id)sender;
+- (IBAction) filterRoster:(id)sender;
+- (IBAction) acceptRequest:(id)sender;
+- (IBAction) rejectRequest:(id)sender;
 
 @end

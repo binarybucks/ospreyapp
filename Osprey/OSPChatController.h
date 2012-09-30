@@ -9,33 +9,31 @@
 #import "OSPChatCoreDataStorage.h"
 
 @interface OSPChatController : NSObject <NSTableViewDelegate, NSWindowDelegate, XMPPAttentionDelegate, NSMenuDelegate>{
-    IBOutlet OSPTableView       *openChatsTable;
-    IBOutlet NSView             *chatView;
-    IBOutlet NSArrayController  *openChatsArrayController;
+    IBOutlet OSPTableView *openChatsTable;
+    IBOutlet NSView *chatView;
+    IBOutlet NSArrayController *openChatsArrayController;
 
-    NSMutableDictionary         *openChatViewControllers;
-    OSPChatCoreDataStorage      *openChatsStorage;
-    NSManagedObjectContext      *openChatsMoc;
-    
+    NSMutableDictionary *openChatViewControllers;
+    OSPChatCoreDataStorage *openChatsStorage;
+    NSManagedObjectContext *openChatsMoc;
+
     OSPChatStorageObject *activeChat;
 
     bool initialAwakeFromNibCallFinished;
     int summedUnreadCount;
 }
 
-
 @property (strong, readonly) NSManagedObjectContext *openChatsMoc;
 
-- (OSPChatStorageObject*)openChatWithUser:(OSPUserStorageObject*)user andMakeActive:(BOOL)makeActive;
-- (OSPChatStorageObject*)openChatWithJidStr:(NSString*)jidStr andMakeActive:(BOOL)makeActive;
-- (void)openChatWithStoredChat:(OSPChatCoreDataStorageObject*)chatStorageObject andMakeActive:(BOOL)makeActive;
+- (OSPChatStorageObject *) openChatWithUser:(OSPUserStorageObject *)user andMakeActive:(BOOL)makeActive;
+- (OSPChatStorageObject *) openChatWithJidStr:(NSString *)jidStr andMakeActive:(BOOL)makeActive;
+- (void) openChatWithStoredChat:(OSPChatCoreDataStorageObject *)chatStorageObject andMakeActive:(BOOL)makeActive;
 
-- (void)closeChat:(OSPChatCoreDataStorageObject*)chat;
-- (IBAction)closeSelectedChat:(id)sender;
+- (void) closeChat:(OSPChatCoreDataStorageObject *)chat;
+- (IBAction) closeSelectedChat:(id)sender;
 
-- (OSPChatStorageObject*)selectedChat;
-- (OSPChatStorageObject*)activeChat;
-- (BOOL)isActiveChat:(OSPChatStorageObject*)chat;
+- (OSPChatStorageObject *) selectedChat;
+- (OSPChatStorageObject *) activeChat;
+- (BOOL) isActiveChat:(OSPChatStorageObject *)chat;
 
-    
 @end

@@ -6,21 +6,20 @@
     NSDictionary *sheetCallbacks;
 }
 
-- (void)notificationForIncommingMessage:(XMPPMessage*)message fromSingleChat:(OSPChatStorageObject*)chat;
-- (void)notificationForIncommingMessage:(XMPPMessage*)message fromSingleChat:(OSPChatStorageObject*)chat isChatSelected:(BOOL)isChatSelected;
+- (void) notificationForIncommingMessage:(XMPPMessage *)message fromSingleChat:(OSPChatStorageObject *)chat;
+- (void) notificationForIncommingMessage:(XMPPMessage *)message fromSingleChat:(OSPChatStorageObject *)chat isChatSelected:(BOOL)isChatSelected;
 
+- (void) notificationForUnsetAccountPreferences;
 
-- (void)notificationForUnsetAccountPreferences;
+- (void) notificationForConnectionErrorWithErrorString:(NSString *)errorStr;
+- (void) notificationForAuthenticationErrorWithErrorString:(NSString *)errorStr;
+- (void) notificationForError:(EErrorState)errorState withErrorString:(NSString *)errorString;
 
-- (void)notificationForConnectionErrorWithErrorString:(NSString*)errorStr;
-- (void)notificationForAuthenticationErrorWithErrorString:(NSString*)errorStr;
-- (void)notificationForError:(EErrorState)errorState withErrorString:(NSString*)errorString;
+- (void) clearAllNotificationsOfChat:(OSPChatStorageObject *)chat;
 
-- (void)clearAllNotificationsOfChat:(OSPChatStorageObject*)chat;
-
-- (void)incrementBadgeCount;
-- (void)decrementBadgeCount;
-- (void)decrementBadgeCountBy:(int)number;
-- (void)clearBadgeCount;
+- (void) incrementBadgeCount;
+- (void) decrementBadgeCount;
+- (void) decrementBadgeCountBy:(int)number;
+- (void) clearBadgeCount;
 
 @end

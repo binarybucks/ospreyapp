@@ -5,9 +5,10 @@
 @synthesize typingTextField;
 
 // Color and style for custom statusTextfield
-- (void)setBackgroundStyle:(NSBackgroundStyle)backgroundStyle {
-    
-    if (backgroundStyle == NSBackgroundStyleDark) {
+- (void) setBackgroundStyle:(NSBackgroundStyle)backgroundStyle
+{
+    if (backgroundStyle == NSBackgroundStyleDark)
+    {
         self.statusTextfield.textColor = [NSColor windowBackgroundColor];
         self.typingTextField.textColor = [NSColor windowBackgroundColor];
 
@@ -18,20 +19,18 @@
         self.statusTextfield.shadow = shadow;
         self.typingTextField.shadow = shadow;
 
-        
-        
         self.textField.textColor = [NSColor windowBackgroundColor];
-
-    } else {
+    }
+    else
+    {
         self.statusTextfield.textColor = [NSColor controlShadowColor];
         self.typingTextField.textColor = [NSColor controlShadowColor];
 
         self.textField.textColor = [NSColor controlShadowColor];
-        
-        
     }
-    
+
     [super setBackgroundStyle:backgroundStyle];
 }
+
 
 @end

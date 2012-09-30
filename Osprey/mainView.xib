@@ -1611,6 +1611,7 @@ A</bytes>
 											<string key="NSFrameSize">{431, 442}</string>
 											<reference key="NSSuperview" ref="710092784"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -1684,8 +1685,6 @@ A</bytes>
 					<string key="NSEntityName">OSPChatCoreDataStorageObject</string>
 				</object>
 				<bool key="_NSIsUsingManagedProxy">YES</bool>
-				<bool key="NSAvoidsEmptySelection">YES</bool>
-				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSAutomaticallyRearrangesObjects">YES</bool>
 			</object>
@@ -1704,6 +1703,7 @@ A</bytes>
 					<string key="NSFrameSize">{480, 270}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView"/>
 					<string key="NSReuseIdentifierKey">_NS:224</string>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>

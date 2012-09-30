@@ -3,8 +3,10 @@
 
 @implementation OSPChatCoreDataStorage
 
-- (void)mainThreadManagedObjectContextDidMergeChanges {
+- (void) mainThreadManagedObjectContextDidMergeChanges
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"chatStorageMainThreadManagedObjectContextDidMergeChanges" object:nil];
 }
+
 
 @end

@@ -2,42 +2,40 @@
 
 @implementation OSPCoreDataToNSImageTransformer
 
-+ (BOOL)allowsReverseTransformation
-
++ (BOOL) allowsReverseTransformation
 {
-    
     return NO;
-    
 }
 
-+ (Class)transformedValueClass
 
++ (Class) transformedValueClass
 {
-    
     return [NSImage class];
-    
 }
 
-- (id)transformedValue:(OSPUserStorageObject*)value
 
+- (id) transformedValue:(OSPUserStorageObject *)value
 {
-    
     if (value.photo != nil)
-	{
-		return value.photo;
-	} 
-	else
-	{
-		NSData *photoData = [[[NSApp delegate] xmppvCardAvatarModule] photoDataForJID:value.jid];
-        
-		if (photoData != nil)
-			return [[NSImage alloc] initWithData:photoData];
-		else
-            return [NSImage imageNamed:@"Account"];
-	}
+    {
+        return value.photo;
+    }
+    else
+    {
+        NSData *photoData = [[[NSApp delegate] xmppvCardAvatarModule] photoDataForJID:value.jid];
 
-//    
-//    
+        if (photoData != nil)
+        {
+            return [[NSImage alloc] initWithData:photoData];
+        }
+        else
+        {
+            return [NSImage imageNamed:@"Account"];
+        }
+    }
+
+//
+//
 //    NSData *photoData = [[[NSApp delegate] xmppvCardAvatarModule] photoDataForJID:((OSPUserStorageObject*)value).jid];
 //    NSImage *avatar;
 //    if (photoData != nil) {
@@ -45,9 +43,9 @@
 //    } else {
 //        avatar = [NSImage imageNamed:@"Account"];
 //    }
-//    
+//
 //    return avatar;
-    
 }
+
 
 @end

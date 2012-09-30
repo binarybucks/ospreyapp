@@ -1,6 +1,6 @@
 #import <AppKit/AppKit.h>
 
 @interface NSColor (HexAdditions)
-+ (NSColor *) colorFromHexRGB:(NSString *) inColorString;
++ (NSColor *) colorFromHexRGB:(NSString *)inColorString;
 
 @end

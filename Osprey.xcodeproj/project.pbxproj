@@ -16,7 +16,7 @@
 		1157B0FD160714310002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1157B0FC160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m */; };
 		115B0AE815A9B547001EB763 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 115B0AE715A9B546001EB763 /* libresolv.dylib */; };
 		115B0AEC15A9B600001EB763 /* chatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AEB15A9B600001EB763 /* chatView.xib */; };
-		115B0AEE15A9B614001EB763 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AED15A9B614001EB763 /* MainMenu.xib */; };
+		115B0AEE15A9B614001EB763 /* mainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AED15A9B614001EB763 /* mainView.xib */; };
 		115B0AF015A9B62A001EB763 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 115B0AEF15A9B62A001EB763 /* Credits.rtf */; };
 		11704D9315B743F00018B351 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11704D9215B743F00018B351 /* CoreServices.framework */; };
 		1186EE4215DFF93A003BA0A6 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1186EE4115DFF93A003BA0A6 /* INAppStoreWindow.m */; };
@@ -220,7 +220,7 @@
 		1157B0FC160714300002CE96 /* XMPPUserCoreDataStorageObject+NotSubscribed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XMPPUserCoreDataStorageObject+NotSubscribed.m"; path = "XMPPFrameworkCustom/XMPPUserCoreDataStorageObject+NotSubscribed.m"; sourceTree = "<group>"; };
 		115B0AE715A9B546001EB763 /* libresolv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.dylib; path = usr/lib/libresolv.dylib; sourceTree = SDKROOT; };
 		115B0AEB15A9B600001EB763 /* chatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chatView.xib; sourceTree = "<group>"; };
-		115B0AED15A9B614001EB763 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		115B0AED15A9B614001EB763 /* mainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mainView.xib; sourceTree = "<group>"; };
 		115B0AEF15A9B62A001EB763 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		11704D9215B743F00018B351 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		1186EE4015DFF93A003BA0A6 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INAppStoreWindow.h; path = Vendor/INAppStoreWindow/INAppStoreWindow.h; sourceTree = "<group>"; };
@@ -1350,7 +1350,7 @@
 			children = (
 				115B0AEB15A9B600001EB763 /* chatView.xib */,
 				11EA735715B230BF00EF1DC6 /* rosterView.xib */,
-				115B0AED15A9B614001EB763 /* MainMenu.xib */,
+				115B0AED15A9B614001EB763 /* mainView.xib */,
 				119164C015A9AF6A0021C203 /* chat.html */,
 			);
 			name = Interface;
@@ -1417,6 +1417,7 @@
 		1191654515A9AFCF0021C203 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				11E5BB2A1618728E001B3CA9 /* Chat messages */,
 				1191650115A9AFAD0021C203 /* OSPTableRowView.h */,
 				1191650215A9AFAD0021C203 /* OSPTableRowView.m */,
 				1191650315A9AFAD0021C203 /* OSPTableView.h */,
@@ -1441,16 +1442,6 @@
 				11DCB3A915F790F3001C8400 /* OSPChatTableView.m */,
 				11DCB3B215F91C31001C8400 /* OSPChatArrayController.h */,
 				11DCB3B315F91C31001C8400 /* OSPChatArrayController.m */,
-				11DCB3B815F9EF8B001C8400 /* OSPMessageTableCellView.h */,
-				11DCB3B915F9EF8B001C8400 /* OSPMessageTableCellView.m */,
-				11DCB3B515F91DAE001C8400 /* OSPOutgoingMessageTableCellView.h */,
-				11DCB3B615F91DAE001C8400 /* OSPOutgoingMessageTableCellView.m */,
-				11DCB3BB15F9F116001C8400 /* OSPIncommingMessageTableCellView.h */,
-				11DCB3BC15F9F117001C8400 /* OSPIncommingMessageTableCellView.m */,
-				11DCB3CD15FA3BEA001C8400 /* OSPLastIncommingMessageTableCellView.h */,
-				11DCB3CE15FA3BEB001C8400 /* OSPLastIncommingMessageTableCellView.m */,
-				11DCB3D015FA3BF6001C8400 /* OSPLastOutgoingMessageTableCellView.h */,
-				11DCB3D115FA3BF7001C8400 /* OSPLastOutgoingMessageTableCellView.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -1494,6 +1485,23 @@
 			);
 			name = PullToRefresh;
 			path = Vendor/PullToRefresh/PullToRefresh;
+			sourceTree = "<group>";
+		};
+		11E5BB2A1618728E001B3CA9 /* Chat messages */ = {
+			isa = PBXGroup;
+			children = (
+				11DCB3B815F9EF8B001C8400 /* OSPMessageTableCellView.h */,
+				11DCB3B915F9EF8B001C8400 /* OSPMessageTableCellView.m */,
+				11DCB3B515F91DAE001C8400 /* OSPOutgoingMessageTableCellView.h */,
+				11DCB3B615F91DAE001C8400 /* OSPOutgoingMessageTableCellView.m */,
+				11DCB3BB15F9F116001C8400 /* OSPIncommingMessageTableCellView.h */,
+				11DCB3BC15F9F117001C8400 /* OSPIncommingMessageTableCellView.m */,
+				11DCB3CD15FA3BEA001C8400 /* OSPLastIncommingMessageTableCellView.h */,
+				11DCB3CE15FA3BEB001C8400 /* OSPLastIncommingMessageTableCellView.m */,
+				11DCB3D015FA3BF6001C8400 /* OSPLastOutgoingMessageTableCellView.h */,
+				11DCB3D115FA3BF7001C8400 /* OSPLastOutgoingMessageTableCellView.m */,
+			);
+			name = "Chat messages";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1556,7 +1564,7 @@
 				119164C915A9AF740021C203 /* General.icns in Resources */,
 				1191653D15A9AFAD0021C203 /* plus.png in Resources */,
 				115B0AEC15A9B600001EB763 /* chatView.xib in Resources */,
-				115B0AEE15A9B614001EB763 /* MainMenu.xib in Resources */,
+				115B0AEE15A9B614001EB763 /* mainView.xib in Resources */,
 				115B0AF015A9B62A001EB763 /* Credits.rtf in Resources */,
 				11ED0C5C15ADE20600F0930E /* sparklePublicDSAKey.pem in Resources */,
 				11EA735815B230BF00EF1DC6 /* rosterView.xib in Resources */,

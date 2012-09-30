@@ -1,18 +1,16 @@
 #import "OSPArrayToSingleValueTransformer.h"
 
 @implementation OSPArrayToSingleValueTransformer
-+ (Class)transformedValueClass
-
++ (Class) transformedValueClass
 {
-    
     return [NSArray class];
-    
 }
 
-- (id)transformedValue:(NSArray*)value
 
+- (id) transformedValue:(NSArray *)value
 {
     return [value lastObject];
-    
 }
+
+
 @end

@@ -1,5 +1,5 @@
 #import "XMPPUserCoreDataStorageObject.h"
 
 @interface XMPPUserCoreDataStorageObject (NotSubscribed)
-- (BOOL)isNotSubscribed;
+- (BOOL) isNotSubscribed;
 @end

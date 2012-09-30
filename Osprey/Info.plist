@@ -31,7 +31,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
 	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
+	<string>mainView</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>

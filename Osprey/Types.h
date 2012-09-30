@@ -6,19 +6,19 @@
 #import "XMPPRosterCoreDataStorage.h"
 #import "OSPRosterCoreDataStorage.h"
 
-typedef OSPRosterCoreDataStorage        OSPRosterStorage;
-typedef XMPPUserCoreDataStorageObject    OSPUserStorageObject;
-
+typedef OSPRosterCoreDataStorage OSPRosterStorage;
+typedef XMPPUserCoreDataStorageObject OSPUserStorageObject;
 
 @class OSPChatCoreDataStorageObject;
 typedef OSPChatCoreDataStorageObject OSPChatStorageObject;
 
-typedef enum{
+typedef enum {
     noError,
     connectionError,
     authenticationError,
     registrationError,
-} EErrorState;
+}
+EErrorState;
 
 typedef enum {
     disconnected = 0,
@@ -28,7 +28,8 @@ typedef enum {
     authenticated = 8,
     registering = 16,
     registered = 32,
-} EConnectionState;
+}
+EConnectionState;
 
 typedef enum {
     dnd = 0,
@@ -36,12 +37,13 @@ typedef enum {
     away = 2,
     online = 3,
     chat = 4,
-} EStatusState;
+}
+EStatusState;
 
 typedef enum {
     singleChat = 1,
     multiChat = 2,
-} EChatType;
+}
+EChatType;
 
-
-#endif
+#endif /* ifndef Osprey_Types_h */

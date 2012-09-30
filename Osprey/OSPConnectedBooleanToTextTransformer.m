@@ -2,18 +2,25 @@
 
 @implementation OSPConnectedBooleanToTextTransformer
 
-+ (Class)transformedValueClass
++ (Class) transformedValueClass
 {
     return [NSString class];
 }
 
-- (id)transformedValue:(id)value
+
+- (id) transformedValue:(id)value
 {
-    if ([(NSNumber*)value isEqualTo:[NSNumber numberWithInt:1]]) {
+    if ([(NSNumber *) value isEqualTo:[NSNumber numberWithInt:1]])
+    {
         return @"Connected";
-    } else if ([(NSNumber*)value isEqualTo:[NSNumber numberWithInt:0]]) {
+    }
+    else if ([(NSNumber *) value isEqualTo:[NSNumber numberWithInt:0]])
+    {
         return @"Disconnected";
     }
+
     return @"";
 }
+
+
 @end

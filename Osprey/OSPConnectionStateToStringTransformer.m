@@ -1,34 +1,48 @@
 #import "OSPConnectionStateToStringTransformer.h"
 
 @implementation OSPConnectionStateToStringTransformer
-+ (Class)transformedValueClass
-
++ (Class) transformedValueClass
 {
     return [NSString class];
 }
-- (id)transformedValue:(id)value
-{    
+
+
+- (id) transformedValue:(id)value
+{
     int status = [value intValue];
 
-    if (!status) {
+    if (!status)
+    {
         return @"Disconnected";
     }
-    if (status & connecting) {
+
+    if (status & connecting)
+    {
         return @"Connecting";
     }
-    if (status & authenticating) {
+
+    if (status & authenticating)
+    {
         return @"Connecting";
     }
-    if (status & authenticated) {
+
+    if (status & authenticated)
+    {
         return @"Authenticated";
     }
-    if (status & registering) {
+
+    if (status & registering)
+    {
         return @"Registering";
     }
-    if (status & registered) {
+
+    if (status & registered)
+    {
         return @"Registered";
     }
+
     return @"Fail";
 }
+
 
 @end

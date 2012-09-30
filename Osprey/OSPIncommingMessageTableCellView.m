@@ -9,24 +9,27 @@
  */
 @implementation OSPIncommingMessageTableCellView
 
-- (id)initWithFrame:(NSRect)frame
+- (id) initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code here.
     }
-    
+
     return self;
 }
+
 
 /*!
  * @brief Sets the background color of incomming messages. Text color is handled in superclass
  */
-- (void)drawRect:(NSRect)dirtyRect
+- (void) drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
     [[NSColor colorFromHexRGB:@"ffffff"] set];
     NSRectFill(dirtyRect);
 }
+
 
 @end

@@ -1,29 +1,36 @@
 #import "OSPDateToMessageTimeStringTransformer.h"
 
 @implementation OSPDateToMessageTimeStringTransformer
-- (id)init
+- (id) init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         // Initialization code here.
     }
-    
+
     return self;
 }
-+ (BOOL)allowsReverseTransformation {
+
+
++ (BOOL) allowsReverseTransformation
+{
     return NO;
 }
 
-+ (Class)transformedValueClass
 
++ (Class) transformedValueClass
 {
     return [NSString class];
 }
-- (id)transformedValue:(id)value
 
+
+- (id) transformedValue:(id)value
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm:ss"];
-    return [formatter stringFromDate:(NSDate*)value];
+    return [formatter stringFromDate:(NSDate *)value];
 }
+
+
 @end

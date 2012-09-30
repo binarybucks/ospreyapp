@@ -6,9 +6,9 @@
 #import "OSPChatArrayController.h"
 
 @interface OSPChatViewController : NSViewController<NSControlTextEditingDelegate, NSTableViewDelegate>   {
-    IBOutlet NSTextField    *inputField;
+    IBOutlet NSTextField *inputField;
 //    IBOutlet WebView        *webView;
-    IBOutlet NSWindow       *window;
+    IBOutlet NSWindow *window;
     IBOutlet OSPChatArrayController *arrayController;
 //    IBOutlet OSPScrollView *scrollView;
     IBOutlet NSTableColumn *messageTableColumn;
@@ -19,27 +19,24 @@
     XMPPJID *lastMessageFromJid;
     DOMHTMLElement *streakElement;
     NSMutableDictionary *cachedUsernames;
- 
+
 //    NSMutableArray *messageQueue;
-    
+
 //    BOOL isLoadViewFinished;
 //    BOOL isWebViewReady;
-    
+
 //    dispatch_queue_t processingQueue;
 //    BOOL processionQueueIsSuspended;
     NSTimer *inputTimer;
     BOOL typing;
-    
+
     NSArray *messages;
     NSTextFieldCell *dummycell;
-
-
 }
 
-- (id)initWithRemoteJid:(XMPPJID*)rjid;
+- (id) initWithRemoteJid:(XMPPJID *)rjid;
 - (void) focusInputField;
 - (IBAction) send:(id)sender;
-
 
 //- (void) displayChatMessage:(XMPPMessage*)message;
 //- (void) displayAttentionMessage:(XMPPMessage*)message;

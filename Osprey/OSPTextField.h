@@ -1,4 +1,4 @@
 #import <Cocoa/Cocoa.h>
 
-@interface OSPTextField : NSTextField 
+@interface OSPTextField : NSTextField
 @end
