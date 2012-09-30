@@ -35,10 +35,10 @@
         [topBorderColor set];
         [topBorder stroke];
     
-    [topHighlightBorder moveToPoint:NSMakePoint(0.0, 1.0+0.5)];
-    [topHighlightBorder lineToPoint:NSMakePoint(self.bounds.size.width, 1.0+0.5)];
-    [topHighlightBorderColor set];
-    [topHighlightBorder stroke];
+        [topHighlightBorder moveToPoint:NSMakePoint(0.0, 1.0+0.5)];
+        [topHighlightBorder lineToPoint:NSMakePoint(self.bounds.size.width, 1.0+0.5)];
+        [topHighlightBorderColor set];
+        [topHighlightBorder stroke];
     
     
         // Draw top-border

@@ -78,7 +78,6 @@
 		[[self xmppStream] addDelegate:self delegateQueue:dispatch_get_main_queue()];
         
         [self setArrayControllerFetchPredicate];
-		[self setArrayControllerFilterPredicate];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(rosterStorageMainThreadManagedObjectContextDidMergeChanges)
@@ -95,19 +94,6 @@
 	}
 }
 
-//- (void)loadView {
-//    [self myViewWillLoad];
-//    [super loadView];
-//    [self myViewDidLoad];
-//}
-//
-//- (void)myViewWillLoad {
-//}
-//
-//- (void)myViewDidLoad {
-//
-//}
-
 - (void) setArrayControllerFetchPredicate {
     /*
      * No need to fetch more than neccessary.
@@ -116,18 +102,6 @@
     NSString *jid = [[NSUserDefaults standardUserDefaults] stringForKey:@"Account.Jid"];
     NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"streamBareJidStr == %@", jid];
     [openChatsArrayController setFetchPredicate:fetchPredicate];
-}
-
-
-- (void) setArrayControllerFilterPredicate {
-    /*
-     * Uppon disconnect the RosterStorage purges it's storage to start clean on future connects (not really sure why)
-     * Thus, uppon disconnect we might have ChatStorageObjects without UserStorageObjects shown in the GUI. 
-     * We filter them out until there is an UserStorageObject associated with them, hence the userStorageObject != nil
-     * TODO: Call when jid changes
-     */
-    //    NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"userStorageObject != nil"];
-    //    [openChatsArrayController setFilterPredicate:fetchPredicate];
 }
 
 
@@ -162,6 +136,8 @@
 
     if (user) {
         username = user.displayName;
+        
+        NSLog(@"typing: %@", chat.isTyping);
         
         if (![[[NSApp delegate] xmppStream] isAuthenticated]) {
             status = @"Offline";
@@ -410,6 +386,7 @@
             OSPChatStorageObject *chat = [self chatStorageObjectForXmppStream:[self xmppStream] jidStr:message.from.bare];
             [chat setValue:[NSNumber numberWithBool:YES] forKey:@"isTyping"];
         }
+
     }
 }
 
