@@ -4,10 +4,6 @@ Osprey is a free and open source Mac instant messaging client for XMPP networks 
 While there are many clients for Mac that also offer great features, most of them do not feel native or are no longer maintained. 
 Osprey tries to change that by bringing a lightweight application with a minimalistic interface to the Mac.
 
-Head over to [Ospreyapp.org](http://ospreyapp.org) to get the latest version and follow us on [Twitter](https://twitter.com/ospreyapp/) for updates.
-
-![Osprey](http://ospreyapp.org/images/osprey_0.1.0_screen.png)
-
 Please note, that Osprey is yet in a very early stage. Thus, expect things to break and don't hesitate to report errors you encounter to our [issue tracker](https://github.com/binarybucks/ospreyapp/issues). 
 
 
